@@ -1,0 +1,41 @@
+# MVP List
+
+Robinhood, is website for retail investors. It aims to make investing in the stock market as easy as possbile with a user friendly UI, and easy-to-use features.
+
+## 1. New account creation, log in, log out, and guest/demo login
+
+- Users can sign up, log in, and log out.
+- Users can use a demo log in to try the site.
+- Users can't use certain features without logging in (eg. custom dashboard, transactions, create watchlists, stock searches).
+- Logged in users are directed to their profile dashboard page which displays news articles and their watchlists they have created, as well as their portfolio performance.
+- Logged out users are directed to a homepage.
+
+## 2. Dashboard & Portfolio
+
+- Logged in users can see their portfolio performance
+- Logged in users can discover new stocks
+- Logged in users can learn about investing
+- Logged in users can read market news
+
+## 3. Asset/Stock Details
+
+- Logged in users can view a stock summary
+  -Company name, price, daily movement, after-hours, chart
+  -Chart has options for time periods
+- Logged in users can view an about section for the stock
+  -Description, CEO, # Employees, HQ Location, Founded Date
+- Logged in users can see key statistics
+  -Same 10 stats for each stock (Market cap, PE Ratio, Div Yield, Avg Vol, High Td, Low Td, Open Pr, Vol, 52 WH, 52 WL)
+- Logged in users can see related lists
+  -Lists that contain this stock appear
+- Logged in users can see news related to the company
+
+## 4. Watchlists
+
+- Logged in users can create, update, view, delete watchlists.
+- Contains the stock name, and a tiny version of the summary from the details page. Clicking this will bring you to the stock details page.
+
+## 5. Search
+
+- Logged in users can use the search bar at the top of the page (always on) to find stocks.
+- Bonus: As you type a list of applicable stocks will pop up
