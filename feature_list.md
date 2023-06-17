@@ -29,6 +29,7 @@ Robinhood, is website for retail investors. It aims to make investing in the sto
 - Logged in users can see related lists
   -Lists that contain this stock appear
 - Logged in users can see news related to the company
+- Logged in users can purchase stocks and sell stocks from this page based on if they own the stock or not.
 
 ## 4. Watchlists
 

@@ -77,11 +77,11 @@
 ### Create (Buying stocks)
 
 - As a logged in user, I can buy stocks from the stock detail page.
-  -When I buy a stock it will be added to my portfolio.
-  -When I buy a stock its performance will be added to my overall portfolio performance.
-  -When I buy a stock, I then have the option to add it to my favorites.
-  -Purchasing a stock will lower my available cash, and increase my portfolio value.
-  -When I buy a stock it is added to the top part of the watchlists box in a separate box named Stocks. If this is my first stock, it will add the box, if it is not my first stock bought it will just add to that list. It will display the tiny version of the summary, and the #shares owned.
+  - When I buy a stock it will be added to my portfolio.
+  - When I buy a stock its performance will be added to my overall portfolio performance.
+  - When I buy a stock, I then have the option to add it to my favorites.
+  - Purchasing a stock will lower my available cash, and increase my portfolio value.
+  - When I buy a stock it is added to the top part of the watchlists box in a separate box named Stocks. If this is my first stock, it will add the box, if it is not my first stock bought it will just add to that list. It will display the tiny version of the summary, and the #shares owned.
 
 ### Delete (Sell stocks)
 
@@ -93,4 +93,35 @@
 
 ### Read (View Portfolio / Dashboard)
 
-- As a logged in user,
+- As a logged in user, I can view my dashboard by clicking the home button in the top left corner of the screen. (always visible)
+  - When I open my dashboard I can see the following:
+    - I can see my portfolio performance, my watchlists, an edit dashboard button, my notes, any modules I have selected.
+  - I can customize my dashboard to have any modules I want from the selection available. The only one that is constant is portfolio performance and notes.
+  - I can see my stock list and purchase / sell from here if I choose to do so.
+  - I can see my watchlists and edit them from this page as well. A modal opens when I click one.
+
+### Update (Edit Notes, Edit dashboard)
+
+- As a logged in user, I can view my notes on my dashboard and edit them.
+  - I can assign each note to a stock
+- As a logged in user, I can customize my dashboard to have as little or as much as possible.
+  - There is an edit dashboard button that will bring me to the edit menu.
+
+## Search
+
+### Blended CRUD (Search with API)
+
+- As a logged in user I can search using the search bar at the top of the screen.
+  - When I use the search bar it will hit an API request to give me the details of the stock I requested.
+  - BONUS: When I use the search bar it auto populates with stocks that exist with the letters used (starting after 2 characters).
+    - Eg. I type AAP it will show me AAPL in a drop down menu and I can click that.
+
+## Asset Stock Details
+
+### Blended CRUD (Stock details Page)
+
+- As a logged in user I can search using the search bar, click on a certain stock in my watchlist, click on a certain stock in my portfolio, to bring me to the stock detail page.
+  - When I land on the detail page I can see the stock performance
+  - I can see all of the details including key metrics, basic company information, etc.
+  - I can see the buy / sell module based on if I currently own any of the stock or not.
+  - I can see / edit / create / delete notes for each stock
