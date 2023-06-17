@@ -12,10 +12,10 @@ Robinhood, is website for retail investors. It aims to make investing in the sto
 
 ## 2. Dashboard & Portfolio
 
-- Logged in users can see their portfolio performance
-- Logged in users can discover new stocks
-- Logged in users can learn about investing
-- Logged in users can read market news
+- Create: Logged in users can purchase stocks from the stock detail page of the respective stock.
+- Read: Logged in users can see thier portfolio performance, watchlists, view their notes, discover new stocks, etc.
+- Update: Logged in users can edit their dashboard, edit their notes, edit stock names to personalize their dashboard.
+- Delete: Logged in users can sell all or some of each stock they own through the dashboard, or by clicking on the stock in any list.
 
 ## 3. Asset/Stock Details
 
@@ -32,8 +32,10 @@ Robinhood, is website for retail investors. It aims to make investing in the sto
 
 ## 4. Watchlists
 
-- Logged in users can create, update, view, delete watchlists.
-- Contains the stock name, and a tiny version of the summary from the details page. Clicking this will bring you to the stock details page.
+- Create: Logged in users can create watchlists and add stocks to them
+- Read: Logged in users can view their watchlists on their dashboard
+- Update: Logged in users can edit the names and icons of each watchlist as well as editing which stocks are in it.
+- Delete: Logged in users can delete stocks from watchlists as well delete the whole watchlist it self.
 
 ## 5. Search
 
