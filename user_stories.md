@@ -61,10 +61,13 @@
 - As a logged in user, I can update my lists by searching for stocks.
   - I can search for a stock using the search bar in the top of page that is always present.
   - Each stock detail page has a button on the right top part of the page that says add to list
-  - When I click this button a modal opens, with all of my lists as well as a create new list button.
+  - When I click this button a modal opens, with all of my lists as well as a create new list button. - When I click this button I can add a stock to one or more watchlists.
   - If I go back to my dashboard page the menu button on each list will let me update the name and/or icon of my watchlist individually.
+    - Clicking on the menu button will open a dropdown menu to choose which option I want.
   - The button changes to have a checkmark if the stock is on a watchlist I have made.
+    - Clicking on this button again opens the same menu but will then be how I can remove a stock from the list detailed below.
   - To remove a stock from a watchlist I can click the same button and deselect the wathlist, and this will remove it from the watchlist.
+    - Removing a stock from a watchlist does not require a confirmation dialogue and based entirely on the state of the checkbox next to each watchlist.
 
 ### Deleting Watchlists
 
