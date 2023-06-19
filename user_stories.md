@@ -81,8 +81,13 @@
 
 - As a logged in user, I can buy stocks from the stock detail page.
   - When I buy a stock it will be added to my portfolio.
+    - I click on a button on the stock detail page in the top right corner that says "buy". This opens a modal where I can buy the stock, inputing the basic information for buying a stock.
+    - The user can buy as many of the companies stock at once as long as they have the cash to do so.
+    - There will be a confirmation window that pops up upon succesfull completion / submission of the purchasing form.
   - When I buy a stock its performance will be added to my overall portfolio performance.
-  - When I buy a stock, I then have the option to add it to my favorites.
+    - This will show up on the top of the my dashbord under portfolio performance.
+  - When I buy a stock, I then have the option to add it to a watchlist.
+    - When I buy a stock there will be a button to add it to a watchlist.
   - Purchasing a stock will lower my available cash, and increase my portfolio value.
   - When I buy a stock it is added to the top part of the watchlists box in a separate box named Stocks. If this is my first stock, it will add the box, if it is not my first stock bought it will just add to that list. It will display the tiny version of the summary, and the #shares owned.
 
@@ -90,6 +95,10 @@
 
 - As a logged in user, I can sell stocks from my portfolio page.
   - When I sell a stock it will be deleted from my portfolio, unless I only sold a few shares that I own.
+    - The user can sell stocks from either clicking a button on the stock detail page that says "sell", or they can sell using the button in their dashboard.
+    - If they are selling through the stock detail page, they can only sell that companies stock.
+    - If they are selling through their dashboard they can pick which stocks they want to sell and do it all at once.
+    - They will complete the input fields on the modal that opens after clicking sell stocks. Once this is compelte, they will click submit and they will be prompted to confirm their actions.
   - When I sell a stock, it will increase my cash value, and decrease my portfolio value.
   - If I sell all of my stock in a company, I will no longer be able to add it to my favorites.
   - If I sell all of my stock in a company, the stock ticker will go away from my list of owned stocks, but will not leave any watchlists it may be on.
@@ -107,6 +116,8 @@
 
 - As a logged in user, I can view my notes on my dashboard and edit them.
   - I can assign each note to a stock
+  - I click a button that says add note at the bottom of the dashboard. This opens a modal where I can input the information for the note.
+  - I can input a stock symbol to attach the note to a certain stock.
 - As a logged in user, I can customize my dashboard to have as little or as much as possible.
   - There is an edit dashboard button that will bring me to the edit menu.
 
