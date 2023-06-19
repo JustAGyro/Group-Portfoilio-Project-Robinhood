@@ -2,17 +2,29 @@
 
 This web app uses the following API routes to dynamically update the page to create a single-page-app-like feel for the user for specific features.
 
-## FauxComments
+## Homepage / Dashboard
 
-* A logged in user may delete one of their own FauxComments, removing it from the list of visible FauxComments without causing a refresh/redirect.
+- `GET /api/`
 
-  * `DELETE /api/fauxcomments/:id`
+## Stock Detail
 
-## FauxLikes
+- `GET /api/stock/:stockId`
+- `POST /api/stock/:stockId/buy`
+- `DELETE /api/stock/:stockId/sell`
+- `GET /api/stock/:stockId/notes`
 
-* A logged in user can FauxLike or FauxUnlike a FauxTweet or FauxComment with visible confirmation without causing a refresh/redirect.
-  
-  * `POST /api/fauxtweets/:id/likes`
-  * `POST /api/fauxcomments/:id/likes`
-  * `DELETE /api/fauxtweets/:id/likes`
-  * `DELETE /api/fauxcomments/:id/likes`
+## Notes
+
+- `GET /api/notes`
+- `GET /api/notes/:noteId`
+- `POST /api/notes/new`
+- `DELETE /api/notes/:noteId/delete`
+- `PUT /api/notes/:noteId`
+
+## Watchlists
+
+- `GET /api/watchlists`
+- `GET /api/watchlists/:watchListId`
+- `POST /api/watchlists/new`
+- `DELETE /api/watchlists/:watchListId`
+- `PUT /api/watchlists/:watchListId`
