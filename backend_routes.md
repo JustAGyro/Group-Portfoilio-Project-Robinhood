@@ -5,12 +5,12 @@ This web app uses the following API routes to dynamically update the page to cre
 ## Homepage / Dashboard
 
 - `GET /api/`
+- `POST /api/stock/:stockId/buy`
+- `DELETE /api/stock/:stockId/sell`
 
 ## Stock Detail
 
 - `GET /api/stock/:stockId`
-- `POST /api/stock/:stockId/buy`
-- `DELETE /api/stock/:stockId/sell`
 - `GET /api/stock/:stockId/notes`
 
 ## Notes
