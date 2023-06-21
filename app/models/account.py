@@ -9,7 +9,7 @@ class Account(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, ForeignKey("users.id"), nullable=False, unique=True)
+    userId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("users.id")), nullable=False, unique=True)
     balance = db.Column(db.Float, nullable=False, default=1000.00)
 
-    userId = relationship("User", back_populates="id")
+    user = relationship("User", back_populates="account")

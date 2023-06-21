@@ -10,7 +10,7 @@ class WatchList(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    userId = db.Column(db.Integer, ForeignKey("users.id"), nullable=False)
+    userId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
-    userId = relationship("User", back_populates="id")
-    id = relationship("SymbolList", back_populates="listId")
+    user = relationship("User", back_populates="watchlists")
+    symbollists = relationship("SymbolList", back_populates="list")

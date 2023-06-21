@@ -9,9 +9,9 @@ class Note(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, ForeignKey("users.id"), nullable=False)
+    userId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     symbol = db.Column(db.String(5))
     subject = db.Column(db.String(100), nullable=False)
     entry = db.Column(db.String(2000), nullable=False)
 
-    userId = relationship("User", back_populates="id")
+    user = relationship("User", back_populates="notes")

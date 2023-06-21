@@ -9,7 +9,7 @@ class SymbolList(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    listId = db.Column(db.Integer, ForeignKey("watchlists.id"), nullable=False)
+    listId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("watchlists.id")), nullable=False)
     symbol = db.Column(db.String(5))
 
-    listId = relationship("WatchList", back_populates="id")
+    list = relationship("WatchList", back_populates="symbolists")

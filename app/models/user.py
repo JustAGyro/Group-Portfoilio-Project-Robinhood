@@ -15,10 +15,10 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    id = relationship("Account", back_populates="userId")
-    id = relationship("Note", back_populates="userId")
-    id = relationship("WatchList", back_populates="userId")
-    id = relationship("PortfolioTransaction", back_populates="userId")
+    account = relationship("Account", back_populates="user")
+    notes = relationship("Note", back_populates="user")
+    watchlists = relationship("WatchList", back_populates="user")
+    portfoliotransactions = relationship("PortfolioTransaction", back_populates="user")
 
     @property
     def password(self):

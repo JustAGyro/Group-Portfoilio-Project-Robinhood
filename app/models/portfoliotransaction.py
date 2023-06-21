@@ -10,11 +10,11 @@ class PortfolioTransaction(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, ForeignKey("users.id"), nullable=False)
+    userId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     transaction = db.Column(db.Enum("buy", "sell"), nullable=False)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.now().date()) 
+    date = db.Column(db.DateTime, nullable=False, default=datetime.now().date())
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     symbol = db.Column(db.String(5), nullable=False)
 
-    userId = relationship("User", back_populates="id")
+    user = relationship("User", back_populates="portfoliotransactions")
