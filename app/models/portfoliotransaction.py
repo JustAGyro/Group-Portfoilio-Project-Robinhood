@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import ForeignKey
+from datetime import datetime
 
 class PortfolioTransaction(db.Model):
     __tablename__ = "portfoliotransactions"
@@ -11,7 +12,7 @@ class PortfolioTransaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, ForeignKey("users.id"), nullable=False)
     transaction = db.Column(db.Enum("buy", "sell"), nullable=False)
-    date = db.Column(db.DateTime, nullable=False) #todo: add default value set to current time stamp
+    date = db.Column(db.DateTime, nullable=False, default=datetime.now().date()) 
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     symbol = db.Column(db.String(5), nullable=False)
