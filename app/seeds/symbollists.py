@@ -55,11 +55,11 @@ def seed_symbolists():
 
 
 
-def undo_symbolists():
+def undo_symbollists():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM symbolists"))
+        db.session.execute(text("DELETE FROM symbollists"))
         
     db.session.commit()
 
