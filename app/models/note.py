@@ -10,8 +10,8 @@ class Note(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    symbol = db.Column(db.String(5))
     subject = db.Column(db.String(100), nullable=False)
     entry = db.Column(db.String(2000), nullable=False)
 
     user = relationship("User", back_populates="notes")
+    symbols = relationship("NoteSymbol", back_populates="note")

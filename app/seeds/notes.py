@@ -3,13 +3,13 @@ from sqlalchemy.sql import text
 
 def seed_notes():
     demos_note1 = Note(
-        userId=1, symbol="AAPL", subject="this is a bagel", entry="OR IS IT??? DUN DUN DAAAAAAAAAAAAAAAAAA"
+        userId=1, subject="this is a bagel", entry="OR IS IT??? DUN DUN DAAAAAAAAAAAAAAAAAA"
     )
     demos_note2 = Note(
-        userId=1, symbol=None, subject="empty symbol note", entry="yeet yeet yeet, yote, doink bonk"
+        userId=1, subject="empty symbol note", entry="yeet yeet yeet, yote, doink bonk"
     )
     marnies_note1 = Note(
-        userId=1, symbol="MSFT", subject="bill gates", entry="owns all the gates"
+        userId=2, subject="bill gates", entry="owns all the gates"
     )
     db.session.add(demos_note1)
     db.session.add(demos_note2)
