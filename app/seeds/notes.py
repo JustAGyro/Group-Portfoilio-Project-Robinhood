@@ -6,7 +6,7 @@ def seed_notes():
         userId=1, symbol="AAPL", subject="this is a bagel", entry="OR IS IT??? DUN DUN DAAAAAAAAAAAAAAAAAA"
     )
     demos_note2 = Note(
-        userId=1, symbol="", subject="empty symbol note", entry="yeet yeet yeet, yote, doink bonk"
+        userId=1, symbol=None, subject="empty symbol note", entry="yeet yeet yeet, yote, doink bonk"
     )
     marnies_note1 = Note(
         userId=1, symbol="MSFT", subject="bill gates", entry="owns all the gates"

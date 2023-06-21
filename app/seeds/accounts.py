@@ -3,12 +3,13 @@ from sqlalchemy.sql import text
 
 def seed_accounts():
     demos_account = Account(
-        userId=1, balance=1000.00)
+        userId=1
+    )
     marnies_account = Account(
-        userId=2, balance=1000.00
+        userId=2, balance=890.00
     )
     bobbies_account = Account(
-        userId=3, balance=1000.00
+        userId=3, balance=1999.00
     )
     db.session.add(demos_account)
     db.session.add(marnies_account)
