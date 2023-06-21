@@ -16,6 +16,9 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     id = relationship("Account", back_populates="userId")
+    id = relationship("Note", back_populates="userId")
+    id = relationship("WatchList", back_populates="userId")
+    id = relationship("PortfolioTransaction", back_populates="userId")
 
     @property
     def password(self):
