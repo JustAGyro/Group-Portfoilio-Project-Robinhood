@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import NoteSymbol, Note, db
+from app.forms.note_form import NoteForm
 
 
 note_routes = Blueprint('notes', __name__)
@@ -14,7 +15,7 @@ def note_test():
 # GET /api/notes
 # Get all notes for the current user
 @note_routes.route('/')
-@login_required
+# @login_required
 def notes():
     """
     Query for all notes and returns them in a list of note dictionaries
@@ -31,9 +32,16 @@ def notes():
 
     return jsonify(note_list)
 
+# GET /api/notes/<id>
+@note_routes.route('/')
+@login_required
+def note():
+    note = Note.Query.get(id)
+    return jsonify(note)
+
 # GET /api/notes/current
 @note_routes.route('/current')
-@login_required
+# @login_required
 def current_notes():
     """
     Query for all notes associated with a specific stock symbol for the current user
@@ -54,25 +62,37 @@ def current_notes():
 
 # POST /api/notes/new
 @note_routes.route('/new', methods=['POST'])
-@login_required
+# @login_required
 def add_note():
     # data is destructured
-    subject = 'Note Subject'
-    userId = current_user.id
-    entry = 'this is the form entry'
-    new_note = Note (
-        userId = userId,
-        subject = subject,
-        entry = entry
-    )
+    form = NoteForm()
+    if form.validate_on_submit():
+        newNote = Note(
+            id=note.id,
+            userId=current_user.id,
+            subject=form.subject.data,
+            entry=form.entry.data
+        )
+
+
+
+
+    # subject = 'Note Subject'
+    # userId = current_user.id
+    # entry = 'this is the form entry'
+    # new_note = Note (
+    #     userId = userId,
+    #     subject = subject,
+    #     entry = entry
+    # )
     db.session.add(new_note)
     db.session.commit()
-    return 'Successfully Added'
-
+    # return 'Successfully Added'
+    return jsonify(newNote)
 # DELETE /api/notes/:noteId/delete
 
 @note_routes.route('/<int:noteId>/delete', methods=['Delete'])
-@login_required
+# @login_required
 def delete_note(noteId):
     note = Note.query.get(noteId)
     if not note:
@@ -83,3 +103,25 @@ def delete_note(noteId):
         return 'Successfully deleted note'
 
 # PUT /api/notes/:noteId
+@note_routes.route('/<id>/edit', methods=['PUT'])
+# @login_required
+def edit_note(id):
+
+    note = Note.query.filter(Note.id == id)
+    if note:
+        form = NoteForm()
+        form.subject.data=note.subject
+        form.entry.data=note.entry
+        if form.validate_on_submit():
+            newNote = Note(
+                id=note.id,
+                userId=current_user.id,
+                subject=form.subject.data,
+                entry=form.entry.data
+            )
+            db.session.add(newNote)
+            db.session.commit()
+
+            return jsonify(newNote)
+    else:
+        return 'No such note.'
