@@ -7,20 +7,21 @@ from app.forms.note_form import NoteForm
 note_routes = Blueprint('notes', __name__)
 
 # Test route
-@note_routes.route('/')
-def note_test():
-    in_route = 'In Route :)'
-    return jsonify(in_route)
+
+# @note_routes.route('/')
+# def note_test():
+#     in_route = 'In Route :)'
+#     return jsonify(in_route)
 
 # GET /api/notes
 # Get all notes for the current user
-@note_routes.route('/')
+@note_routes.route('/mine')
 # @login_required
 def notes():
     """
     Query for all notes and returns them in a list of note dictionaries
     """
-    user_id = current_user.id
+    user_id = 1
     notes = (
         Note.query
         .join(NoteSymbol)
@@ -36,7 +37,7 @@ def notes():
 @note_routes.route('/')
 @login_required
 def note():
-    note = Note.Query.get(id)
+    note = Note.Query.all()
     return jsonify(note)
 
 # GET /api/notes/current

@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import NewNotes from "./components/NewNotes"
 import EditNotes from "./components/EditNotes"
+import ListNotes from "./components/ListNotes"
 import Test from "./components/test/Test"
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
@@ -24,12 +25,15 @@ function App() {
           <Route exact path="/" >
             <Test/>
           </Route>
+          <Route exact path="/notes/">
+            <ListNotes/>
+          </Route>
           <Route path="/notes/new">
             <NewNotes/>
           </Route>
-          <Route path="/notes/:id/edit">
+          {/* <Route path="/notes/:id/edit">
             <EditNotes/>
-          </Route>
+          </Route> */}
           <Route path="/login" >
             <LoginFormPage />
           </Route>
