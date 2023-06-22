@@ -66,29 +66,24 @@ def current_notes():
 def add_note():
     # data is destructured
     form = NoteForm()
-    if form.validate_on_submit():
-        newNote = Note(
-            id=note.id,
-            userId=current_user.id,
-            subject=form.subject.data,
-            entry=form.entry.data
-        )
-
-
-
-
-    # subject = 'Note Subject'
-    # userId = current_user.id
-    # entry = 'this is the form entry'
-    # new_note = Note (
-    #     userId = userId,
-    #     subject = subject,
-    #     entry = entry
-    # )
+    # if form.validate_on_submit():
+    new_note = Note(
+        userId=1,
+        subject=form.subject.data,
+        entry=form.entry.data
+    )
+        # subject = 'Note Subject'
+        # userId = current_user.id
+        # entry = 'this is the form entry'
+        # new_note = Note (
+        #     userId = userId,
+        #     subject = subject,
+        #     entry = entry
+        # )
     db.session.add(new_note)
     db.session.commit()
-    # return 'Successfully Added'
-    return jsonify(newNote)
+        # return 'Successfully Added'
+    return jsonify(new_note)
 # DELETE /api/notes/:noteId/delete
 
 @note_routes.route('/<int:noteId>/delete', methods=['Delete'])

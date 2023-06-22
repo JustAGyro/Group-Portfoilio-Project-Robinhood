@@ -15,7 +15,15 @@ export const getNotes = (notes) => {
         payload: notes
     }
 }
-export const getNotesThunk = (id) => async dispatch => {
+export const getAllNotes = () => async dispatch => {
+    const response = await fetch(`/api/notes/}`);
+    if(response.ok){
+        const details = await response.json();
+        await dispatch(getNotes(details))
+        return details
+    }
+}
+export const getNoteByIdThunk = (id) => async dispatch => {
     const response = await fetch(`/api/notes/${id}`);
     if(response.ok){
         const details = await response.json();

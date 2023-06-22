@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getNotesThunk, updateNoteThunk } from "../../store/notes"
+import { getAllNotes, getNoteByIdThunk, updateNoteThunk } from "../../store/notes"
 import { useHistory, useParams } from "react-router-dom";
 
-export default EditNote = () => {
+export default function EditNote() {
     const dispatch = useDispatch();
     const {id} = useParams();
     const oldNote = useSelector(state => state.notes[id]);
@@ -12,7 +12,8 @@ export default EditNote = () => {
     const [note, setNote] = useState({subject, entry})
 
     useEffect(() => {
-        dispatch(getNotesThunk(id))
+        dispatch(getNoteByIdThunk(id))
+        dispatch(getAllNotes(id))
     })
 
     const submit = async (e) => {
