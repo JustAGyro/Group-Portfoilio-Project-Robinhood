@@ -7,7 +7,7 @@ note_routes = Blueprint('notes', __name__)
 
 # Test route
 @note_routes.route('/')
-def notes():
+def note_test():
     in_route = 'In Route :)'
     return jsonify(in_route)
 
@@ -53,7 +53,7 @@ def current_notes():
     return jsonify(note_list)
 
 # POST /api/notes/new
-@note_routes('/new', methods=['POST'])
+@note_routes.route('/new', methods=['POST'])
 @login_required
 def add_note():
     # data is destructured
@@ -71,7 +71,7 @@ def add_note():
 
 # DELETE /api/notes/:noteId/delete
 
-@note_routes('/<int:noteId>/delete', methods=['Delete'])
+@note_routes.route('/<int:noteId>/delete', methods=['Delete'])
 @login_required
 def delete_note(noteId):
     note = Note.query.get(noteId)

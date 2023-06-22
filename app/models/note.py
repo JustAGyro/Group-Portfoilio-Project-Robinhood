@@ -1,7 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import ForeignKey
-from app.models import NoteSymbol
 
 class Note(db.Model):
     __tablename__ = "notes"
