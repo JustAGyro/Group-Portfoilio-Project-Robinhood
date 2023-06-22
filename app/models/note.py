@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import ForeignKey
+from app.models import NoteSymbol
 
 class Note(db.Model):
     __tablename__ = "notes"
@@ -15,3 +16,21 @@ class Note(db.Model):
 
     user = relationship("User", back_populates="notes")
     symbols = relationship("NoteSymbol", back_populates="note")
+
+    def to_dict(self):
+        symbols1 = [
+            {
+                'id': symbol.id,
+                'noteId': symbol.noteId,
+                'symbol': symbol.symbol
+            }
+            for symbol in self.symbols
+        ]
+
+        return {
+            'id': self.id,
+            'userId': self.userId,
+            'subject': self.subject,
+            'entry': self.entry,
+            'symbols': symbols1
+        }
