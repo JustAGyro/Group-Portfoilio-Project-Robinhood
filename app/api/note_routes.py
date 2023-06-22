@@ -52,18 +52,6 @@ def current_notes():
 
     return jsonify(note_list)
 
-
-
-
-
-
-
-
-
-
-
-
-
 # POST /api/notes/new
 @note_routes('/new', methods=['POST'])
 @login_required
@@ -72,7 +60,7 @@ def add_note():
     subject = 'Note Subject'
     userId = current_user.id
     entry = 'this is the form entry'
-    new_note = Note ( 
+    new_note = Note (
         userId = userId,
         subject = subject,
         entry = entry
@@ -81,39 +69,17 @@ def add_note():
     db.session.commit()
     return 'Successfully Added'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # DELETE /api/notes/:noteId/delete
 
 @note_routes('/<int:noteId>/delete', methods=['Delete'])
 @login_required
 def delete_note(noteId):
     note = Note.query.get(noteId)
-    if not note: 
+    if not note:
         return ('note not found')
     if current_user.id == note.userId:
         db.session.delete(note)
         db.session.commit()
         return 'Successfully deleted note'
-
-
-
-
-
-
-
-
 
 # PUT /api/notes/:noteId
