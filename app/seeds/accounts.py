@@ -16,10 +16,10 @@ def seed_accounts():
     db.session.add(bobbies_account)
     db.session.commit()
 
-    def undo_accounts():
-        if environment == "production":
-            db.session.execute(f"TRUNCATE table {SCHEMA}.accounts RESTART IDENTITY CASCADE;")
-        else:
-            db.session.execute(text("DELETE FROM accounts"))
+def undo_accounts():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.accounts RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM accounts"))
 
-        db.session.commit()
+    db.session.commit()

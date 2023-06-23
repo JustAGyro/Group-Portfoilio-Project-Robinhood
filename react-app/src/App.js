@@ -9,13 +9,16 @@ import Test from "./components/test/Test"
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import { getAllNotes } from "./store/notes";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
+    // dispatch(getAllNotes())
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
 
   return (
     <>
@@ -31,9 +34,9 @@ function App() {
           <Route path="/notes/new">
             <NewNotes/>
           </Route>
-          {/* <Route path="/notes/:id/edit">
+          <Route path="/notes/:id/edit">
             <EditNotes/>
-          </Route> */}
+          </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>

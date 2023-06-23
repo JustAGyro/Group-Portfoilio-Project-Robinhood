@@ -12,4 +12,4 @@ class SymbolList(db.Model):
     listId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("watchlists.id")), nullable=False)
     symbol = db.Column(db.String(5))
 
-    list = relationship("WatchList", back_populates="symbolists")
+    list = relationship("WatchList", back_populates="symbollists")

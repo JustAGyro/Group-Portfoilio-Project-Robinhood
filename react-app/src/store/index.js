@@ -5,7 +5,7 @@ import notes from './notes'
 
 const rootReducer = combineReducers({
   session,
-  notes,
+  // notes,
 });
 
 

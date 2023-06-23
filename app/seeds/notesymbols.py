@@ -14,3 +14,10 @@ def seed_notessymbols():
     db.session.add(noteB)
 
     db.session.commit()
+
+def undo_notesymbols():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.notesymbols RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM notesymbols"))
+    db.session.commit()
