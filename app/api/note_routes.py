@@ -21,16 +21,13 @@ def notes():
     """
     Query for all notes and returns them in a list of note dictionaries
     """
+    print("THIS IS A FLAG")
     user_id = current_user.id
-    notes = (
-        Note.query
-        .join(NoteSymbol)
-        .filter(Note.userId == user_id)
-        .all()
-    )
+    notes = Note.query.join(NoteSymbol).filter(Note.userId == user_id).all()
+    print(notes)
 
     note_list = [note.to_dict() for note in notes]
-
+    print(note_list)
     return jsonify(note_list)
 
 # GET /api/notes/<id>

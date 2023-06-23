@@ -15,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    // dispatch(getAllNotes())
+    dispatch(getAllNotes())
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 

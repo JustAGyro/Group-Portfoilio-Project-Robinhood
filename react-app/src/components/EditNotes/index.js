@@ -7,15 +7,18 @@ export default function EditNote() {
     const dispatch = useDispatch();
     const {id} = useParams();
     const oldNote = useSelector(state => state.notes[id]);
-    const [subject, setSubject] = useState(oldNote.subject);
-    const [entry, setEntry] = useState(oldNote.entry);
+    const [subject, setSubject] = useState(oldNote?.subject || "");
+    const [entry, setEntry] = useState(oldNote?.entry || "");
     const [note, setNote] = useState({subject, entry})
 
     useEffect(() => {
         dispatch(getNoteByIdThunk(id))
         dispatch(getAllNotes(id))
-    })
-
+    }, [dispatch])
+    useEffect(() => {
+        setSubject(oldNote?.subject || "")
+        setEntry(oldNote?.entry || "")
+    }, [oldNote])
     const submit = async (e) => {
         e.preventDefault();
         if(subject && entry) {

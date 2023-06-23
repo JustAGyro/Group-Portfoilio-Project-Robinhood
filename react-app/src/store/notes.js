@@ -16,9 +16,10 @@ export const getNotes = (notes) => {
     }
 }
 export const getAllNotes = () => async dispatch => {
-    const response = await fetch(`/api/notes/}`);
+    const response = await fetch(`/api/notes/mine`);
     if(response.ok){
         const details = await response.json();
+        console.log(details)
         await dispatch(getNotes(details))
         return details
     }
