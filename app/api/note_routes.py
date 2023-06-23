@@ -21,7 +21,7 @@ def notes():
     """
     Query for all notes and returns them in a list of note dictionaries
     """
-    user_id = 1
+    user_id = current_user.id
     notes = (
         Note.query
         .join(NoteSymbol)
