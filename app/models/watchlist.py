@@ -14,3 +14,20 @@ class WatchList(db.Model):
 
     user = relationship("User", back_populates="watchlists")
     symbollists = relationship("SymbolList", back_populates="list")
+
+    def to_dict(self):
+        symbollists1 = [
+            {
+                'id': symbollist.id,
+                'listId': symbollist.listId,
+                'symbol': symbollist.symbol
+            }
+            for symbollist in self.symbollists
+        ]
+
+        return {
+            'id': self.id,
+            'name': self.name,
+            'userId': self.userId,
+            'symbols': symbollists1
+        }
