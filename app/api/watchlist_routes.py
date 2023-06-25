@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import WatchList, SymbolList, db
 from app.forms.watchlist_form import WatchListForm
+from app.forms.symbollist_form import SymbolListForm
 
 watchlist_routes = Blueprint('watchlists', __name__)
 
@@ -82,3 +83,44 @@ def edit_watchlist(id):
         return jsonify(new_watchlist.to_dict())
     else:
         return "No Watchlist Found"
+
+# POST /api/watchlists/<id>/symbollist/new
+# POST a new symbollist to a watchlist
+@watchlist_routes.route('/<id>/symbollist/new', methods=['POST'])
+@login_required
+def add_symbollist(id):
+    watchlist = WatchList.query.get(id)
+    if not watchlist:
+        return jsonify(error='Watchlist not found'), 404
+
+    form = SymbolListForm()
+    new_symbollist = SymbolList(
+        listId = id,
+        symbol = form.symbol.data
+    )
+
+    db.session.add(new_symbollist)
+    db.session.commit()
+
+    return jsonify(new_symbollist.to_dict())
+
+# DELETE /api/watchlists/<watchlist_id>/symbollist/<symbollist_id>/delete
+# DELETE a symbollist from a watchlist
+@watchlist_routes.route('/<watchlist_id>/symbollist/<symbollist_id>/delete', methods=['DELETE'])
+@login_required
+def delete_symbollist(watchlist_id, symbollist_id):
+    watchlist = WatchList.query.get(watchlist_id)
+    if not watchlist:
+        return jsonify(error='Watchlist not found'), 404
+
+    symbollist = SymbolList.query.get(symbollist_id)
+    if not symbollist:
+        return jsonify(error='Symbol not found'), 404
+
+    if symbollist.listId != watchlist.id:
+        return jsonify(error='Symbol does not belong to the specified Watchlist'), 400
+
+    db.session.delete(symbollist)
+    db.session.commit()
+
+    return jsonify(message='Symbol deleted successfully')

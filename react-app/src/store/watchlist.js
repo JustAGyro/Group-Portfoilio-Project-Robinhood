@@ -1,6 +1,8 @@
 const GET_WATCHLIST = 'watchlist/GET_WATCHLIST';
 const ADD_WATCHLIST = 'watchlist/ADD_WATCHLIST';
 const DELETE_WATCHLIST = 'watchlist/DELETE_WATCHLIST';
+const ADD_SYMBOLLIST = 'watchlist/ADD_SYMBOLLIST';
+const DELETE_SYMBOLLIST = 'watchlist/DELETE_SYMBOLLIST';
 
 export const getAllWatchlists = (watchlists) => {
   return {
@@ -20,6 +22,16 @@ export const deleteWatchlist = (watchlist) => {
   return {
     type: DELETE_WATCHLIST,
     payload: watchlist,
+  };
+};
+
+export const addSymbollist = (watchlistId, symbollist) => {
+  return {
+    type: ADD_SYMBOLLIST,
+    payload: {
+      watchlistId,
+      symbollist,
+    },
   };
 };
 
