@@ -35,6 +35,16 @@ export const addSymbollist = (watchlistId, symbollist) => {
   };
 };
 
+export const deleteSymbollist = (watchlistId, symbollistId) => {
+  return {
+    type: DELETE_SYMBOLLIST,
+    payload: {
+      watchlistId,
+      symbollistId,
+    },
+  };
+};
+
 export const getAllWatchlistsThunk = () => async (dispatch) => {
   const response = await fetch('/api/watchlists/current');
 
@@ -72,7 +82,7 @@ export const createWatchlistThunk = (watchlist) => async (dispatch) => {
 };
 
 export const deleteWatchlistThunk = (watchlist) => async (dispatch) => {
-  const reposne = await fetch(`/api/watchlists/delete/${watchlist.id}`, {
+  const response = await fetch(`/api/watchlists/delete/${watchlist.id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -85,6 +95,45 @@ export const deleteWatchlistThunk = (watchlist) => async (dispatch) => {
     dispatch(deleteWatchlist(watchlist.id));
   }
 };
+
+export const createSymbollistThunk =
+  (watchlistId, symbollist) => async (dispatch) => {
+    const response = await fetch(
+      `/api/watchlists/${watchlistId}/symbollist/new`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ symbol: symbollist }),
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(addSymbollist(watchlistId, data));
+      return data;
+    }
+  };
+
+export const deleteSymbollistThunk =
+  (watchlistId, symbollistId) => async (dispatch) => {
+    const response = await fetch(
+      `/api/watchlists/${watchlistId}/symbollist/${symbollistId}/delete`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (response.ok) {
+      dispatch(deleteSymbollist(watchlistId, symbollistId));
+      return true;
+    }
+    return false;
+  };
 
 export default function watchlistsReducer(state = {}, action) {
   let newState = {};
@@ -102,6 +151,23 @@ export default function watchlistsReducer(state = {}, action) {
     case DELETE_WATCHLIST:
       newState = { ...state };
       delete newState[action.payload];
+      return newState;
+    case ADD_SYMBOLLIST:
+      newState = { ...state };
+      const { watchlistId, symbollist } = action.payload;
+      newState[watchlistId] = {
+        ...newState[watchlistId],
+        symbollist: [...newState[watchlistId].symbollist, symbollist],
+      };
+      return newState;
+    case DELETE_SYMBOLLIST:
+      newState = { ...state };
+      const { watchId, symbollistId } = action.payload;
+      if (newState[watchId]) {
+        newState[watchId].symbollists = newState[watchId].symbollists.filter(
+          (symbollist) => symbollist.id !== symbollistId
+        );
+      }
       return newState;
     default:
       return state;
