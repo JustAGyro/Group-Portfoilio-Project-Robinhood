@@ -31,12 +31,6 @@ function App() {
           <Route exact path="/">
             <Dashboard />
           </Route>
-          <Route exact path="/account">
-            <Transaction />
-          </Route>
-          <Route exact path="/account">
-            <Transaction />
-          </Route>
           <Route exact path="/notes/">
             <ListNotes />
           </Route>
