@@ -28,3 +28,8 @@ This web app uses the following API routes to dynamically update the page to cre
 - `POST /api/watchlists/new`
 - `DELETE /api/watchlists/:watchListId`
 - `PUT /api/watchlists/:watchListId`
+
+## Symbol Lists
+
+- `POST /api/symbollists/new`
+- `DELETE /api/symbollists/delete`

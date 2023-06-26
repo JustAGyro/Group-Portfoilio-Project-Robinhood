@@ -1,0 +1,53 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: 'content';
+  margin-top: 50px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 0.5fr 2.1fr 0.9fr 0.5fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: 'left-gutter dashboard stock-watchlist right-gutter';
+  grid-area: content;
+  min-height: 0; /* Add this to allow content overflow */
+  overflow: hidden; /* Hide overflowing content */
+}
+
+.stock-watchlist {
+  position: fixed;
+  top: 50px;
+  left: 1300px;
+  width: 200px; /* Adjust the width as per your needs */
+  height: 100vh; /* Adjust the height as per your needs */
+  background-color: blue;
+  padding: 20px;
+  z-index: 1;
+  overflow-y: auto;
+}
+
+.right-gutter {
+  grid-area: right-gutter;
+}
+
+.left-gutter {
+  grid-area: left-gutter;
+}
+
+.dashboard {
+  grid-area: dashboard;
+  background-color: #fff;
+  height: 100%; /* Occupy full height of the parent */
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 500px;
+}
