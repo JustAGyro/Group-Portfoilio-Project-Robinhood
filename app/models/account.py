@@ -13,3 +13,10 @@ class Account(db.Model):
     balance = db.Column(db.Float, nullable=False, default=1000.00)
 
     user = relationship("User", back_populates="account")
+
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'userId':self.userId,
+            'balance': self.balance
+        }

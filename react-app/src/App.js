@@ -10,12 +10,14 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import { getAllNotes } from "./store/notes";
+import { getAccountInfo } from "./store/account";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(getAllNotes())
+    dispatch(getAccountInfo())
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
@@ -27,6 +29,9 @@ function App() {
         <Switch>
           <Route exact path="/" >
             <Test/>
+          </Route>
+          <Route exact path= "/account">
+            <Transaction/>
           </Route>
           <Route exact path="/notes/">
             <ListNotes/>

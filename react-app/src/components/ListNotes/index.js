@@ -4,7 +4,8 @@ import { useHistory, useParams } from "react-router-dom";
 
 export default function ListNotes() {
 
-    const response = fetch(`/api/notes/}`).then(res => res.json()).then(res => console.log(res))
+    const response = fetch(`/api/notes/mine`).then(res => res.json()).then(res => console.log(res))
+    
     return (
         <div>
             yesss
