@@ -1,7 +1,9 @@
 const GET_NOTES = 'notes/GET_NOTES';
 const ADD_NOTE = 'notes/ADD_NOTE';
 const DELETE_NOTE = 'notes/DELETE_NOTE';
+const GET_NOTESYMBOLS = 'note/GET_NOTESYMBOLS'
 const ADD_NOTESYMBOL = 'notes/ADD_NOTESYMBOL';
+const EDIT_NOTESYMBOL = 'notes/EDIT_NOTESYMBOL'
 const DELETE_NOTESYMBOL = 'notes/DELETE_';
 
 export const addNote = (note) => {
@@ -16,12 +18,29 @@ export const getNotes = (notes) => {
     payload: notes,
   };
 };
+export const getNoteSymbols = (noteId, notesymbols) => {
+  return {
+    type: GET_NOTESYMBOLS,
+    payload: {
+      noteId, 
+      notesymbols
+    }
+  }
+}
 export const addNoteSymbol = (noteId, notesymbol) => {
   return {
     type: ADD_NOTESYMBOL,
     payload: {
       noteId,
       notesymbol
+    }
+  }
+}
+export const editNoteSymbol = (noteId, notesymbolId, notesymbol) => {
+  return {
+    type: EDIT_NOTESYMBOL,
+    payload: {
+      noteId, notesymbolId, notesymbol
     }
   }
 }
@@ -99,6 +118,13 @@ export const updateNoteThunk = (note, id) => async (dispatch) => {
     return details;
   }
 };
+export const getAllNoteSymbols = (id) => async (dispatch) => {
+  const response = await fetch (`/api/notes/${id}/notesymbols`);
+  if (response.ok) {
+    const details = await response.json()
+    await dispatch(getNoteSymbols(details))
+  }
+}
 export const createNoteSymbolThunk = (noteId, notesymbol) => async (dispatch) => {
   const response = await fetch(
     `/api/notes/${noteId}/notesymbol/new`, {
@@ -112,6 +138,20 @@ export const createNoteSymbolThunk = (noteId, notesymbol) => async (dispatch) =>
   if (response.ok) {
     const data = await response.json();
     dispatch(addNoteSymbol(noteId, data));
+    return data
+  }
+}
+export const editNoteSymbolThunk = (noteId, notesymbolId, notesymbol) => async (dispatch) => {
+  const response = await fetch (`/api/notes/${noteId}/notesymbol/${notesymbolId}/edit`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({symbol: notesymbol})
+  });
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(editNoteSymbol(noteId, notesymbolId, data))
     return data
   }
 }
@@ -151,6 +191,14 @@ export default function notesReducer(state = {}, action) {
         newState[note.id] = note;
       });
       return newState;
+    case GET_NOTESYMBOLS:
+      newState = { ...state };
+      const {noteId1, notesymbols} = action.payload;
+      newState[noteId1] = {
+        ...newState[noteId1],
+        symbollist:notesymbols
+      } 
+    
     case ADD_NOTESYMBOL:
       newState = { ...state };
       const { noteId, notesymbol } = action.payload;
@@ -159,6 +207,11 @@ export default function notesReducer(state = {}, action) {
         symbollist: [...newState[noteId].symbollist, notesymbol],
       };
       return newState
+    case EDIT_NOTESYMBOL:
+      newState = { ...state }
+      const {noteId2, notesymbolId1, notesymbol1} = action.payload;
+      newState[noteId2].symbollist[notesymbolId1] = notesymbol1
+      return newState 
     case DELETE_NOTESYMBOL:
       newState = { ...state };
       const { noteeId, notesymbolId } = action.payload
