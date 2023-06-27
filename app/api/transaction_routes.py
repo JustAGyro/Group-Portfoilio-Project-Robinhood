@@ -12,7 +12,8 @@ transaction_routes = Blueprint('portfoliotransactions', __name__)
 def transactions_current():
     user_id = current_user.id
     transactions = PortfolioTransaction.query.filter(PortfolioTransaction.userId == user_id).all()
-    transaction_list = [transactions.to_dict() for transaction in transactions]
+    transaction_list = [transaction.to_dict() for transaction in transactions]
+
     return jsonify(transaction_list)
 
 # GET /api/transactions/symbol/<symbol>
@@ -36,7 +37,7 @@ def transactions_one(p_id):
 
 # POST /api/transactions/new
 # POST a new transaction (buy/sell).
-@transaction_routes.routes('/new')
+@transaction_routes.route('/new')
 @login_required
 def transactions_new():
     user_id = current_user.id
@@ -52,9 +53,9 @@ def transactions_new():
         transaction = form.transaction.data,
         quantity = form.quantity.data,
         price = price,
-        symbol = symbol
+        symbol = form.symbol.data,
     )
-
+    print(new_transaction)
     db.session.add(new_transaction)
     db.session.commit()
 

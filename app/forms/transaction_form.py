@@ -5,3 +5,4 @@ from wtforms.validators import DataRequired
 class TransactionForm(FlaskForm):
     transaction = SelectField('transaction', choices=['Buy','Sell'], validators=[DataRequired()])
     quantity = IntegerField('quantity', validators=[DataRequired()])
+    symbol = StringField('symbol', validators=[DataRequired()])

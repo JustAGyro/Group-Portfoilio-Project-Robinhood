@@ -4,9 +4,11 @@ import session from './session';
 import notes from './notes';
 import account from './account'
 import watchlists from './watchlist';
+import transactions from './transactions'
 
 const rootReducer = combineReducers({
   session,
+  transactions,
   notes,
   account,
   watchlists,

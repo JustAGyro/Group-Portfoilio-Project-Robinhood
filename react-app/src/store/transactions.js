@@ -20,6 +20,7 @@ export const getAllTransactionsThunk = () => async (dispatch) => {
 
   if (response.ok) {
     const transactions = await response.json();
+    console.log(response)
     await dispatch(getTransactions(transactions));
     return transactions;
   }

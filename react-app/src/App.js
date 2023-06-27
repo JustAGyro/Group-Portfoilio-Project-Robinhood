@@ -12,6 +12,9 @@ import Navigation from './components/Navigation';
 import { getAllNotes } from './store/notes';
 import { getAllWatchlistsThunk } from './store/watchlist';
 import { getAccountInfo } from './store/account';
+import Account from './components/Account';
+import { getAllTransactionsThunk } from './store/transactions';
+import Transactions, { NewTransaction } from './components/Transactions';
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +22,7 @@ function App() {
   useEffect(() => {
     dispatch(getAccountInfo());
     dispatch(getAllNotes());
+    dispatch(getAllTransactionsThunk());
     dispatch(getAllWatchlistsThunk());
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -30,6 +34,15 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Dashboard />
+          </Route>
+          <Route exact path="/transactions">
+            <Transactions/>
+          </Route>
+          <Route path="/transactions/new">
+            <NewTransaction />
+          </Route>
+          <Route path="/account">
+            <Account/>
           </Route>
           <Route exact path="/notes">
             <ListNotes />
