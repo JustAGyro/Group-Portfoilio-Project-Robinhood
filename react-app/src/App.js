@@ -24,14 +24,14 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
           <Route exact path="/">
             <Dashboard />
           </Route>
-          <Route exact path="/notes/">
+          <Route exact path="/notes">
             <ListNotes />
           </Route>
           <Route path="/notes/new">
@@ -48,7 +48,7 @@ function App() {
           </Route>
         </Switch>
       )}
-    </>
+    </div>
   );
 }
 

@@ -7,5 +7,9 @@
 }
 
 .bar {
-  position: fixed;
-}
+  display: flex;
+  flex-direction: row;
+ }
+ .bar > div{
+  margin: 5px;
+ }
