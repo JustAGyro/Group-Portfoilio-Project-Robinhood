@@ -18,3 +18,14 @@ class PortfolioTransaction(db.Model):
     symbol = db.Column(db.String(5), nullable=False)
 
     user = relationship("User", back_populates="portfoliotransactions")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'userId': self.userId,
+            'transaction': self.transaction,
+            'date': self.date,
+            'quantity': self.quantity,
+            'price': self.price,
+            'symbol': self.symbol
+        }
