@@ -31,23 +31,24 @@ export function NewTransaction() {
     const dispatch = useDispatch();
     const history = useHistory()
     const [transaction, setTransaction] = useState("")
+    const [price, setPrice] = useState(0)
     const [quantity, setQuantity] = useState(0)
     const [symbol, setSymbol] = useState("")
-    const [fin ,setFin] = useState({transaction, quantity, symbol})
+    const [fin ,setFin] = useState({transaction, quantity, symbol, price})
 
     useEffect(() => {
-        setFin({transaction, quantity, symbol})
-    }, [transaction, quantity, symbol])
+        setFin({transaction, quantity, symbol, price})
+    }, [transaction, quantity, symbol, price])
     const submit = async (e) => {
         e.preventDefault();
-        if(transaction && quantity && symbol){
+        if(transaction && quantity && symbol && price){
             await dispatch(createTransactionThunk(fin));
             history.push(`/transactions`)
         }
     }
     return (
         <div>
-            <form onSubmit={submit}>
+            <form onSubmit={submit} method="POST" action={'/api/transactions/new'}>
                 <div>
                     <label>
                         <select
@@ -63,13 +64,13 @@ export function NewTransaction() {
                             </option>
                             <option
                             key={"Buy"}
-                            value={"Buy"}
+                            value={"buy"}
                             >
                                 Buy
                             </option>
                             <option
                             key={"Sell"}
-                            value={"Sell"}
+                            value={"sell"}
                             >
                                 Sell
                             </option>
@@ -97,11 +98,23 @@ export function NewTransaction() {
                         </label>
                     </div>
                     <div>
+                        <label>
+                            <input
+                            placeholder="1"
+                            type="number"
+                            name="price"
+                            onChange={e => setPrice(e.target.value)}
+                            value={price}
+                            />
+                        </label>
+                    </div>
+                    <div>
                         <button type='submit'> submit </button>
                     </div>
                 </div>
-
             </form>
+
+
         </div>
     )
 }

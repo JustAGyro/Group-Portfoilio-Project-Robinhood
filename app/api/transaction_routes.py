@@ -37,7 +37,7 @@ def transactions_one(p_id):
 
 # POST /api/transactions/new
 # POST a new transaction (buy/sell).
-@transaction_routes.route('/new')
+@transaction_routes.route('/new', methods=["POST"])
 @login_required
 def transactions_new():
     user_id = current_user.id
@@ -52,7 +52,7 @@ def transactions_new():
         userId = user_id,
         transaction = form.transaction.data,
         quantity = form.quantity.data,
-        price = price,
+        price = form.price.data,
         symbol = form.symbol.data,
     )
     print(new_transaction)
