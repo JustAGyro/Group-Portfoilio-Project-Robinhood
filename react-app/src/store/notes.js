@@ -1,6 +1,8 @@
 const GET_NOTES = 'notes/GET_NOTES';
 const ADD_NOTE = 'notes/ADD_NOTE';
 const DELETE_NOTE = 'notes/DELETE_NOTE';
+const ADD_NOTESYMBOL = 'notes/ADD_NOTESYMBOL';
+const DELETE_NOTESYMBOL = 'notes/DELETE_';
 
 export const addNote = (note) => {
   return {
@@ -14,6 +16,24 @@ export const getNotes = (notes) => {
     payload: notes,
   };
 };
+export const addNoteSymbol = (noteId, notesymbol) => {
+  return {
+    type: ADD_NOTESYMBOL,
+    payload: {
+      noteId,
+      notesymbol
+    }
+  }
+}
+export const deleteNoteSymbol = (noteId, notesymbolId) => {
+  return {
+    type: DELETE_NOTESYMBOL,
+    payload: {
+      noteId,
+      notesymbolId
+    }
+  }
+}
 export const getAllNotes = () => async (dispatch) => {
   const response = await fetch(`/api/notes/current`);
   if (response.ok) {
@@ -79,6 +99,40 @@ export const updateNoteThunk = (note, id) => async (dispatch) => {
     return details;
   }
 };
+export const createNoteSymbolThunk = (noteId, notesymbol) => async (dispatch) => {
+  const response = await fetch(
+    `/api/notes/${noteId}/notesymbol/new`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ symbol: notesymbol })
+  }
+  );
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(addNoteSymbol(noteId, data));
+    return data
+  }
+}
+
+export const deleteNoteSymbolThunk = (
+  noteId, notesymbolId
+) => async (dispatch) => {
+  const response = await fetch(
+    `/api/notes/${noteId}/notesymbol/${notesymbolId}/delete `, {
+    method: 'Delete',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+  )
+  if (response.ok) {
+    dispatch(deleteNoteSymbol(noteId, notesymbolId));
+    return true
+  }
+  return false
+}
 
 export default function notesReducer(state = {}, action) {
   let newState = {};
@@ -97,6 +151,23 @@ export default function notesReducer(state = {}, action) {
         newState[note.id] = note;
       });
       return newState;
+    case ADD_NOTESYMBOL:
+      newState = { ...state };
+      const { noteId, notesymbol } = action.payload;
+      newState[noteId] = {
+        ...newState[noteId],
+        symbollist: [...newState[noteId].symbollist, notesymbol],
+      };
+      return newState
+    case DELETE_NOTESYMBOL:
+      newState = { ...state };
+      const { noteeId, notesymbolId } = action.payload
+      if (newState[noteeId]) {
+        newState[noteeId].symbollist.filter(
+          (symbollist) => symbollist.id !== notesymbolId
+        )
+      }
+      return newState
     default:
       return state;
   }

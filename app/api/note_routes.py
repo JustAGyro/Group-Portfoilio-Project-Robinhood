@@ -104,3 +104,84 @@ def edit_note(id):
         return jsonify(newNote.to_dict())
     else:
         return 'No Note Found'
+    
+
+# /api/notes/<id>/notesymbol/new
+# post a new note symbol to a note
+@note_routes.route('/<id>/notesymbol/new', methods=['POST'])
+@login_required
+def add_note_symbols(id):
+    note = Note.query.get(id)
+    if not note:
+        return jsonify(error = 'Watchlist not found'), 404
+    form = NoteForm()
+    new_note_symbol = NoteSymbol(
+        symbol = form.symbol.data,
+        noteId = id
+    )
+    db.session.add(new_note_symbol)
+    db.session.commit()
+
+    return jsonify(new_note_symbol.to_dict())
+
+# DELETE /api/notes/<note_id>/notesymbol/<notesymbol_id>/delete
+# delete a notesymbol from a notesymbols
+@note_routes.route('/<note_id>/notesymbol/<notesymbol_id>/delete', methods=['DELETE'])
+@login_required
+def delete_note_symbol(note_id, notesymbol_id):
+    note = Note.query.get(note_id)
+    if not note:
+        return jsonify(error = 'Note not found'), 404
+    note_symbol= NoteSymbol.query.get(notesymbol_id)
+    if not note_symbol:
+        return jsonify(error = 'Symbol not found'), 404
+    if note_symbol.noteId != note.id:
+        return jsonify(error='Symbol does not belong to the specified note'), 400
+    
+    db.session.delete(note_symbol)
+    db.session.commit()
+
+    return jsonify(message = 'Symbol deleted successfullt')
+
+# PUT /api/notes/<note_id>/notesymbol/<notesymbol_id>/edit
+# edit a notesymbol from a notesymbols
+@note_routes.route('/<note_id>/notesymol/<notesymbol_id>/edit', methods=['PUT'])
+@login_required
+def edit_note_symbol(note_id, notesymbol_id):
+    note = Note.query.get()
+    if not note:
+        return jsonify(error = 'Note not found'), 404
+    note_symbol = NoteSymbol.query.get(notesymbol_id)
+    if not note_symbol:
+        return jsonify(error = 'Symbol not found'), 404
+    if note_symbol.noteId != note.id:
+        return jsonify(error='Symbol does not belong to the specified note'), 400
+    form = NoteForm()
+    form.symbol.data = note.symbol
+    new_symbol = NoteSymbol(
+        id = note_symbol.id,
+        noteId = note_id,
+        symbol = form.symbol.data
+    )
+    db.session.add(new_symbol)
+    db.session.commit()
+
+    return jsonify(new_symbol)
+    
+# GET /api/notes/<note_id>/notesymbol
+# get all the note symbol for a specific note
+@note_routes.route('/<note_id>/notesymbols')
+@login_required
+def get_note_symbols(note_id):
+    note = Note.query.get(note_id)
+    if not note:
+        return jsonify(error = 'Note not found'), 404
+    note_symbols = (NoteSymbol.query.filter(NoteSymbol.noteId == note_id))
+    note_symbols_list = [note_symbol.to_dict() for note_symbol in note_symbols]
+    return jsonify(note_symbols_list)
+
+    
+
+
+
+
