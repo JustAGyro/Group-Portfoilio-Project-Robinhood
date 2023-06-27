@@ -1,5 +1,5 @@
 const GET_ACCOUNT = 'accounts/GET_ACCOUNT'
-const ADD_ACCOUNT = 'accounts/UPDATE_ACCOUNT'
+const ADD_ACCOUNT = 'accounts/ADD_ACCOUNT'
 
 export const getAccount = (account) => {
     return {
@@ -24,8 +24,15 @@ export const getAccountInfo = () => async dispatch => {
         return details
     }
 }
-export const updateAccountInfo = (id, balance) => async dispatch => {
-    const response = await fetch(`/api/accounts/${id}/update`)
+export const updateAccountInfo = (id, account) => async dispatch => {
+    const response = await fetch(`/api/accounts/${id}/update`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(account)
+    });
+
     if (response.ok) {
         const details = await response.json()
         await dispatch(addAccount(details))
