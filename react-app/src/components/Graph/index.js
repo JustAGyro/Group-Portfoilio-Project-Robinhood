@@ -15,7 +15,7 @@ export default function Chart (props) {
 			areaBottomColor = 'rgba(41, 98, 255, 0.28)',
 		} = {},
 	} = props;
-    let fav = useSelector(state => state.stocks[symbol]).map()
+    let fav = useSelector(state => state.stocks[symbol])
     const chartContainerRef = useRef();
     useEffect(
 		() => {
