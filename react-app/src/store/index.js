@@ -5,10 +5,12 @@ import notes from './notes';
 import account from './account'
 import watchlists from './watchlist';
 import transactions from './transactions'
+import stocks from './stocks'
 
 const rootReducer = combineReducers({
   session,
   transactions,
+  stocks,
   notes,
   account,
   watchlists,
