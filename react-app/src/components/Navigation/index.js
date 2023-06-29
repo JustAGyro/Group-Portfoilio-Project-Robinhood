@@ -9,41 +9,46 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav class="bar">
+      <div>
+        <NavLink exact to="/">
+          Home
+        </NavLink>
+      </div>
+      <div>
+        <NavLink exact to="/notes">
+          Notes
+        </NavLink>
+      </div>
+      <div>
+        <NavLink exact to="/notes/new">
+          New Note
+        </NavLink>
+      </div>
+      <div>
+        <NavLink exact to="/transactions">
+          Transactions
+        </NavLink>
+      </div>
+      <div>
+        <NavLink exact to="/transactions/new">
+          New Transaction
+        </NavLink>
+      </div>
+      <div>
+        <NavLink exact to="/account">
+          Account Balance
+        </NavLink>
+      </div>
+      <div>
+        <NavLink exact to="/search">
+          Search
+        </NavLink>
+      </div>
+      {isLoaded && (
         <div>
-          <NavLink exact to="/">
-            Home
-          </NavLink>
+          <ProfileButton user={sessionUser} />
         </div>
-        <div>
-          <NavLink exact to="/notes">
-            Notes
-          </NavLink>
-        </div>
-        <div>
-          <NavLink exact to="/notes/new">
-            New Note
-          </NavLink>
-        </div>
-        <div>
-          <NavLink exact to="/transactions">
-            Transactions
-          </NavLink>
-        </div>
-        <div>
-          <NavLink exact to="/transactions/new">
-            New Transaction
-          </NavLink>
-        </div>
-        <div>
-          <NavLink exact to="/account">
-            Account Balance
-          </NavLink>
-        </div>
-        {isLoaded && (
-          <div>
-            <ProfileButton user={sessionUser} />
-          </div>
-        )}
+      )}
     </nav>
   );
 }

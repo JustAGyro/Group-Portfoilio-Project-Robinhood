@@ -16,6 +16,7 @@ import Account from './components/Account';
 import { getAllTransactionsThunk } from './store/transactions';
 import Transactions, { NewTransaction } from './components/Transactions';
 import StockApi from './components/StockAPI';
+import SearchBar from './components/SearchBar';
 
 function App() {
   const dispatch = useDispatch();
@@ -40,13 +41,13 @@ function App() {
             <StockApi />
           </Route>
           <Route exact path="/transactions">
-            <Transactions/>
+            <Transactions />
           </Route>
           <Route path="/transactions/new">
             <NewTransaction />
           </Route>
           <Route path="/account">
-            <Account/>
+            <Account />
           </Route>
           <Route exact path="/notes">
             <ListNotes />
@@ -62,6 +63,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route patch="/search">
+            <SearchBar />
           </Route>
         </Switch>
       )}
