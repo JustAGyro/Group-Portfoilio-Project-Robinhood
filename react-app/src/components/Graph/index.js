@@ -2,11 +2,10 @@ import { createChart, ColorType } from 'lightweight-charts';
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-export default function Chart (props) {
+export default function Graph (props) {
 
-    const {
+    let {
 		data,
-        symbol,
 		colors: {
 			backgroundColor = 'white',
 			lineColor = '#2962FF',
@@ -15,7 +14,8 @@ export default function Chart (props) {
 			areaBottomColor = 'rgba(41, 98, 255, 0.28)',
 		} = {},
 	} = props;
-    let fav = useSelector(state => state.stocks[symbol])
+    console.log("yeager",data)
+
     const chartContainerRef = useRef();
     useEffect(
 		() => {
@@ -34,7 +34,7 @@ export default function Chart (props) {
 			chart.timeScale().fitContent();
 
 			const newSeries = chart.addAreaSeries({ lineColor, topColor: areaTopColor, bottomColor: areaBottomColor });
-			newSeries.setData(fav || data);
+            newSeries.setData(data);
 
 			window.addEventListener('resize', handleResize);
 
@@ -44,8 +44,9 @@ export default function Chart (props) {
 				chart.remove();
 			};
 		},
-		[data, backgroundColor, lineColor, textColor, areaTopColor, areaBottomColor]
+		[data, backgroundColor, lineColor, textColor, areaTopColor, areaBottomColor,]
 	);
+
     return (
 		<div
 			ref={chartContainerRef}
