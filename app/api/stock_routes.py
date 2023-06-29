@@ -14,7 +14,7 @@ stock_routes = Blueprint('stocks', __name__)
 # stock price real time
 @stock_routes.route('/stock_price/<symbol>')
 @login_required
-def stock_price(symbol): 
+def stock_price(symbol):
     url =  f"https://financialmodelingprep.com/api/v3/quote/{symbol}?apikey=c4af6834a77de852f5ef970e0b5dd457"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode('utf-8')
@@ -35,32 +35,10 @@ def historical_daily(symbol):
     print(parsed_data)
     return json.loads(data)
 
-# Search Bar
-@stock_routes.route('/search/<value>')
-@login_required
-def stock_search(value):
-    url = f"https://financialmodelingprep.com/api/v3/search?query={value}&limit=10&apikey=c4af6834a77de852f5ef970e0b5dd457"
-    response = urlopen(url, cafile=certifi.where())
-    data = response.read().decode("utf-8")
-    parsed_data = json.loads(data)
-
-    filtered_results = []
-
-    for result in parsed_data:
-        exchange_short_name = result.get('exchangeShortName')
-        if exchange_short_name in ['NASDAQ', 'NYSE']:
-            filtered_results.append({
-                'name': result.get('name'),
-                'symbol': result.get('symbol')
-            })
-
-    if filtered_results:
-        return filtered_results
-
 # Company Quote for the stock
 @stock_routes.route('/company_quote/<symbol>')
 @login_required
-def company_quote(symbol): 
+def company_quote(symbol):
     url =  f"https://financialmodelingprep.com/api/v3/quote/{symbol}?apikey=c4af6834a77de852f5ef970e0b5dd457"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode('utf-8')
@@ -114,7 +92,7 @@ def single_stock_news(symbol):
 # search stock by symbol
 @stock_routes.route('/stock_search/<symbol>')
 # @login_required
-def stock_search (symbol):
+def stock_search_symbol(symbol):
     symbol = symbol.upper()
     url=f"https://financialmodelingprep.com/api/v3/search?query={symbol}&limit=10&apikey=c4af6834a77de852f5ef970e0b5dd457"
     response = urlopen(url, cafile=certifi.where())
@@ -146,7 +124,7 @@ def gerneral_news():
     data = response.read().decode("utf-8")
     return json.loads(data)
 
-# crypto news articles 
+# crypto news articles
 @stock_routes.route('/crypto_news')
 @login_required
 def crypto_news():
@@ -184,28 +162,3 @@ def stock_search(value):
 
     if filtered_results:
         return filtered_results
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

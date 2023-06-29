@@ -7,10 +7,10 @@ export default function Graph (props) {
     let {
 		data,
 		colors: {
-			backgroundColor = 'white',
-			lineColor = '#2962FF',
-			textColor = 'black',
-			areaTopColor = '#2962FF',
+			backgroundColor = 'black',
+			lineColor = 'red',
+			textColor = 'white',
+			areaTopColor = 'green',
 			areaBottomColor = 'rgba(41, 98, 255, 0.28)',
 		} = {},
 	} = props;

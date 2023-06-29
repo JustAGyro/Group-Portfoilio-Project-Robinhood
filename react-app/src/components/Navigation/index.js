@@ -25,6 +25,11 @@ function Navigation({ isLoaded }) {
         </NavLink>
       </div>
       <div>
+        <NavLink to="/stockapi">
+          Stock Graph
+        </NavLink>
+      </div>
+      <div>
         <NavLink exact to="/transactions">
           Transactions
         </NavLink>
