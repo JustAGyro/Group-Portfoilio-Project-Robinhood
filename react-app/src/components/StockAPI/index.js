@@ -7,8 +7,8 @@ import { addStock, getStock } from "../../store/stocks";
 export default function StockApi () {
     const dispatch = useDispatch()
     const [symbol, setSymbol] = useState("")
-
-    let fav = useSelector(state => state.stocks[symbol]) || []
+    let update = symbol;
+    let fav = useSelector(state => state.stocks[update]) || []
 
     const [initialData, setInitialData] = useState([
             { time: '2018-12-22', value: 32.51 },
@@ -29,7 +29,6 @@ export default function StockApi () {
         return it
     }
     useEffect(() => {
-        console.log(fav)
         if(fav && fav.length > 0)setInitialData(fav)
     }, [fav])
 
@@ -37,10 +36,11 @@ export default function StockApi () {
         e.preventDefault()
         let them = await getIt()
         console.log("them", them)
+        update = symbol;
         // dispatch(addStock(them))
         // setInitialData(fav)
-    //     setInitialData(them.historical)
-    //     console.log(initialData)
+        // setInitialData(them.historical)
+        // console.log(initialData)
     }
 
     return (

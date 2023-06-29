@@ -14,7 +14,6 @@ export default function Graph (props) {
 			areaBottomColor = 'rgba(41, 98, 255, 0.28)',
 		} = {},
 	} = props;
-    console.log("yeager",data)
 
     const chartContainerRef = useRef();
     useEffect(
