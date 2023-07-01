@@ -2,6 +2,10 @@
   position: absolute;
 }
 
+.searchbar-dropdown {
+  position: absolute;
+}
+
 .hidden {
   display: none;
 }
@@ -9,7 +13,16 @@
 .bar {
   display: flex;
   flex-direction: row;
- }
- .bar > div{
+  background-color: gray;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.bar > div {
   margin: 5px;
- }
+}
+
+.search-div {
+  background-color: blue;
+}

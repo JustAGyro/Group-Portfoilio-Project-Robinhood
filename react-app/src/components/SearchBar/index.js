@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import './SearchBar.css';
 
 export default function SearchBar() {
   const [input, setInput] = useState('');
   const [results, setResults] = useState([]);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const fetchData = (value) => {
     if (value) {
@@ -25,10 +34,14 @@ export default function SearchBar() {
     }
   };
 
-  console.log(results);
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setResults([]);
+    }
+  };
 
   return (
-    <>
+    <div className="search-bar">
       <div className="input-wrapper">
         <FaSearch id="search-icon" />
         <input
@@ -37,20 +50,24 @@ export default function SearchBar() {
           onChange={(e) => handleChange(e.target.value)}
         />
       </div>
-      <div className="results-wrapper">
-        {results.length > 0 && (
+      {results.length > 0 && (
+        <div className="dropdown-menu" ref={dropdownRef}>
           <ul className="results-list">
             {results.map((result) => (
               <li key={result.symbol}>
-                <span>
-                  {result.symbol} - {result.name}
-                </span>
+                <Link
+                  to={`/stocks/${result.symbol}`}
+                  onClick={() => setResults([])}
+                >
+                  <span>
+                    {result.symbol} - {result.name}
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>
-        )}
-        {results.length === 0 && <p></p>}
-      </div>
-    </>
+        </div>
+      )}
+    </div>
   );
 }

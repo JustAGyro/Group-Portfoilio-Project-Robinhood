@@ -1,0 +1,104 @@
+.container {
+  display: grid;
+  grid-template-columns: 0.5fr 2.5fr 0.5fr 0.5fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: 'l-gutter details actions r-gutter';
+  margin-top: 50px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'action-buttons'
+    'action-deadspace';
+  grid-area: actions;
+}
+
+.action-buttons {
+  grid-area: action-buttons;
+}
+
+.action-deadspace {
+  grid-area: action-deadspace;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 2fr 1.6fr 0.6fr 0.5fr 1.3fr 0.7fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'details-name-price'
+    'details-graph'
+    'details-about'
+    'details-info'
+    'details-keystats-name'
+    'details-keystats'
+    'details-news';
+  grid-area: details;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.details::-webkit-scrollbar {
+  display: none;
+}
+
+.details-name-price {
+  grid-area: details-name-price;
+}
+
+.details-graph {
+  grid-area: details-graph;
+}
+
+.details-about {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'about-title'
+    'about-description';
+  grid-area: details-about;
+}
+
+.about-title {
+  grid-area: about-title;
+}
+
+.about-description {
+  grid-area: about-description;
+}
+
+.details-info {
+  grid-area: details-info;
+}
+
+.details-keystats-name {
+  grid-area: details-keystats-name;
+}
+
+.details-keystats {
+  grid-area: details-keystats;
+}
+
+.details-news {
+  grid-area: details-news;
+}
+
+.r-gutter {
+  grid-area: r-gutter;
+}
+
+.l-gutter {
+  grid-area: l-gutter;
+}

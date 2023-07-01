@@ -56,6 +56,9 @@ def company_quote(symbol):
         '52WeekHigh': parsed_data['yearHigh'],
         '52WeekLow': parsed_data['yearLow']
     }
+    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+    print(company_quote)
+    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     return company_quote
 
 #  company info related to stock
@@ -74,6 +77,9 @@ def company_info(symbol):
         'foundedDate': parsed_data['ipoDate'],
         'companyDiscription': parsed_data['description']
     }
+    print('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY')
+    print(company_info)
+    print('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY')
     return company_info
 
 # returns five article realted to specific stock

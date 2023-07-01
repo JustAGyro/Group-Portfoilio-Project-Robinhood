@@ -17,6 +17,7 @@ import { getAllTransactionsThunk } from './store/transactions';
 import Transactions, { NewTransaction } from './components/Transactions';
 import StockApi from './components/StockAPI';
 import SearchBar from './components/SearchBar';
+import StockDetail from './components/StockDetail';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Dashboard />
+          </Route>
+          <Route exact path="/stocks/:symbol">
+            <StockDetail />
           </Route>
           <Route exact path="/stockapi">
             <StockApi />
