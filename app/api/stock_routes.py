@@ -162,3 +162,13 @@ def stock_search(value):
 
     if filtered_results:
         return filtered_results
+
+# Most Gainer Stock
+
+@stock_routes.route('/top_gainers')
+@login_required
+def top_gainers():
+    url="https://financialmodelingprep.com/api/v3/stock_market/gainers?apikey=c4af6834a77de852f5ef970e0b5dd457"
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    return json.loads(data)

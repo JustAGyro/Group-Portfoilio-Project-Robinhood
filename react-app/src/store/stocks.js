@@ -5,7 +5,6 @@ export const getStock = (symbol) => async dispatch => {
     const response = await fetch(`/api/stocks/historical_daily/${symbol}`);
     if(response.ok){
         const details = await response.json();
-        console.log("FLAG", details)
         await dispatch(addStock(details));
         return details;
     }
@@ -14,6 +13,14 @@ export const addStock = (data) => {
     return {
         type: ADD_STOCK,
         payload: data
+    }
+}
+export const getGainers = () => async dispatch => {
+    const response = await fetch(`/api/stocks/top_gainers`);
+    if(response.ok){
+        const details = await response.json();
+        console.log('deets',details)
+        return details;
     }
 }
 export default function stockReducer(state = {}, action) {

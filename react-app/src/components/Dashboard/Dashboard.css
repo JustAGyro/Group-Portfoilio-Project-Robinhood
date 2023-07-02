@@ -1,4 +1,4 @@
-.container {
+  .container {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0px 0px;
@@ -10,10 +10,12 @@
 .content {
   display: grid;
   grid-template-columns: 0.5fr 2.1fr 0.9fr 0.5fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
-  grid-template-areas: 'left-gutter dashboard stock-watchlist right-gutter';
+  grid-template-areas:
+  'left-gutter dashboard stock-watchlist right-gutter'
+  'left-gutter dash-portfolio stock-watchlist right-gutter';
   grid-area: content;
   min-height: 0; /* Add this to allow content overflow */
   overflow: hidden; /* Hide overflowing content */
@@ -22,8 +24,8 @@
 .stock-watchlist {
   position: fixed;
   top: 50px;
-  left: 1300px;
-  width: 200px; /* Adjust the width as per your needs */
+  left: 1000px;
+  width: 10%; /* Adjust the width as per your needs */
   height: 100vh; /* Adjust the height as per your needs */
   background-color: blue;
   padding: 20px;
@@ -46,8 +48,37 @@
   overflow-y: auto; /* Enable vertical scrolling */
   max-width: 100%;
   overflow-x: hidden;
+  text-align: center;
 }
-
+.dash-portfolio{
+  grid-column: 2;
+  grid-row: 2;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.dash-movers{
+  grid-column: 2;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.movers-card{
+  width: 300px;
+  margin: 5px;
+  border: solid 2px black;
+  background-color: gray;
+  border-radius: 20px;
+}
+.dash-news{
+  grid-column: 2;
+  grid-row: 4;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 img {
   max-width: 500px;
 }
