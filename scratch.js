@@ -114,6 +114,7 @@ async function getHistoricalPrice(symbol, date) {
       '2023-06-29': 155,
       '2023-06-30': 160,
       '2023-07-01': 160,
+      '2023-07-02': 190,
     },
     MSFT: {
       '2023-06-20': 250,
@@ -128,6 +129,7 @@ async function getHistoricalPrice(symbol, date) {
       '2023-06-29': 280,
       '2023-06-30': 300,
       '2023-07-01': 300,
+      '2023-07-02': 320,
     },
     GOOG: {
       '2023-06-20': 2000,
@@ -142,6 +144,7 @@ async function getHistoricalPrice(symbol, date) {
       '2023-06-29': 2035,
       '2023-06-30': 2000,
       '2023-07-01': 2000,
+      '2023-07-02': 2050,
     },
   };
   return historicalPriceData[symbol][date];
@@ -149,7 +152,7 @@ async function getHistoricalPrice(symbol, date) {
 
 async function calculatePortfolioValueByDay() {
   const portfolioTransactions = await fakeTableInfo();
-  const firstTransactionDate = new Date(portfolioTransactions[0].date);
+  const firstTransactionDate = new Date(portfolioTransactions[0].date); //user creation date
   const currentDate = new Date(); // Current date
 
   const portfolioValues = [];
