@@ -47,11 +47,9 @@ export const deleteSymbollist = (watchlistId, symbollistId) => {
 
 export const getAllWatchlistsThunk = () => async (dispatch) => {
   const response = await fetch('/api/watchlists/current');
-  console.log (response, '-------------------------')
   if (response.ok) {
     const watchlists = await response.json();
     await dispatch(getAllWatchlists(watchlists));
-    // console.log (watchlists, '-------------------------')
 
     return watchlists;
   }
@@ -68,7 +66,6 @@ export const getOneWatchlistThunk = (id) => async (dispatch) => {
 };
 
 export const createWatchlistThunk = (watchlist) => async (dispatch) => {
-  console.log ('---------before thunk------')
   const response = await fetch('/api/watchlists/new', {
     method: 'POST',
     headers: {
@@ -80,7 +77,6 @@ export const createWatchlistThunk = (watchlist) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(addWatchlists(data));
-    console.log ('--------------after hitting state')
     return data;
   }
 };
@@ -151,7 +147,6 @@ export default function watchlistsReducer(state = {}, action) {
     case ADD_WATCHLIST:
       newState = { ...state };
       newState[action.payload.id] = action.payload;
-      console.log (newState, '--------------new state after adding')
       return newState;
     case DELETE_WATCHLIST:
       newState = { ...state };
