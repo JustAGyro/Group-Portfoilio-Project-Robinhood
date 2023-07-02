@@ -11,6 +11,7 @@ export default function Movers() {
             const movers = await dispatch(getGainers())
             console.log("movers", movers)
             setMovers(movers);
+            console.log(movers)
             return movers
         }
         parseMovers()
@@ -34,6 +35,9 @@ export default function Movers() {
                     </div>
                     <div class="movers-card-symbol">
                     symbol: {ele.symbol}
+                    </div>
+                    <div>
+
                     </div>
                 </div>
             )
