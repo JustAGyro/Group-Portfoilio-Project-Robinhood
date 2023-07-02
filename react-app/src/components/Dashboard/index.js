@@ -1,7 +1,7 @@
 import React from 'react';
 import './Dashboard.css';
 import Movers from '../Movers'
-
+import { NewsBox } from '../News';
 export default function ShowDashboard() {
   return (
     <>
@@ -28,7 +28,12 @@ export default function ShowDashboard() {
             </div>
           </div>
           <div class="dash-news">
-            <div>This is the news</div>
+            <div className="dash-news">
+              This is the news
+              <div >
+                <NewsBox />
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -4,8 +4,9 @@ import session from './session';
 import notes from './notes';
 import account from './account'
 import watchlists from './watchlist';
-import transactions from './transactions'
-import stocks from './stocks'
+import transactions from './transactions';
+import stocks from './stocks';
+import news from './news'
 
 const rootReducer = combineReducers({
   session,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   notes,
   account,
   watchlists,
+  news,
 });
 
 let enhancer;
