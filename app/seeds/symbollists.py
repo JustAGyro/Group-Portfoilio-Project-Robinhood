@@ -15,28 +15,28 @@ def seed_symbolists():
         listId = 1, symbol = 'AAME'
     )
     symbol_list_2_1 = SymbolList(
-        listId = 1, symbol = 'AAME'
+        listId = 2, symbol = 'AAME'
     )
     symbol_list_2_2 = SymbolList(
-        listId = 1, symbol = 'ACQA'
+        listId = 2, symbol = 'ACQA'
     )
     symbol_list_2_3 = SymbolList(
-        listId = 1, symbol = 'ACB'
+        listId = 2, symbol = 'ACB'
     )
     symbol_list_2_4 = SymbolList(
-        listId = 1, symbol = 'ACCD'
+        listId = 2, symbol = 'ACCD'
     )
     symbol_list_3_1 = SymbolList(
-        listId = 1, symbol = 'ACCD'
+        listId = 3, symbol = 'ACCD'
     )
     symbol_list_3_2 = SymbolList(
-        listId = 1, symbol = 'ACI'
+        listId = 3, symbol = 'ACI'
     )
     symbol_list_3_3 = SymbolList(
-        listId = 1, symbol = 'ACMR'
+        listId = 3, symbol = 'ACMR'
     )
     symbol_list_3_4 = SymbolList(
-        listId = 1, symbol = 'ACN'
+        listId = 3, symbol = 'ACN'
     )
 
     db.session.add(symbol_list_1_1)

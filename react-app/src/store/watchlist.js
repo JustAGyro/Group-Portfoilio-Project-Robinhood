@@ -47,10 +47,10 @@ export const deleteSymbollist = (watchlistId, symbollistId) => {
 
 export const getAllWatchlistsThunk = () => async (dispatch) => {
   const response = await fetch('/api/watchlists/current');
-
   if (response.ok) {
     const watchlists = await response.json();
     await dispatch(getAllWatchlists(watchlists));
+
     return watchlists;
   }
 };
@@ -82,7 +82,7 @@ export const createWatchlistThunk = (watchlist) => async (dispatch) => {
 };
 
 export const deleteWatchlistThunk = (watchlist) => async (dispatch) => {
-  const response = await fetch(`/api/watchlists/delete/${watchlist.id}`, {
+  const response = await fetch(`/api/watchlists/${watchlist.id}/delete`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

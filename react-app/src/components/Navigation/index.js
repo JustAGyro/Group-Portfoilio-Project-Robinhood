@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import SearchBar from '../SearchBar';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -25,9 +26,7 @@ function Navigation({ isLoaded }) {
         </NavLink>
       </div>
       <div>
-        <NavLink to="/stockapi">
-          Stock Graph
-        </NavLink>
+        <NavLink to="/stockapi">Stock Graph</NavLink>
       </div>
       <div>
         <NavLink exact to="/transactions">
@@ -44,10 +43,13 @@ function Navigation({ isLoaded }) {
           Account Balance
         </NavLink>
       </div>
+      <div className="search-div">
+        <SearchBar />
+      </div>
       <div>
-        <NavLink exact to="/search">
-          Search
-        </NavLink>
+        <NavLink exact to="/watchlists">
+          Watchlists
+        </NavLink>      
       </div>
       {isLoaded && (
         <div>

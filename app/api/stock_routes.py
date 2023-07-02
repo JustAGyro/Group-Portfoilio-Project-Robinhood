@@ -47,14 +47,14 @@ def company_quote(symbol):
     # !!! this is missing dividend yield need to add another api and add it to the company quote
     company_quote = {
         'marketCap': parsed_data['marketCap'],
-        'peRation': parsed_data['pe'],
+        'peRatio': parsed_data['pe'],
         'avgVolume': parsed_data['avgVolume'],
         'highToday': parsed_data['dayHigh'],
         'lowToday': parsed_data['dayLow'],
         'volume': parsed_data['volume'],
         'openPrice': parsed_data['open'],
-        '52WeekHigh': parsed_data['yearHigh'],
-        '52WeekLow': parsed_data['yearLow']
+        'yearHigh': parsed_data['yearHigh'],
+        'yearLow': parsed_data['yearLow']
     }
     return company_quote
 
@@ -72,7 +72,7 @@ def company_info(symbol):
         'employees': parsed_data['fullTimeEmployees'],
         'headquaters': parsed_data['city']+','+ parsed_data['state'],
         'foundedDate': parsed_data['ipoDate'],
-        'companyDiscription': parsed_data['description']
+        'description': parsed_data['description']
     }
     return company_info
 

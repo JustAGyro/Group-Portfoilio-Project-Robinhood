@@ -1,0 +1,58 @@
+.container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 0.5fr 2.3fr 0.7fr 0.5fr;
+  gap: 0px 0px;
+  overflow: hidden;
+  background-color: gray;
+  margin-top: 40px;
+}
+.details {
+  overflow-y: scroll;
+  height: calc(100% - 100px);
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.details::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+.details::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.about-title {
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+}
+
+.details-info {
+  display: flex;
+  width: 100%;
+  gap: 100px;
+}
+
+.info-item {
+  margin-top: 5px;
+  font-weight: bold;
+  width: 180px;
+}
+
+.details-keystats-name {
+  border-bottom: 1px solid white;
+}
+
+.details-keystats {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  column-gap: 100px;
+  row-gap: 10px;
+  margin-top: 10px;
+}
+
+.details-news {
+  border-bottom: 1px solid white;
+}

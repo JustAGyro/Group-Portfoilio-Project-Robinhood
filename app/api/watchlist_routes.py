@@ -19,7 +19,11 @@ def watchlist_test():
 def watchlist_current():
 
     user_id = current_user.id
-    watchlists = WatchList.query.join(SymbolList).filter(WatchList.userId == user_id).all()
+    print(user_id)
+    
+    # watchlists = WatchList.query.join(SymbolList).filter(WatchList.userId == user_id).all()
+    watchlists = WatchList.query.filter(WatchList.userId == user_id)
+    print(watchlists)
     list = [watchlist.to_dict() for watchlist in watchlists]
 
     return jsonify(list)
@@ -39,9 +43,15 @@ def watchlist_one(id):
 def add_watchlist():
     form = WatchListForm()
 
+    # new_watchlist = WatchList(
+    #     userId = current_user.id,
+    #     name=form.name.data
+    # )
+    data = request.get_json()
+    name = data.get('name')
     new_watchlist = WatchList(
         userId = current_user.id,
-        name=form.name.data
+        name = name
     )
     db.session.add(new_watchlist)
     db.session.commit()
@@ -59,7 +69,9 @@ def delete_watchlist(id):
     if current_user.id == watchlist.userId:
         db.session.delete(watchlist)
         db.session.commit()
-        return 'Successfully Deleted Watchlist'
+        return {
+            "message":'Successfully Deleted Watchlist'
+            }
 
 # PUT /api/watchlists/<id>/edit
 # PUT edit a watchlist

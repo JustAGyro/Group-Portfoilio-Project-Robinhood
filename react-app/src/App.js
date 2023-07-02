@@ -17,6 +17,8 @@ import { getAllTransactionsThunk } from './store/transactions';
 import Transactions, { NewTransaction } from './components/Transactions';
 import StockApi from './components/StockAPI';
 import SearchBar from './components/SearchBar';
+import StockDetail from './components/StockDetail';
+import WatchLists from './components/WatchLists';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +38,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Dashboard />
+          </Route>
+          <Route exact path="/stocks/:symbol">
+            <StockDetail />
           </Route>
           <Route exact path="/stockapi">
             <StockApi />
@@ -64,8 +69,11 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route patch="/search">
+          <Route path="/search">
             <SearchBar />
+          </Route>
+          <Route path = "/watchlists">
+            <WatchLists />
           </Route>
         </Switch>
       )}
