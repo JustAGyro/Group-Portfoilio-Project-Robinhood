@@ -56,3 +56,40 @@
 .details-news {
   border-bottom: 1px solid white;
 }
+
+.sd-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.news-card {
+  font-size: small;
+  max-width: 99%;
+  border: 1px solid white;
+  margin-top: 5px;
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+}
+
+.news-card:hover {
+  background-color: lightgray;
+}
+
+.news-card h4 {
+  margin-top: 1px;
+}
+
+.news-card h2 {
+  margin-top: -10px;
+  font-weight: bolder;
+}
+
+.article-img {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+.article-img-thumbnail {
+  width: 250px;
+}
