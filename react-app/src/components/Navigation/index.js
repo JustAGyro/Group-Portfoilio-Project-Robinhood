@@ -46,6 +46,11 @@ function Navigation({ isLoaded }) {
       <div className="search-div">
         <SearchBar />
       </div>
+      <div>
+        <NavLink exact to="/watchlists">
+          Watchlists
+        </NavLink>      
+      </div>
       {isLoaded && (
         <div>
           <ProfileButton user={sessionUser} />

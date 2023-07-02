@@ -18,6 +18,7 @@ import Transactions, { NewTransaction } from './components/Transactions';
 import StockApi from './components/StockAPI';
 import SearchBar from './components/SearchBar';
 import StockDetail from './components/StockDetail';
+import WatchLists from './components/WatchLists';
 
 function App() {
   const dispatch = useDispatch();
@@ -68,8 +69,11 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route patch="/search">
+          <Route path="/search">
             <SearchBar />
+          </Route>
+          <Route path = "/watchlists">
+            <WatchLists />
           </Route>
         </Switch>
       )}
