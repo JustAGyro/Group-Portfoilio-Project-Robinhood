@@ -234,19 +234,19 @@ export default function ShowStockDetail() {
           <div class="details-info">
             <div className="info-card">
               <div className="info-item">CEO</div>
-              <div className="info-item">{stockInfo.ceo}</div>
+              <div className="info-item-bottom">{stockInfo.ceo}</div>
             </div>
             <div className="info-card">
               <div className="info-item">Employees</div>
-              <div className="info-item">{stockInfo.employees}</div>
+              <div className="info-item-bottom">{stockInfo.employees}</div>
             </div>
             <div className="info-card">
               <div className="info-item">Headquarters</div>
-              <div className="info-item">{stockInfo.headquaters}</div>
+              <div className="info-item-bottom">{stockInfo.headquaters}</div>
             </div>
             <div className="info-card">
               <div className="info-item">Founded</div>
-              <div className="info-item">{stockInfo.foundedDate}</div>
+              <div className="info-item-bottom">{stockInfo.foundedDate}</div>
             </div>
           </div>
           <div class="details-keystats-name">
@@ -255,40 +255,40 @@ export default function ShowStockDetail() {
           <div class="details-keystats">
             <div className="info-card">
               <div className="info-item">Market Cap</div>
-              <div className="info-item">{stockQuote.marketCap}</div>
+              <div className="info-item-bottom">{stockQuote.marketCap}</div>
             </div>
             <div className="info-card">
               <div className="info-item">Price-Earnings Ratio</div>
-              <div className="info-item">{stockQuote.peRatio}</div>
+              <div className="info-item-bottom">{stockQuote.peRatio}</div>
             </div>
             <div className="info-card">
               <div className="info-item">Average Volume</div>
-              <div className="info-item">{stockQuote.avgVolume}</div>
+              <div className="info-item-bottom">{stockQuote.avgVolume}</div>
             </div>
             <div className="info-card">
               <div className="info-item">Volume</div>
-              <div className="info-item">{stockQuote.volume}</div>
+              <div className="info-item-bottom">{stockQuote.volume}</div>
             </div>
             <div className="info-card">
               <div className="info-item">High Today</div>
-              <div className="info-item">{stockQuote.highToday}</div>
+              <div className="info-item-bottom">{stockQuote.highToday}</div>
             </div>
             <div className="info-card">
               <div className="info-item">Low Today</div>
-              <div className="info-item">{stockQuote.lowToday}</div>
+              <div className="info-item-bottom">{stockQuote.lowToday}</div>
             </div>
             <div className="info-card">
               <div className="info-item">52 Week High</div>
-              <div className="info-item">{stockQuote.yearHigh}</div>
+              <div className="info-item-bottom">{stockQuote.yearHigh}</div>
             </div>
             <div className="info-card">
               <div className="info-item">52 Week Low</div>
-              <div className="info-item">{stockQuote.yearLow}</div>
+              <div className="info-item-bottom">{stockQuote.yearLow}</div>
             </div>
           </div>
           <div className="info-card">
             <div className="info-item">Open Price</div>
-            <div className="info-item">{stockQuote.openPrice}</div>
+            <div className="info-item-bottom">{stockQuote.openPrice}</div>
           </div>
           <div class="details-news">
             <h2>News</h2>

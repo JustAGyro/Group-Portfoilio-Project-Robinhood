@@ -59,6 +59,10 @@
   font-weight: bold;
   width: 180px;
 }
+.info-item-bottom {
+  margin-top: 5px;
+  width: 180px;
+}
 
 .details-keystats-name {
   border-bottom: 2px solid #1e2124;
