@@ -8,29 +8,98 @@ export default function ShowStockDetail() {
   const [stockQuote, setStockQuote] = useState({});
   const [stockInfo, setStockInfo] = useState({});
   const [stockNews, setStockNews] = useState([]);
+  const [newData, setNewData] = useState([]);
+  const [selectedGraphButton, setSelectedGraphButton] = useState('1Y');
+  const [graphData, setGraphData] = useState([]);
+  const [stockPrice, setStockPrice] = useState({});
 
-  const [graphData, setGraphData] = useState([
-    { time: '2018-12-22', value: 32.51 },
-    { time: '2018-12-23', value: 31.11 },
-    { time: '2018-12-24', value: 27.02 },
-    { time: '2018-12-25', value: 27.32 },
-    { time: '2018-12-26', value: 25.17 },
-    { time: '2018-12-27', value: 28.89 },
-    { time: '2018-12-28', value: 25.46 },
-    { time: '2018-12-29', value: 23.92 },
-    { time: '2018-12-30', value: 22.68 },
-    { time: '2018-12-31', value: 22.67 },
-    { time: '2019-01-01', value: 22.0 },
-    { time: '2019-01-02', value: 23.0 },
-    { time: '2019-01-03', value: 24.0 },
-    { time: '2019-01-04', value: 26.0 },
-    { time: '2019-01-05', value: 23.0 },
-    { time: '2019-01-06', value: 21.0 },
-    { time: '2019-01-07', value: 29.0 },
-    { time: '2019-01-08', value: 28.0 },
-    { time: '2019-01-09', value: 24.0 },
-    { time: '2019-01-10', value: 25.0 },
-  ]);
+  const fetchRealTimePrice = (symbol) => {
+    if (symbol) {
+      fetch(`/api/stocks/stock_price/${symbol}`)
+        .then((response) => response.json())
+        .then((data) => setStockPrice(data));
+    }
+  };
+
+  const fetchOneMonth = (symbol) => {
+    if (symbol && selectedGraphButton === '1M') {
+      fetch(`/api/stocks/one_month/${symbol}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const formatData = data
+            .map((record) => ({
+              time: record.date,
+              value: record.close,
+            }))
+            .reverse();
+          setNewData(formatData);
+        });
+    }
+  };
+
+  const fetchThreeMonth = (symbol) => {
+    if (symbol && selectedGraphButton === '3M') {
+      fetch(`/api/stocks/three_month/${symbol}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const formatData = data
+            .map((record) => ({
+              time: record.date,
+              value: record.close,
+            }))
+            .reverse();
+          setNewData(formatData);
+        });
+    }
+  };
+
+  const fetchOneYear = (symbol) => {
+    if (symbol && selectedGraphButton === '1Y') {
+      fetch(`/api/stocks/one_year/${symbol}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const formatData = data
+            .map((record) => ({
+              time: record.date,
+              value: record.close,
+            }))
+            .reverse();
+          setNewData(formatData);
+        });
+    }
+  };
+
+  const fetchThreeYear = (symbol) => {
+    if (symbol && selectedGraphButton === '3Y') {
+      fetch(`/api/stocks/three_year/${symbol}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const formatData = data
+            .map((record) => ({
+              time: record.date,
+              value: record.close,
+            }))
+            .reverse();
+          setNewData(formatData);
+        });
+    }
+  };
+
+  const fetchFiveYear = (symbol) => {
+    if (symbol && selectedGraphButton === '5Y') {
+      fetch(`/api/stocks/five_year/${symbol}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const formatData = data
+            .map((record) => ({
+              time: record.date,
+              value: record.close,
+            }))
+            .reverse();
+          setNewData(formatData);
+        });
+    }
+  };
 
   const fetchQuote = (symbol) => {
     if (symbol) {
@@ -40,7 +109,6 @@ export default function ShowStockDetail() {
     } else {
       setStockQuote({});
     }
-    console.log(stockQuote);
   };
 
   const fetchInfo = (symbol) => {
@@ -51,7 +119,6 @@ export default function ShowStockDetail() {
     } else {
       setStockInfo({});
     }
-    console.log(stockInfo);
   };
 
   const fetchNews = (symbol) => {
@@ -74,9 +141,23 @@ export default function ShowStockDetail() {
     fetchNews(symbol);
   }, [symbol]);
 
-  console.log(stockQuote);
-  console.log(stockInfo);
-  console.log(stockNews);
+  useEffect(() => {
+    fetchRealTimePrice(symbol);
+  }, [symbol]);
+
+  useEffect(() => {
+    fetchOneMonth(symbol);
+    fetchThreeMonth(symbol);
+    fetchOneYear(symbol);
+    fetchThreeYear(symbol);
+    fetchFiveYear(symbol);
+  }, [symbol, selectedGraphButton]);
+
+  useEffect(() => {
+    setGraphData(newData);
+  }, [newData, selectedGraphButton]);
+
+  console.log(stockPrice);
 
   return (
     <>
@@ -84,18 +165,63 @@ export default function ShowStockDetail() {
         <div class="l-gutter"></div>
         <div class="details">
           <div class="details-name-price">
-            <h1>{symbol}</h1>
-            <p>price $</p>
+            <h1>{stockQuote.name}</h1>
+            <h3 className="sd-stock-price">$ {stockPrice.price}</h3>
           </div>
           <div class="details-graph">
             <DetailGraph data={graphData} />
           </div>
           <div class="sd-graph-buttons-div">
-            <button class="sd-graph-button">1D</button>
-            <button class="sd-graph-button">1W</button>
-            <button class="sd-graph-button">3M</button>
-            <button class="sd-graph-button">1Y</button>
-            <button class="sd-graph-button">5Y</button>
+            <button
+              type="button"
+              className="sd-graph-button"
+              onClick={(event) => {
+                event.preventDefault();
+                setSelectedGraphButton('1M');
+              }}
+            >
+              1M
+            </button>
+            <button
+              type="button"
+              className="sd-graph-button"
+              onClick={(event) => {
+                event.preventDefault();
+                setSelectedGraphButton('3M');
+              }}
+            >
+              3M
+            </button>
+            <button
+              type="button"
+              className="sd-graph-button"
+              onClick={(event) => {
+                event.preventDefault();
+                setSelectedGraphButton('1Y');
+              }}
+            >
+              1Y
+            </button>
+            <button
+              type="button"
+              className="sd-graph-button"
+              onClick={(event) => {
+                event.preventDefault();
+                setSelectedGraphButton('3Y');
+              }}
+            >
+              3Y
+            </button>
+            <button
+              type="button"
+              className="sd-graph-button"
+              onClick={(event) => {
+                event.preventDefault();
+                setSelectedGraphButton('5Y');
+              }}
+            >
+              5Y
+            </button>
           </div>
           <div class="details-about">
             <div class="about-title">
@@ -189,8 +315,15 @@ export default function ShowStockDetail() {
         </div>
         <div class="actions">
           <div class="action-buttons">
-            <p>buttons</p>
+            <div class="sd-action-buttons-container">
+              <button className="sd-button">Buy {symbol}</button>
+              <button className="sd-button">Sell {symbol}</button>
+            </div>
+            <div className="sd-buttons-words-below">
+              Buy and Sell this stock today!
+            </div>
           </div>
+
           <div class="action-deadspace"></div>
         </div>
         <div class="r-gutter"></div>

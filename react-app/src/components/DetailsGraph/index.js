@@ -68,10 +68,6 @@ export default function DetailGraph(props) {
         horzLine: {
           visible: false,
         },
-        // Add a listener to get the price at crosshair position
-        priceFormatter: (value) => {
-          setCurrentPrice(value);
-        },
       },
     });
 
@@ -112,7 +108,7 @@ export default function DetailGraph(props) {
         handleMouseWheel: false,
       });
     }
-  }, []);
+  }, [data]);
 
   console.log(currentPrice);
 

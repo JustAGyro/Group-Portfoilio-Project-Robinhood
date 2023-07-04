@@ -24,16 +24,56 @@ def stock_price(symbol):
     }
     return stock_price
 
-# Historical Daily Price for a specific stock
-@stock_routes.route('/historical_daily/<symbol>')
+# Historical Daily Price for a specific stock - 1 Month
+@stock_routes.route('/one_month/<symbol>')
 @login_required
-def historical_daily(symbol):
-    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=365&apikey=c4af6834a77de852f5ef970e0b5dd457"
+def one_month(symbol):
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=30&apikey=c4af6834a77de852f5ef970e0b5dd457"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
-    parsed_data = data
-    print(parsed_data)
-    return json.loads(data)
+    parsed_data = json.loads(data)
+    return jsonify(parsed_data['historical'])
+
+# Historical Daily Price for a specific stock - 3 Month
+@stock_routes.route('/three_month/<symbol>')
+@login_required
+def three_month(symbol):
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=90&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    parsed_data = json.loads(data)
+    return jsonify(parsed_data['historical'])
+
+# Historical Daily Price for a specific stock - 1 Year
+@stock_routes.route('/one_year/<symbol>')
+@login_required
+def one_year(symbol):
+    url = f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=365&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    parsed_data = json.loads(data)
+    return jsonify(parsed_data['historical'])
+
+# Historical Daily Price for a specific stock - 3 Year
+@stock_routes.route('/three_year/<symbol>')
+@login_required
+def three_year(symbol):
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=1095&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    parsed_data = json.loads(data)
+    return jsonify(parsed_data['historical'])
+
+# Historical Daily Price for a specific stock - 5 Year
+@stock_routes.route('/five_year/<symbol>')
+@login_required
+def five_year(symbol):
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=1825&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    parsed_data = json.loads(data)
+    return jsonify(parsed_data['historical'])
+
 
 # Company Quote for the stock
 @stock_routes.route('/company_quote/<symbol>')
@@ -46,6 +86,7 @@ def company_quote(symbol):
 
     # !!! this is missing dividend yield need to add another api and add it to the company quote
     company_quote = {
+        'name': parsed_data['name'],
         'marketCap': parsed_data['marketCap'],
         'peRatio': parsed_data['pe'],
         'avgVolume': parsed_data['avgVolume'],
