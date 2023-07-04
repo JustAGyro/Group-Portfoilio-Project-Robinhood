@@ -80,7 +80,7 @@ export default function ShowStockDetail() {
 
   return (
     <>
-      <div class="container">
+      <div class="sd-container">
         <div class="l-gutter">
           <p>left gutter</p>
         </div>
@@ -91,6 +91,13 @@ export default function ShowStockDetail() {
           </div>
           <div class="details-graph">
             <DetailGraph data={initialData} />
+          </div>
+          <div class="sd-graph-buttons-div">
+            <button class="sd-graph-button">1D</button>
+            <button class="sd-graph-button">1W</button>
+            <button class="sd-graph-button">3M</button>
+            <button class="sd-graph-button">1Y</button>
+            <button class="sd-graph-button">5Y</button>
           </div>
           <div class="details-about">
             <div class="about-title">

@@ -13,16 +13,24 @@
 .bar {
   display: flex;
   flex-direction: row;
-  background-color: gray;
+  background-color: black;
+  color: white;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  align-items: center;
+  height: 40px;
 }
 .bar > div {
   margin: 5px;
 }
 
-.search-div {
-  background-color: blue;
+.navbar-link {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-link:hover {
+  color: green;
 }

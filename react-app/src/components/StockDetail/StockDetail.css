@@ -1,4 +1,4 @@
-.container {
+.sd-container {
   display: grid;
   height: 100vh;
   grid-template-columns: 0.5fr 2.3fr 0.7fr 0.5fr;
@@ -6,6 +6,8 @@
   overflow: hidden;
   background-color: gray;
   margin-top: 40px;
+  color: white;
+  background-color: black;
 }
 .details {
   overflow-y: scroll;
@@ -21,6 +23,24 @@
 
 .details::-webkit-scrollbar-thumb {
   background-color: transparent;
+}
+
+.sd-graph-buttons-div {
+  display: flex;
+  gap: 5px;
+}
+
+.sd-graph-button {
+  border: none;
+  background-color: black;
+  color: white;
+  font-weight: bolder;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.sd-graph-button:hover {
+  color: green;
 }
 
 .about-title {
@@ -65,15 +85,15 @@
 .news-card {
   font-size: small;
   max-width: 99%;
-  border: 1px solid white;
-  margin-top: 5px;
+  margin-top: 10px;
   display: flex;
   gap: 5px;
   justify-content: space-between;
 }
 
 .news-card:hover {
-  background-color: lightgray;
+  background-color: #444444;
+  border: 2px solid #444444;
 }
 
 .news-card h4 {
@@ -87,7 +107,6 @@
 
 .article-img {
   display: flex;
-  /* align-items: center; */
   justify-content: center;
 }
 .article-img-thumbnail {

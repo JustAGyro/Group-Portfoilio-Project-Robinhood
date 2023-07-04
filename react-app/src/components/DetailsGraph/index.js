@@ -42,10 +42,12 @@ export default function DetailGraph(props) {
       width: chartContainerRef.current.clientWidth,
       height: 340,
       rightPriceScale: {
-        visible: false,
+        visible: true,
+        borderVisible: false,
       },
       timeScale: {
-        visible: false,
+        visible: true,
+        borderVisible: false,
       },
       grid: {
         vertLines: {
@@ -117,9 +119,6 @@ export default function DetailGraph(props) {
   return (
     <div className="chart-container-div">
       <div ref={chartContainerRef} />
-      <div className="chart-child">
-        Price: {currentPrice != null ? currentPrice.toFixed(2) : '-'}
-      </div>
     </div>
   );
 }

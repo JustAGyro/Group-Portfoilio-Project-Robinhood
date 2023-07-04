@@ -11,35 +11,37 @@ function Navigation({ isLoaded }) {
   return (
     <nav class="bar">
       <div>
-        <NavLink exact to="/">
+        <NavLink className="navbar-link" exact to="/">
           Home
         </NavLink>
       </div>
       <div>
-        <NavLink exact to="/notes">
+        <NavLink className="navbar-link" exact to="/notes">
           Notes
         </NavLink>
       </div>
       <div>
-        <NavLink exact to="/notes/new">
+        <NavLink className="navbar-link" exact to="/notes/new">
           New Note
         </NavLink>
       </div>
       <div>
-        <NavLink to="/stockapi">Stock Graph</NavLink>
+        <NavLink className="navbar-link" to="/stockapi">
+          Stock Graph
+        </NavLink>
       </div>
       <div>
-        <NavLink exact to="/transactions">
+        <NavLink className="navbar-link" exact to="/transactions">
           Transactions
         </NavLink>
       </div>
       <div>
-        <NavLink exact to="/transactions/new">
+        <NavLink className="navbar-link" exact to="/transactions/new">
           New Transaction
         </NavLink>
       </div>
       <div>
-        <NavLink exact to="/account">
+        <NavLink className="navbar-link" exact to="/account">
           Account Balance
         </NavLink>
       </div>
@@ -47,9 +49,9 @@ function Navigation({ isLoaded }) {
         <SearchBar />
       </div>
       <div>
-        <NavLink exact to="/watchlists">
+        <NavLink className="navbar-link" exact to="/watchlists">
           Watchlists
-        </NavLink>      
+        </NavLink>
       </div>
       {isLoaded && (
         <div>
