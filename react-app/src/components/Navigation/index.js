@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import SearchBar from '../SearchBar';
+import { GiFeather } from 'react-icons/gi';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -12,7 +13,7 @@ function Navigation({ isLoaded }) {
     <nav class="bar">
       <div>
         <NavLink className="navbar-link" exact to="/">
-          Home
+          <GiFeather id="feather-icon" />
         </NavLink>
       </div>
       <div>

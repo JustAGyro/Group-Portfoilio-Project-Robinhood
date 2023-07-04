@@ -9,7 +9,7 @@ export default function ShowStockDetail() {
   const [stockInfo, setStockInfo] = useState({});
   const [stockNews, setStockNews] = useState([]);
 
-  const [initialData, setInitialData] = useState([
+  const [graphData, setGraphData] = useState([
     { time: '2018-12-22', value: 32.51 },
     { time: '2018-12-23', value: 31.11 },
     { time: '2018-12-24', value: 27.02 },
@@ -81,16 +81,14 @@ export default function ShowStockDetail() {
   return (
     <>
       <div class="sd-container">
-        <div class="l-gutter">
-          <p>left gutter</p>
-        </div>
+        <div class="l-gutter"></div>
         <div class="details">
           <div class="details-name-price">
             <h1>{symbol}</h1>
             <p>price $</p>
           </div>
           <div class="details-graph">
-            <DetailGraph data={initialData} />
+            <DetailGraph data={graphData} />
           </div>
           <div class="sd-graph-buttons-div">
             <button class="sd-graph-button">1D</button>
@@ -193,13 +191,9 @@ export default function ShowStockDetail() {
           <div class="action-buttons">
             <p>buttons</p>
           </div>
-          <div class="action-deadspace">
-            <p>deadspace</p>
-          </div>
+          <div class="action-deadspace"></div>
         </div>
-        <div class="r-gutter">
-          <p>right gutter</p>
-        </div>
+        <div class="r-gutter"></div>
       </div>
     </>
   );
