@@ -5,7 +5,7 @@ import { NewsBox } from '../News';
 export default function ShowDashboard() {
   return (
     <>
-      <div class="container">
+      <div class="dash-container">
         <div class="navbar"></div>
         <div class="content">
           <div class="stock-watchlist">

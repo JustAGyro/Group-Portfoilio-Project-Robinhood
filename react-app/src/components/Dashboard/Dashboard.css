@@ -1,4 +1,4 @@
-  .container {
+  .dash-container {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0px 0px;
@@ -29,7 +29,7 @@
   height: 100vh; /* Adjust the height as per your needs */
   background-color: blue;
   padding: 20px;
-  z-index: 1;
+  z-index: -1;
   overflow-y: auto;
 }
 

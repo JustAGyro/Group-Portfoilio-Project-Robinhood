@@ -34,7 +34,8 @@ function App() {
   return (
     <div>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
+      <div id="full-page">
+        {isLoaded && (
         <Switch>
           <Route exact path="/">
             <Dashboard />
@@ -75,8 +76,10 @@ function App() {
           <Route path = "/watchlists">
             <WatchLists />
           </Route>
-        </Switch>
-      )}
+        </Switch>)}
+      </div>
+
+
     </div>
   );
 }
