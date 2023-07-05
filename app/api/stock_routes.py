@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+import datetime
 from flask_login import login_required, current_user
 import certifi
 import json
@@ -166,9 +167,57 @@ def stock_search(value):
 # Most Gainer Stock
 
 @stock_routes.route('/top_gainers')
-@login_required
+# @login_required
 def top_gainers():
     url="https://financialmodelingprep.com/api/v3/stock_market/gainers?apikey=c4af6834a77de852f5ef970e0b5dd457"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     return json.loads(data)
+
+# Historical for 24 hours
+@stock_routes.route('/todays/<symbol>')
+# @login_required
+def historical_today(symbol):
+    
+    url =f"https://financialmodelingprep.com/api/v3/historical-chart/1hour/{symbol}?serietype=line&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    parsed_data = json.loads(data)[:24]
+    print (parsed_data,'------------this is prsed data')
+    # modified_data = []
+    # for items in parsed_data:
+    #     date_str = items['date']
+    #     # price = 
+    #     date_obj = datetime.datetime.strptime(date_str,"%Y-%m-%d %H:%M:%S")
+    #     unix_time = int(date_obj.timestamp())
+    #     modified_item = {"date": unix_time}
+    #     modified_data.append(modified_item)
+    #     print(modified_data, '------------this is modified data')
+    
+    price_and_time_only = [{'time': obj['date'], 'value': obj['close']} for obj in parsed_data]
+    # print(price_and_time_only, '---------------before reverse')
+    price_and_time_only.reverse()
+    print (price_and_time_only, '-----------this is price and time')
+
+    modified_data = []
+    for items in price_and_time_only:
+        date_str = items['time']
+        val = items['value']
+        date_obj = datetime.datetime.strptime(date_str,"%Y-%m-%d %H:%M:%S")
+        unix_time = int(date_obj.timestamp())
+        modified_item = {"time": unix_time, "value": val}
+        modified_data.append(modified_item)
+    print(modified_data)
+    # print ('')
+
+
+
+
+
+
+    # modified_data.reverse()
+    # print(price_and_time_only, '------------------after reverse')
+
+    
+    return modified_data
+    # return price_and_time_only

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import WatchListModal from "../ModalsWatchlist/ShowListModal";
 import DeleteWatchListModal from "../ModalsWatchlist/DeleteListModal";
 import { getAllWatchlistsThunk, getOneWatchlistThunk, createWatchlistThunk, deleteWatchlistThunk, createSymbollistThunk, deleteSymbollistThunk } from "../../store/watchlist";
+import WatchlistGraph from "../WatchlistGraphs";
+import './watchlist.css'
 
 export default function WatchLists() {
     const dispatch = useDispatch()
@@ -24,16 +26,19 @@ export default function WatchLists() {
                     {watchlists.map(ele => {
                         return (
                             <div>
-                                <div>
-                                    list_name: {ele.name}
+                                <div> 
+                                    <p>Lists</p>
+                                    <p> add </p>
                                 </div>
                                 <div>
-                                    user_id: {ele.userId}
+                                    list_name: {ele.name}
+                                    <p>open</p>
                                 </div>
                                 {ele['symbols'].map(ele => {
                                     return (
                                         <div>
                                             {ele.symbol}
+                                            <WatchlistGraph symbol = {ele.symbol} />
                                         </div>
                                     )
                                 })}
