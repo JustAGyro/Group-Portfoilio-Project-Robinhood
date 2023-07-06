@@ -1,12 +1,4 @@
 .chart-container-div {
   position: relative;
-}
-
-.chart-child {
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  color: white;
-  z-index: 1;
-  line-height: 18px;
+  z-index: 0;
 }

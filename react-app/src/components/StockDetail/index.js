@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './StockDetail.css';
 import DetailGraph from '../DetailsGraph';
+import OpenModalButton from '../OpenModalButton';
+import BuyModal from '../BuyModal';
 
 export default function ShowStockDetail() {
   const { symbol } = useParams();
@@ -316,7 +318,12 @@ export default function ShowStockDetail() {
         <div class="actions">
           <div class="action-buttons">
             <div class="sd-action-buttons-container">
-              <button className="sd-button">Buy {symbol}</button>
+              <button className="sd-button">
+                <OpenModalButton
+                  buttonText={`Buy ${symbol}`}
+                  modalComponent={<BuyModal symbol={symbol} />}
+                />
+              </button>
               <button className="sd-button">Sell {symbol}</button>
             </div>
             <div className="sd-buttons-words-below">

@@ -16,6 +16,10 @@
   scrollbar-color: transparent transparent;
 }
 
+.details-graph {
+  z-index: 0;
+}
+
 .details::-webkit-scrollbar {
   width: 6px;
   background-color: transparent;
