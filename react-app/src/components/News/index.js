@@ -7,7 +7,7 @@ import "./News.css"
 export default function NewsStory(props) {
     const history = useHistory();
     const {story} = props
-    console.log("story", story)
+    // console.log("story", story)
     return (
         <div className="news-story" onClick={() => window.location.href = story.url}>
             <div className="news-title">
@@ -33,7 +33,7 @@ export const NewsBox = () => {
         dispatch(getGeneralNews())
     }, [])
     useEffect(() => {
-        console.log(news)
+        // console.log(news)
     }, [news])
     let generalNews = news.general
     let newsList = Object.values(generalNews);
@@ -42,7 +42,7 @@ export const NewsBox = () => {
             <NewsStory story={ele}/>
         )
     })
-    console.log("display", display)
+    // console.log("display", display)
     return (
         <div className="news-box">
             {display[0]}

@@ -2,6 +2,7 @@ import React from 'react';
 import './Dashboard.css';
 import Movers from '../Movers'
 import { NewsBox } from '../News';
+import Portfolio from '../Portfolio';
 export default function ShowDashboard() {
   return (
     <>
@@ -17,7 +18,9 @@ export default function ShowDashboard() {
             <h1>this is the dashboard. .</h1>
           </div>
           <div class="dash-portfolio">
-            <div> This is the portfolio </div>
+            <div> This is the portfolio
+              <Portfolio />
+            </div>
           </div>
           <div class="dash-movers">
             <div>

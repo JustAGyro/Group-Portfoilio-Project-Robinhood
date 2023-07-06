@@ -3,7 +3,9 @@
 
 body {
   font-family: Monsterrat-Regular;
+  background-color: black;
 }
 #full-page{
   margin-top: 40px;
+  color: white;
 }

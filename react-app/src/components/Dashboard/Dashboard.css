@@ -24,7 +24,7 @@
 .stock-watchlist {
   position: fixed;
   top: 50px;
-  left: 1000px;
+  left: 1300px;
   width: 10%; /* Adjust the width as per your needs */
   height: 100vh; /* Adjust the height as per your needs */
   background-color: blue;
@@ -43,7 +43,6 @@
 
 .dashboard {
   grid-area: dashboard;
-  background-color: #fff;
   height: 100%; /* Occupy full height of the parent */
   overflow-y: auto; /* Enable vertical scrolling */
   max-width: 100%;

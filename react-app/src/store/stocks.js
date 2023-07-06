@@ -28,7 +28,7 @@ export default function stockReducer(state = {}, action) {
     switch (action.type) {
         case ADD_STOCK:
             newState = {...state}
-            newState[action.payload.symbol] = action.payload.historical.map(ele => {
+            newState[action.payload.symbol] = action.payload.historical?.map(ele => {
                 let thing = {
                     time: ele.date,
                     value: ele.close

@@ -34,6 +34,7 @@ export default function StockApi() {
     }
     useEffect(() => {
         if (fav && fav.length > 0) setInitialData(fav)
+        console.log("fav", fav)
     }, [fav])
 
     const onSubmit = async (e) => {
