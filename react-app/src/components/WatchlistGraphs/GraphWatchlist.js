@@ -8,12 +8,10 @@ export default function GraphWatchlist (props) {
 		data,
         lineColor,
 		colors: {
-			backgroundColor = 'black',
-			// lineColor = 'green',
-            // lineWidth
+			backgroundColor = 'white',
 			textColor = '#70e000',
-			areaTopColor = 'black',
-			areaBottomColor = 'black',
+			areaTopColor = 'white',
+			areaBottomColor = 'white',
 		} = {},
 	} = props;
 
@@ -30,8 +28,8 @@ export default function GraphWatchlist (props) {
 					textColor,
 				},
 				width: chartContainerRef.current.clientWidth,
-				height: 60,
-                width: 60,
+				height: 40,
+                width: 50,
                 rightPriceScale: {
                     visible: false
                 },

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetHistoricalHour } from "../../store/stocks";
 // import Graph from "./GraphWatchlist"
 import GraphWatchlist from "./GraphWatchlist";
+import './watchlistgraph.css'
 
 export default function WatchlistGraph(props) {
     const dispatch = useDispatch()
@@ -49,8 +50,6 @@ export default function WatchlistGraph(props) {
         color = 'red'
     }
     
-    // if (percentDifference == NaN) 
-    // setDifference(percentDifference)
     console.log('Percent Difference:', percentDifference);
 
 
@@ -60,14 +59,17 @@ export default function WatchlistGraph(props) {
         <>
 
            
-            <div style={{display: "flex"}}>
+            <div id='watc-lst-gra-container'style={{display: "flex"}}>
                 <div>
 
                     <GraphWatchlist {...props} data={stockHour} lineColor = {color} />
                 </div>
+                <div className="watc-lst-gra-container-footer">
 
-                <p>{lastPrice}</p>
-                {isNaN(percentDifference) ? null : <p>{percentDifference.toFixed(3)}</p>}
+                <p id="watc-lst-gra-container-footer-top">${Number(lastPrice).toFixed(2)}</p>
+                {isNaN(percentDifference) ? null : <p id="watc-lst-gra-container-footer-down" style={{color: color}} >{percentDifference.toFixed(3)}%</p>}
+                </div>
+
             </div>
         </>
 

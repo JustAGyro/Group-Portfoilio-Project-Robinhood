@@ -21,37 +21,44 @@ export default function WatchLists() {
     return (
 
         <>
-            <div>
+            <div className="wat-lst-mn-ctn">
+                <div className="wat-lst-header">
+                    <p>
+                        Lists
+                    </p>
+                    <div>
+                        <button className="openModalBtn" onClick={() => { setOpenModal(true) }}><i class="fa-solid fa-plus"></i></button>
+                        {openModal && <WatchListModal closeModal={setOpenModal} />}
+                    </div>
+
+
+                </div>
                 <div>
                     {watchlists.map(ele => {
                         return (
-                            <div>
-                                <div> 
-                                    <p>Lists</p>
-                                    <p> add </p>
-                                </div>
-                                <div>
-                                    list_name: {ele.name}
-                                    <p>open</p>
+                            <div className="wat-lst-pri-cont">
+                                <div className="wat-lst-bod-head">
+                                    <p>{ele['name'].toUpperCase()}</p>
+                                    <p><i class="fa-solid fa-sort-down"></i></p>
                                 </div>
                                 {ele['symbols'].map(ele => {
                                     return (
-                                        <div>
-                                            {ele.symbol}
-                                            <WatchlistGraph symbol = {ele.symbol} />
+                                        <div className="wat-lst-bod-bod">
+                                            <p>{ele.symbol}</p>
+                                            <WatchlistGraph symbol={ele.symbol} />
                                         </div>
                                     )
                                 })}
-                                <button onClick={() => {setDeleteModal(true)}}>Delete</button>
-                                {deleteModal && <DeleteWatchListModal closeModal = {setDeleteModal} id = {ele.id} />}
+                                <button onClick={() => { setDeleteModal(true) }}>Delete</button>
+                                {deleteModal && <DeleteWatchListModal closeModal={setDeleteModal} id={ele.id} />}
                             </div>
                         )
                     })}
 
                 </div>
                 <div>
-                    <button className="openModalBtn" onClick={() => { setOpenModal(true) }}>create list</button>
-                    {openModal && <WatchListModal closeModal={setOpenModal} />}
+                    {/* <button className="openModalBtn" onClick={() => { setOpenModal(true) }}>create list</button>
+                    {openModal && <WatchListModal closeModal={setOpenModal} />} */}
                 </div>
 
             </div>
