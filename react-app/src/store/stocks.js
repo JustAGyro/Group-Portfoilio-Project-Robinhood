@@ -2,10 +2,11 @@ const ADD_STOCK = "/stocks/ADD_STOCK";
 const GET_STOCK = "/stocks/GET_STOCK";
 
 export const getStock = (symbol) => async dispatch => {
-    const response = await fetch(`/api/stocks/historical_daily/${symbol}`);
+    const response = await fetch(`/api/stocks/one_year/${symbol}`);
     if(response.ok){
         const details = await response.json();
-        await dispatch(addStock(details));
+        console.log(details)
+        await dispatch(addStock({symbol,historical:details}));
         return details;
     }
 }
@@ -25,14 +26,14 @@ export const getGainers = () => async dispatch => {
 }
 
 export const GetHistoricalHour = (symbol) => async dispatch => {
-    const response = await 
+    const response = await
     fetch(`/api/stocks/todays/${symbol}`);
     if (response.ok) {
         const details = await response.json()
         // console.log (details, '----------flag for hourly historical')
         return details
     }
-} 
+}
 export default function stockReducer(state = {}, action) {
     let newState = {};
     switch (action.type) {

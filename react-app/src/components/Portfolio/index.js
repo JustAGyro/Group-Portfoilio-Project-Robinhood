@@ -10,12 +10,15 @@ export default function Portfolio() {
     let transactions = useSelector(state => state?.transactions)
     let stocks = useSelector(state => state.stocks)
     const [dataGraph, setDataGraph] = useState([])
+
     useEffect(async () => {
         dispatch(getAllTransactionsThunk())
     },[])
+
     useEffect(() => {
         let trans = Object.values(transactions)
         let dailyData = {...groupBy(trans, ['symbol','date','transaction'])}
+        // console.log("FLAGGYWAGGY",dailyData)
         Object.keys(dailyData).forEach(ele => {
             dispatch(getStock(ele))
         })
@@ -41,7 +44,7 @@ export default function Portfolio() {
         // let it = {}
         let data = {}
         let returnData = {}
-        // console.log(it, returnData, data)
+        // console.log("winkaaaa",returnData, data)
         transactionHistory.forEach(ele => {
             let newDate = new Date(ele.date)
             data[newDate.toDateString()] = orderedHistory[ele.date]
@@ -100,15 +103,16 @@ export default function Portfolio() {
         // })
         // console.log(it, returnData)
         console.log(sortedDataEntries)
-        // console.log(returnData)
+        console.log(returnData)
         return returnData;
     }
 
 
     let manageInfo = (history) => {
       let graphData = []
-      let input = Object.keys(history)
 
+      let input = Object.keys(history)//all the dates
+      console.log("dates",input)
       let tank = Object.entries(stocks);
       // console.log(tank)
       let tankData = {}
@@ -117,7 +121,10 @@ export default function Portfolio() {
         let filler = groupBy(ele[1], ['time'])
         let fillerKeys = Object.keys(filler)
         fillerKeys.forEach(e => {
-          actual[new Date(e).toDateString()] = filler[e];
+          let date = new Date(e)
+          // console.log('key', e)
+          // console.log('obj',filler[e])
+          actual[date.toDateString()] = filler[e];
         })
         tankData[ele[0]] = actual
       })
@@ -127,6 +134,7 @@ export default function Portfolio() {
         // to get a value that is either negative, positive, or zero.
         return new Date(b) - new Date(a);
       }).reverse();
+      let savedDate;
       sortedData.forEach(ele => {
         let value = 0;
         let data = history[ele];
@@ -137,11 +145,12 @@ export default function Portfolio() {
           if(tankData[val][ele]){
             // console.log("tankdata",val,ele,tankData[val][ele])
             value += tankData[val][ele][0].value * data[val]
-            // console.log(value)
-            graphData.push({time: ele, value})
+            savedDate = ele;
           }
-
+          else value += tankData[val][savedDate][0].value * data[val]
+          
         })
+        graphData.push({time: ele, value})
 
       })
       return graphData
@@ -162,7 +171,7 @@ export default function Portfolio() {
               // console.log("this",hist)
               let theStuff = manageInfo(hist)
               setDataGraph(theStuff)
-              // console.log(">>>",dataGraph)
+              console.log(">>>",dataGraph)
             })
         }
         else{
@@ -171,7 +180,7 @@ export default function Portfolio() {
     }, [stocks])
     return (
         <div>
-            {/* <Graph data={dataGraph} /> */}
+            <Graph data={dataGraph} />
         </div>
     )
 }

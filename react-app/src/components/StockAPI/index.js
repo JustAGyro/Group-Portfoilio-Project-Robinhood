@@ -30,20 +30,11 @@ export default function StockApi() {
   const getIt = async () => {
     let it = await dispatch(getStock(symbol));
 
-<<<<<<< HEAD
-        return it
-    }
-    useEffect(() => {
-        if (fav && fav.length > 0) setInitialData(fav)
-        console.log("fav", fav)
-    }, [fav])
-=======
     return it;
   };
   useEffect(() => {
     if (fav && fav.length > 0) setInitialData(fav);
   }, [fav]);
->>>>>>> dev
 
   const onSubmit = async (e) => {
     e.preventDefault();
