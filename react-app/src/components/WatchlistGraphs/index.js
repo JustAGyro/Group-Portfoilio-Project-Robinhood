@@ -14,17 +14,16 @@ export default function WatchlistGraph(props) {
     // const [difference, setDifference] = useState('')
 
     function calculatePercentDifference(lastPrice, prevPrice) {
-        var difference = lastPrice - prevPrice;
-        console.log(difference, '-----------this is difference')
-        var percentDifference = (difference / lastPrice) * 100;
-        // setDifference(percentDifference)
-        // setDifference
+        let difference = lastPrice - prevPrice;
+
+        let percentDifference = (difference / lastPrice) * 100;
+        
         return percentDifference;
     }
     useEffect(() => {
         const parseHistorical = async () => {
             const historicalHour = await dispatch(GetHistoricalHour(props.symbol))
-            console.log(historicalHour, '------------from the store')
+            // console.log(historicalHour, '------------from the store')
             setStockHour(historicalHour)
             setLastPrice(historicalHour[23].value)
             setPrevPrice(historicalHour[16].value)
@@ -40,17 +39,14 @@ export default function WatchlistGraph(props) {
         calculatePercentDifference()
 
     }, [])
-    console.log(stockHour, '-----------------')
-    console.log(lastPrice)
-    console.log(prevPrice)
-    console.log(valueDown)
+    
     const percentDifference = calculatePercentDifference(lastPrice, prevPrice);
     let color = 'green'
     if (percentDifference < 0) {
         color = 'red'
     }
     
-    console.log('Percent Difference:', percentDifference);
+    // console.log('Percent Difference:', percentDifference);
 
 
 

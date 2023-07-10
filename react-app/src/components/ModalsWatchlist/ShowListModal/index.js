@@ -35,23 +35,26 @@ export default function WatchListModal({closeModal}) {
       }
     return (
         <div id="wat-lst-modal-background">
-            <div ref={modalRef} id="wat-lst-modalContainer"> 
-                <div className="title">
-                    <h1>Create List</h1>
-                <button onClick={() =>closeModal(false)}> X </button>
+            <div ref={modalRef} id="cre-wat-lst-modalContainer"> 
+                <div className="cre-wat-mod-hed">
+                    <p>Create List</p>
+                <button onClick={() =>closeModal(false)} className="cre-wat-mod-hed-can"> X </button>
                 </div>
                 <div>
-                    <p>Pick a name for your watchlist</p>
                     <form onSubmit={submit} method = 'POST' action="/api/watchlists/new">
-                      <div>
-                        name
-                      <input placeholder="name" name = 'name' type='text' onChange = {e => setName(e.target.value)}value={name}/>
+                      <div className="wat-lst-cre-mod-bod">
+                      <input placeholder="List Name" name = 'name' type='text' onChange = {e => (setName(e.target.value))} value={name}/>
                       </div>
-                      <button type="submit" disabled={checkLength(name)}>Create List</button>
+                      <div className="cre-wat-lst-mod-btns">
+                        <button onClick={() =>closeModal(false)} className="cre-lst-mod-cancel-btn">Cancel</button>
+                      <button 
+                       
+                       className="cre-lst-mod-btn" type="submit" disabled={checkLength(name)}>Create List</button>
+                      </div>
+                    
                     </form>
                 </div>
-                <div className="footer">
-                    <button onClick={() =>closeModal(false)}>Cancel</button>
+                <div className="cre-wat-mod-footer">
                     {/* <button>Create List</button> */}
                 </div>
             </div>

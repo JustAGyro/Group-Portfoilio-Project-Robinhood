@@ -29,7 +29,7 @@ export const GetHistoricalHour = (symbol) => async dispatch => {
     fetch(`/api/stocks/todays/${symbol}`);
     if (response.ok) {
         const details = await response.json()
-        console.log (details, '----------flag for hourly historical')
+        // console.log (details, '----------flag for hourly historical')
         return details
     }
 } 

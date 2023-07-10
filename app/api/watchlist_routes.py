@@ -64,9 +64,12 @@ def add_watchlist():
 @login_required
 def delete_watchlist(id):
     watchlist = WatchList.query.get(id)
+    symbollist = SymbolList.query.filter(SymbolList.listId == (id))
     if not watchlist:
         return ('Watchlist not found')
     if current_user.id == watchlist.userId:
+        for symbol in symbollist:
+            db.session.delete(symbol)
         db.session.delete(watchlist)
         db.session.commit()
         return {
