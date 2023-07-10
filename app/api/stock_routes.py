@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 import certifi
 import json
 from urllib.request import urlopen
+from datetime import datetime
 
 stock_routes = Blueprint('stocks', __name__)
 
@@ -25,16 +26,56 @@ def stock_price(symbol):
     }
     return stock_price
 
-# Historical Daily Price for a specific stock
-@stock_routes.route('/historical_daily/<symbol>')
+# Historical Daily Price for a specific stock - 1 Month
+@stock_routes.route('/one_month/<symbol>')
 @login_required
-def historical_daily(symbol):
-    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=365&apikey=c4af6834a77de852f5ef970e0b5dd457"
+def one_month(symbol):
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=30&apikey=c4af6834a77de852f5ef970e0b5dd457"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
-    parsed_data = data
-    print(parsed_data)
-    return json.loads(data)
+    parsed_data = json.loads(data)
+    return jsonify(parsed_data['historical'])
+
+# Historical Daily Price for a specific stock - 3 Month
+@stock_routes.route('/three_month/<symbol>')
+@login_required
+def three_month(symbol):
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=90&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    parsed_data = json.loads(data)
+    return jsonify(parsed_data['historical'])
+
+# Historical Daily Price for a specific stock - 1 Year
+@stock_routes.route('/one_year/<symbol>')
+@login_required
+def one_year(symbol):
+    url = f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=365&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    parsed_data = json.loads(data)
+    return jsonify(parsed_data['historical'])
+
+# Historical Daily Price for a specific stock - 3 Year
+@stock_routes.route('/three_year/<symbol>')
+@login_required
+def three_year(symbol):
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=1095&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    parsed_data = json.loads(data)
+    return jsonify(parsed_data['historical'])
+
+# Historical Daily Price for a specific stock - 5 Year
+@stock_routes.route('/five_year/<symbol>')
+@login_required
+def five_year(symbol):
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=1825&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    parsed_data = json.loads(data)
+    return jsonify(parsed_data['historical'])
+
 
 # Company Quote for the stock
 @stock_routes.route('/company_quote/<symbol>')
@@ -45,17 +86,21 @@ def company_quote(symbol):
     data = response.read().decode('utf-8')
     parsed_data = json.loads(data)[0]
 
-    # !!! this is missing dividend yield need to add another api and add it to the company quote
+    market_cap = "{:,}".format(parsed_data['marketCap'])
+    avg_volume = "{:,}".format(parsed_data['avgVolume'])
+    volume = "{:,}".format(parsed_data['volume'])
+
     company_quote = {
-        'marketCap': parsed_data['marketCap'],
+        'name': parsed_data['name'],
+        'marketCap': market_cap,
         'peRatio': parsed_data['pe'],
-        'avgVolume': parsed_data['avgVolume'],
-        'highToday': parsed_data['dayHigh'],
-        'lowToday': parsed_data['dayLow'],
-        'volume': parsed_data['volume'],
-        'openPrice': parsed_data['open'],
-        'yearHigh': parsed_data['yearHigh'],
-        'yearLow': parsed_data['yearLow']
+        'avgVolume': avg_volume,
+        'highToday': f"$ {parsed_data['dayHigh']}",
+        'lowToday': f"$ {parsed_data['dayLow']}",
+        'volume': volume,
+        'openPrice': f"$ {parsed_data['open']}",
+        'yearHigh': f"$ {parsed_data['yearHigh']}",
+        'yearLow': f"$ {parsed_data['yearLow']}"
     }
     return company_quote
 
@@ -67,14 +112,19 @@ def company_info(symbol):
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     parsed_data = json.loads(data)[0]
-    # !!! founded date is the date when company went public
+
+
+    employees = "{:,}".format(int(parsed_data['fullTimeEmployees']))
+    founded_date = datetime.strptime(parsed_data['ipoDate'], '%Y-%m-%d').year
+
     company_info = {
         'ceo': parsed_data['ceo'],
-        'employees': parsed_data['fullTimeEmployees'],
-        'headquaters': parsed_data['city']+','+ parsed_data['state'],
-        'foundedDate': parsed_data['ipoDate'],
+        'employees': employees,
+        'headquaters': parsed_data['city'] + ', ' + parsed_data['state'],
+        'foundedDate': founded_date,
         'description': parsed_data['description']
     }
+
     return company_info
 
 # returns five article realted to specific stock

@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../../store/session";
-import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../store/session';
+import OpenModalButton from '../OpenModalButton';
+import LoginFormModal from '../LoginFormModal';
+import SignupFormModal from '../SignupFormModal';
+import { MdOutlineAccountCircle } from 'react-icons/md';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -24,9 +25,9 @@ function ProfileButton({ user }) {
       }
     };
 
-    document.addEventListener("click", closeMenu);
+    document.addEventListener('click', closeMenu);
 
-    return () => document.removeEventListener("click", closeMenu);
+    return () => document.removeEventListener('click', closeMenu);
   }, [showMenu]);
 
   const handleLogout = (e) => {
@@ -34,13 +35,13 @@ function ProfileButton({ user }) {
     dispatch(logout());
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = 'profile-dropdown' + (showMenu ? '' : ' hidden');
   const closeMenu = () => setShowMenu(false);
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className="account-button" onClick={openMenu}>
+        <MdOutlineAccountCircle id="account-icon" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (

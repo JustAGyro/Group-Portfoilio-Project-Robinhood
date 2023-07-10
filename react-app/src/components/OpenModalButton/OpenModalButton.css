@@ -1,0 +1,13 @@
+.open-modal-button-master {
+  background-color: none;
+  border: none;
+  background: none;
+  color: white;
+  font-size: large;
+  height: 100%;
+  width: 100%;
+}
+
+.open-modal-button-master:hover {
+  cursor: pointer;
+}
