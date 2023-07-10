@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./deletelistmodal.css"
-import { deleteWatchlistThunk, getAllWatchlistsThunk } from "../../../store/watchlist";
+import { deleteWatchlistThunk, getAllWatchlistsThunk, deleteSymbollistThunk } from "../../../store/watchlist";
 import { useDispatch } from "react-redux";
 export default function DeleteWatchListModal({ closeModal, id }) {
     const dispatch = useDispatch()
@@ -23,12 +23,15 @@ export default function DeleteWatchListModal({ closeModal, id }) {
         dispatch(deleteWatchlistThunk({
             id: id
         }))
+        dispatch(deleteSymbollistThunk({
+            
+        }))
         closeModal(false)
-        dispatch(getAllWatchlistsThunk())
+        // dispatch(getAllWatchlistsThunk())
     }
 
     return (
-        <div id="wat-lst-modal-background">
+        <div id="del-wat-lst-modal-background">
             <div ref={modalRef} id="det-wat-lst-modalContainer">
                 <div className="title">
                     <h1>Confirm Delete</h1>

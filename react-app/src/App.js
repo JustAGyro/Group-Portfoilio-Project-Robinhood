@@ -19,6 +19,7 @@ import StockApi from './components/StockAPI';
 import SearchBar from './components/SearchBar';
 import StockDetail from './components/StockDetail';
 import WatchLists from './components/WatchLists';
+import WatchlistGraph from './components/WatchlistGraphs';
 
 function App() {
   const dispatch = useDispatch();
@@ -76,10 +77,12 @@ function App() {
           <Route path = "/watchlists">
             <WatchLists />
           </Route>
-        </Switch>)}
+          <Route exact path = "/justatest">
+          <WatchlistGraph />
+          </Route>
+        </Switch>
+      )}
       </div>
-
-
     </div>
   );
 }

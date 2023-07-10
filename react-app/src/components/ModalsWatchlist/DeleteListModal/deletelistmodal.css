@@ -12,9 +12,9 @@
   align-items: center;
 }
 
-#wat-lst-modal-background {
+#del-wat-lst-modal-background {
 
-  background-color: rgb(206, 22, 22);
+  background-color: rgba(129, 126, 126, 0.6);
   position: fixed;
   top: 0;
   bottom: 0;
@@ -23,6 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
 }
 
 #det-wat-lst-modalContainer {

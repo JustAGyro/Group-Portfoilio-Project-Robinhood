@@ -1,0 +1,124 @@
+.wat-lst-pri-cont {
+    /* background-color: green; */
+    /* width: 220px; */
+    /* z-index: 1; */
+    position: relative;
+}
+.wat-lst-header {
+    /* background-color: teal; */
+    /* margin-top: 40px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(200, 196, 196);
+    /* padding: 5px; */
+}
+.wat-lst-header i {
+    margin-right:10px;
+    /* background-color: red; */
+}
+.wat-lst-header p {
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: 12px;
+    
+    /* border-bottom: 1px solid green; */
+
+}
+/* .wat-lst-header button {
+    background: none;
+    border: none;
+    color: rgb(159, 157, 157);
+} */
+.cre-lst-openModalBtn {
+    background: none;
+    border: none;
+    color: rgb(159, 157, 157);
+}
+.wat-lst-mn-ctn {
+    width: 190px;
+    border: 1px solid rgb(200, 196, 196);
+    margin-top: 50px;
+    border-radius: 4px;
+}
+.wat-lst-bod-head {
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+}
+.wat-lst-bod-head p {
+    font-size: 10px;
+    margin-left: 12px;
+}
+.wat-lst-bod-head i {
+    margin-right: 20px;
+    /* transform: rotate(180deg); */
+}
+.wat-lst-bod-bod {
+    /* background-color: blue; */
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    z-index: 1;
+}
+.wat-lst-bod-bod p {
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: 11px;
+    
+}
+.fa-ellipsis {
+
+}
+.wat-lst-bod-head-menu {
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    flex-direction: row;
+    align-items: center;
+    /* background-color: red; */
+}
+.wat-lst-bod-head-menu button{
+    background: none;
+    border: none;
+}
+/* .wat-lst-opt-popup {
+    margin-bottom: 8px;
+} */
+.fa-sort-down {
+    margin-bottom: 7px;
+    /* padding-bottom: 4px; */
+    /* background-color: green; */
+}
+.wat-lst-mod-btn-cont {
+    position: absolute;
+    top: 26px;
+    /* left: 5px; */
+    right: -70px;
+    background-color: white;
+    height: 30px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 130px;
+    border-radius: 4px;
+    /* border: 1px solid grey; */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.wat-lst-delete-mod-btn {
+    padding: auto;
+    text-decoration: underline;
+    font-size: 10px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    text-underline-offset: 2px;
+    
+    
+    /* word-spacing: 6px; */
+}
+.fa-circle-xmark {
+    margin-right: 8px ;
+}

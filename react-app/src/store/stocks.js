@@ -23,6 +23,16 @@ export const getGainers = () => async dispatch => {
         return details;
     }
 }
+
+export const GetHistoricalHour = (symbol) => async dispatch => {
+    const response = await 
+    fetch(`/api/stocks/todays/${symbol}`);
+    if (response.ok) {
+        const details = await response.json()
+        // console.log (details, '----------flag for hourly historical')
+        return details
+    }
+} 
 export default function stockReducer(state = {}, action) {
     let newState = {};
     switch (action.type) {

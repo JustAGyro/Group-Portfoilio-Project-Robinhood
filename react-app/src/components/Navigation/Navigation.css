@@ -14,16 +14,46 @@
 .bar {
   display: flex;
   flex-direction: row;
-  background-color: gray;
+  background-color: black;
+  color: white;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  align-items: center;
+  height: 40px;
 }
 .bar > div {
   margin: 5px;
 }
 
-.search-div {
-  background-color: blue;
+.navbar-link {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-link:hover {
+  color: green;
+}
+
+#feather-icon {
+  color: green;
+  height: fit-content;
+  width: 30px;
+}
+
+.account-button {
+  border: none;
+  background-color: black;
+  color: white;
+  height: fit-content;
+}
+
+.account-button:hover {
+  color: green;
+}
+
+#account-icon {
+  width: 30px;
+  height: 30px;
 }

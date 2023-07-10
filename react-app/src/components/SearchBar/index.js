@@ -45,13 +45,14 @@ export default function SearchBar() {
       <div className="input-wrapper">
         <FaSearch id="search-icon" />
         <input
+          className="searchbar-input"
           placeholder="Search"
           value={input}
           onChange={(e) => handleChange(e.target.value)}
         />
       </div>
       {results.length > 0 && (
-        <div className="dropdown-menu" ref={dropdownRef}>
+        <div className="results-dropdown-menu" ref={dropdownRef}>
           <ul className="results-list">
             {results.map((result) => (
               <li key={result.symbol}>
@@ -59,7 +60,7 @@ export default function SearchBar() {
                   to={`/stocks/${result.symbol}`}
                   onClick={() => setResults([])}
                 >
-                  <span>
+                  <span className="result-item">
                     {result.symbol} - {result.name}
                   </span>
                 </Link>
