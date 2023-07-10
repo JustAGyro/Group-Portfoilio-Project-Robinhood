@@ -19,7 +19,7 @@ export const getGainers = () => async dispatch => {
     const response = await fetch(`/api/stocks/top_gainers`);
     if(response.ok){
         const details = await response.json();
-        console.log('deets',details)
+        // console.log('deets',details)
         return details;
     }
 }

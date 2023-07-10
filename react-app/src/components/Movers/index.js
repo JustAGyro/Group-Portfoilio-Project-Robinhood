@@ -9,9 +9,9 @@ export default function Movers() {
     useEffect(() => {
         const parseMovers = async () => {
             const movers = await dispatch(getGainers())
-            console.log("movers", movers)
+            // console.log("movers", movers)
             setMovers(movers);
-            console.log(movers)
+            // console.log(movers)
             return movers
         }
         parseMovers()

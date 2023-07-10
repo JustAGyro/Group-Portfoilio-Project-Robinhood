@@ -1,22 +1,23 @@
 from app.models import db, PortfolioTransaction, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import date
 
 def seed_portfoliotransactions():
     #User 1 - Demo
     t1 = PortfolioTransaction(
-        userId=1, transaction='buy', quantity=10, price=95.44,date="2022-11-29", symbol='GOOG'
+        userId=1, transaction='buy', quantity=10, price=95.44,date=date.fromisoformat("2022-11-29"), symbol='GOOG'
     )
     t2 = PortfolioTransaction(
-    userId=1, transaction='buy', quantity=10, price=121.82,date="2022-12-29", symbol='TSLA'
+    userId=1, transaction='buy', quantity=10, price=121.82,date=date.fromisoformat("2022-12-29"), symbol='TSLA'
     )
     t3 = PortfolioTransaction(
-    userId=1, transaction='buy', quantity=10, price=90.30,date="2023-2-28", symbol='GOOG'
+    userId=1, transaction='buy', quantity=10, price=90.30,date=date.fromisoformat("2023-02-26"), symbol='GOOG'
     )
     t4 = PortfolioTransaction(
-    userId=1, transaction='sell', quantity=5, price=183.25, date="2023-3-20", symbol='TSLA'
+    userId=1, transaction='sell', quantity=5, price=183.25, date=date.fromisoformat("2023-03-20"), symbol='TSLA'
     )
     t5 = PortfolioTransaction(
-    userId=1, transaction='sell', quantity=5, price=101.90, date="2023-3-29",symbol='GOOG'
+    userId=1, transaction='sell', quantity=5, price=101.90, date=date.fromisoformat("2023-03-29"),symbol='GOOG'
     )
 
     #User 2 - Marnie
