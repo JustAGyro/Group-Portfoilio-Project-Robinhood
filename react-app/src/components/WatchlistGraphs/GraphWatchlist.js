@@ -8,10 +8,10 @@ export default function GraphWatchlist (props) {
 		data,
         lineColor,
 		colors: {
-			backgroundColor = 'white',
+			backgroundColor = 'black',
 			textColor = '#70e000',
-			areaTopColor = 'white',
-			areaBottomColor = 'white',
+			areaTopColor = 'black',
+			areaBottomColor = 'black',
 		} = {},
 	} = props;
 

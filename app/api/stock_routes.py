@@ -248,7 +248,7 @@ def historical_today(symbol):
     # print(price_and_time_only, '---------------before reverse')
     price_and_time_only.reverse()
     print (price_and_time_only, '-----------this is price and time')
-
+    import datetime
     modified_data = []
     for items in price_and_time_only:
         date_str = items['time']
