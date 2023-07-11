@@ -1,6 +1,6 @@
 .profile-dropdown {
   position: absolute;
-  background-color: white;;
+  background-color: white;
 }
 
 .searchbar-dropdown {
@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: row;
   background-color: black;
-  color: white;
+  color: black;
   position: fixed;
   top: 0;
   left: 0;
