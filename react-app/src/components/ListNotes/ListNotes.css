@@ -1,0 +1,14 @@
+.note-subject{
+    background-color: rgb(20, 20, 20);
+}
+.note-entry{
+    background-color: rgb(15, 15, 15);
+}
+.note-symbols{
+    color: grey;
+    font-size: 10px;
+}
+.note{
+    width: 180px;
+    overflow-wrap: break-word;
+}

@@ -45,8 +45,25 @@ export const NewsBox = () => {
     // console.log("display", display)
     return (
         <div className="news-box">
-            {display[0]}
-            {display[1]}
+            {newsList.map((article, index) => (
+            <a className="sd-link" href={article.url}>
+              <div className="news-card" key={index}>
+                <div className="article-text">
+                  <h4>
+                    {article.site} - {article.publishedDate}
+                  </h4>
+                  <h2>{article.title}</h2>
+                  <p>{article.text}</p>
+                </div>
+                <div className="article-img">
+                  <img
+                    className="article-img-thumbnail"
+                    src={article.image}
+                  ></img>
+                </div>
+              </div>
+            </a>
+          ))}
         </div>
     )
 }

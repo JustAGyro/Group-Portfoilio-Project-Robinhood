@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGainers } from "../../store/stocks";
+import './Movers.css'
 
 export default function Movers() {
     const dispatch = useDispatch();
