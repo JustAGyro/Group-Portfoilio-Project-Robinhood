@@ -48,12 +48,35 @@
   width: 100%;
   height: 30px;
   margin-top: 15px;
+  border: 1px solid #282d30;
+  background-color: #1e2124;
+  border-radius: 4px;
+  color: white;
+  font-size: 18px;
+  font-weight: 200;
 }
 
 .modal-p-tag {
   margin-top: -10px;
 }
 
+.modal-p-tag-trans-good {
+  margin-top: -10px;
+  color: darkgreen;
+}
+
+.modal-p-tag-trans-bad {
+  margin-top: -10px;
+  color: darkred;
+}
+
 .validation-error {
   color: darkred;
+}
+
+.buy-submit-button-modal:hover {
+  color: green;
+  font-weight: 200;
+  border: 1px solid darkgreen;
+  cursor: pointer;
 }
