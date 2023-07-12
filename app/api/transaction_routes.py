@@ -42,20 +42,20 @@ def transactions_one(p_id):
 def transactions_new():
     user_id = current_user.id
 
-    form = TransactionForm()
     data = request.get_json()
+    transaction = data.get('transaction')
+    quantity = data.get('quantity')
     price = data.get('price')
     symbol = data.get('symbol')
 
-
     new_transaction = PortfolioTransaction(
-        userId = user_id,
-        transaction = form.transaction.data,
-        quantity = form.quantity.data,
-        price = form.price.data,
-        symbol = form.symbol.data,
+        userId=user_id,
+        transaction=transaction,
+        quantity=quantity,
+        price=price,
+        symbol=symbol,
     )
-    print(new_transaction)
+
     db.session.add(new_transaction)
     db.session.commit()
 
