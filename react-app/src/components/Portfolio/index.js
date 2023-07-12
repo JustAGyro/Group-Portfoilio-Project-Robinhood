@@ -4,6 +4,7 @@ import { getAllTransactionsThunk} from "../../store/transactions";
 import { getStock } from "../../store/stocks";
 import Graph from "../Graph"
 import reactRouterDom from "react-router-dom";
+import DetailGraph from "../DetailsGraph";
 
 export default function Portfolio() {
     const dispatch = useDispatch()
@@ -148,7 +149,7 @@ export default function Portfolio() {
             savedDate = ele;
           }
           else value += tankData[val][savedDate][0].value * data[val]
-          
+
         })
         graphData.push({time: ele, value})
 
@@ -180,7 +181,7 @@ export default function Portfolio() {
     }, [stocks])
     return (
         <div>
-            <Graph data={dataGraph} />
+            <DetailGraph data={dataGraph} />
         </div>
     )
 }

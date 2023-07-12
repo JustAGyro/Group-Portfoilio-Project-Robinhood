@@ -329,7 +329,9 @@ export default function ShowStockDetail() {
               <button className="sd-button">
                 <OpenModalButton
                   buttonText={`Buy ${symbol}`}
-                  modalComponent={<BuyModal symbol={symbol} />}
+                  modalComponent={
+                    <BuyModal symbol={symbol} price={stockPrice.price} />
+                  }
                 />
               </button>
               <button className="sd-button">Sell {symbol}</button>

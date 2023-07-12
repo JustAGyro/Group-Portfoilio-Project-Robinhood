@@ -22,7 +22,7 @@ export const getNoteSymbols = (noteId, notesymbols) => {
   return {
     type: GET_NOTESYMBOLS,
     payload: {
-      noteId, 
+      noteId,
       notesymbols
     }
   }
@@ -57,7 +57,7 @@ export const getAllNotes = () => async (dispatch) => {
   const response = await fetch(`/api/notes/current`);
   if (response.ok) {
     const details = await response.json();
-    console.log(details);
+    console.log("NOTEFLAG",details);
     await dispatch(getNotes(details));
     return details;
   }
@@ -77,7 +77,7 @@ export const deleteNote = (details) => {
   };
 };
 export const deleteNoteThunk = (note) => async (dispatch) => {
-  const response = await fetch(`/api/notes/${note.id}`, {
+  const response = await fetch(`/api/notes/${note.id}/delete`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -87,10 +87,11 @@ export const deleteNoteThunk = (note) => async (dispatch) => {
   if (response.ok) {
     const details = await response.json();
 
-    dispatch(deleteNote(note.id));
+    dispatch(deleteNote(note));
   }
 };
 export const createNoteThunk = (note) => async (dispatch) => {
+  console.log("NOTEFLAG",note)
   const response = await fetch(`/api/notes/new`, {
     method: 'POST',
     headers: {
@@ -179,7 +180,7 @@ export default function notesReducer(state = {}, action) {
   switch (action.type) {
     case DELETE_NOTE:
       newState = { ...state };
-      delete newState[action.payload];
+      delete newState[action.payload.id];
       return newState;
     case ADD_NOTE:
       newState = { ...state };
@@ -197,8 +198,8 @@ export default function notesReducer(state = {}, action) {
       newState[noteId1] = {
         ...newState[noteId1],
         symbollist:notesymbols
-      } 
-    
+      }
+
     case ADD_NOTESYMBOL:
       newState = { ...state };
       const { noteId, notesymbol } = action.payload;
@@ -211,7 +212,7 @@ export default function notesReducer(state = {}, action) {
       newState = { ...state }
       const {noteId2, notesymbolId1, notesymbol1} = action.payload;
       newState[noteId2].symbollist[notesymbolId1] = notesymbol1
-      return newState 
+      return newState
     case DELETE_NOTESYMBOL:
       newState = { ...state };
       const { noteeId, notesymbolId } = action.payload
