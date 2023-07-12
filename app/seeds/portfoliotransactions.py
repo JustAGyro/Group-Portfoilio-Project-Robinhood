@@ -22,36 +22,36 @@ def seed_portfoliotransactions():
 
     #User 2 - Marnie
     t6 = PortfolioTransaction(
-    userId=2, transaction='buy', quantity=10, price=100, symbol='ABC'
+        userId=2, transaction='buy', quantity=10, price=95.44,date=date.fromisoformat("2022-11-29"), symbol='GOOG'
     )
     t7 = PortfolioTransaction(
-    userId=2, transaction='buy', quantity=10, price=100, symbol='DEF'
+    userId=2, transaction='buy', quantity=10, price=121.82,date=date.fromisoformat("2022-12-29"), symbol='TSLA'
     )
     t8 = PortfolioTransaction(
-    userId=2, transaction='buy', quantity=10, price=100, symbol='XYZ'
+    userId=2, transaction='buy', quantity=10, price=90.30,date=date.fromisoformat("2023-02-26"), symbol='GOOG'
     )
     t9 = PortfolioTransaction(
-    userId=2, transaction='sell', quantity=5, price=120, symbol='ABC'
+    userId=2, transaction='sell', quantity=5, price=183.25, date=date.fromisoformat("2023-03-20"), symbol='TSLA'
     )
     t10 = PortfolioTransaction(
-    userId=2, transaction='sell', quantity=5, price=150, symbol='DEF'
+    userId=2, transaction='sell', quantity=5, price=101.90, date=date.fromisoformat("2023-03-29"),symbol='GOOG'
     )
 
     #User 3 - Bobbie
     t11 = PortfolioTransaction(
-    userId=3, transaction='buy', quantity=10, price=100, symbol='ABC'
+        userId=3, transaction='buy', quantity=10, price=95.44,date=date.fromisoformat("2022-11-29"), symbol='GOOG'
     )
     t12 = PortfolioTransaction(
-    userId=3, transaction='buy', quantity=10, price=100, symbol='DEF'
+    userId=3, transaction='buy', quantity=10, price=121.82,date=date.fromisoformat("2022-12-29"), symbol='TSLA'
     )
     t13 = PortfolioTransaction(
-    userId=3, transaction='buy', quantity=10, price=100, symbol='XYZ'
+    userId=3, transaction='buy', quantity=10, price=90.30,date=date.fromisoformat("2023-02-26"), symbol='GOOG'
     )
     t14 = PortfolioTransaction(
-    userId=3, transaction='sell', quantity=5, price=120, symbol='ABC'
+    userId=3, transaction='sell', quantity=5, price=183.25, date=date.fromisoformat("2023-03-20"), symbol='TSLA'
     )
     t15 = PortfolioTransaction(
-    userId=3, transaction='sell', quantity=5, price=150, symbol='DEF'
+    userId=3, transaction='sell', quantity=5, price=101.90, date=date.fromisoformat("2023-03-29"),symbol='GOOG'
     )
 
     #Seed database
