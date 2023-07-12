@@ -161,3 +161,22 @@
 .sd-stock-price {
   margin-top: -10px;
 }
+.stc-det-add-to-list-cont {
+  /* background-color: red; */
+  display: flex;
+  margin-top: 10px;
+
+}
+.stc-det-add-to-list {
+  margin: auto;
+  height: 30px;
+  width: 100px;
+  background-color: rgb(25, 163, 29);
+  border-radius: 18px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+}
+

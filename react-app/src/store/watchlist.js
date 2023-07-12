@@ -96,8 +96,7 @@ export const deleteWatchlistThunk = (watchlist) => async (dispatch) => {
   }
 };
 
-export const createSymbollistThunk =
-  (watchlistId, symbollist) => async (dispatch) => {
+export const createSymbollistThunk = (watchlistId, symbollist) => async (dispatch) => {
     const response = await fetch(
       `/api/watchlists/${watchlistId}/symbollist/new`,
       {
