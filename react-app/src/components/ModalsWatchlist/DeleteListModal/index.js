@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./deletelistmodal.css"
 import { deleteWatchlistThunk, getAllWatchlistsThunk, deleteSymbollistThunk } from "../../../store/watchlist";
 import { useDispatch } from "react-redux";
-export default function DeleteWatchListModal({ closeModal, id }) {
+export default function DeleteWatchListModal({ closeModal, id, name, len }) {
     const dispatch = useDispatch()
     const modalRef = useRef(null);
 
@@ -33,12 +33,14 @@ export default function DeleteWatchListModal({ closeModal, id }) {
     return (
         <div id="del-wat-lst-modal-background">
             <div ref={modalRef} id="det-wat-lst-modalContainer">
-                <div className="title">
-                    <h1>Confirm Delete</h1>
+                <div className="wat-lst-del-mod-headr">
+                    <p>Are you sure you want to delete "{name.toUpperCase()}" list ?</p>
+                    {/* <h1>Confirm Delete</h1> */}
                     <button onClick={() => closeModal(false)}> X </button>
                 </div>
-                <div>
-                    <p>Are you sure you want to delete this list</p>
+                <div className="wat-lst-del-mod-bod">
+                    
+                    <p>if you delete this list and its {len} items, it'll be gone forever!</p>
                     <div>
 
                         <button onClick={onDeleteHandle}>yes</button>

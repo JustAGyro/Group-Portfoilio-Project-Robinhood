@@ -82,20 +82,27 @@ def delete_watchlist(id):
 @login_required
 def edit_watchlist(id):
     watchlist = WatchList.query.get(id)
+    if not watchlist:
+        return 'Watchlist not found'
+    data = request.get_json()
+    name = data.get('name')
+    # id = data.get('id')
+    userId = current_user.id
 
     if watchlist:
-        form = WatchListForm()
-        form.name.data=watchlist.name
+        # form = WatchListForm()
+        # form.name.data=watchlist.name
 
-        new_watchlist = WatchList(
-            id=watchlist.id,
-            userId=current_user.id,
-            name=form.name.data
-        )
-        db.session.add(new_watchlist)
+        # new_watchlist = WatchList(
+        #     id=watchlist.id,
+        #     userId=userId,
+        #     name=name
+        # )
+        watchlist.name = name
+        # db.session.add(new_watchlist)
         db.session.commit()
 
-        return jsonify(new_watchlist.to_dict())
+        return jsonify(watchlist.to_dict())
     else:
         return "No Watchlist Found"
 

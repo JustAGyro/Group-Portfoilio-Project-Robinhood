@@ -116,6 +116,20 @@ export const createSymbollistThunk =
     }
   };
 
+export const editListThunk = (id, updatedList) => async (dispatch) => {
+  const response = await fetch(`/api/watchlists/${id}/edit`, {
+    method:'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updatedList)
+  });
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(addWatchlists(data))
+    return data
+  }
+}
 export const deleteSymbollistThunk =
   (watchlistId, symbollistId) => async (dispatch) => {
     const response = await fetch(
