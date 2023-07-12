@@ -11,17 +11,6 @@ def note_test():
     in_route = 'In Route :)'
     return jsonify(in_route)
 
-# GET /api/notes/current
-# Get all notes for the current user
-@note_routes.route('/current')
-@login_required
-def notes():
-    user_id = current_user.id
-    notes = Note.query.join(NoteSymbol).filter(Note.userId == user_id).all()
-    note_list = [note.to_dict() for note in notes]
-
-    return jsonify(note_list)
-
 # GET /api/notes/<id>
 # GET note by note_id
 @note_routes.route('/<id>')
@@ -29,6 +18,28 @@ def notes():
 def note(id):
     note = Note.query.get(1)
     return jsonify(note)
+
+# # GET /api/notes/current
+# # Get all notes for the current user
+# @note_routes.route('/current')
+# @login_required
+# def notes():
+#     user_id = current_user.id
+#     notes = Note.query.join(NoteSymbol).filter(Note.userId == user_id).all()
+#     note_list = [note.to_dict() for note in notes]
+
+#     return jsonify(note_list)
+
+# # GET /api/notes/current
+# # Get all notes for the current user
+# @note_routes.route('/all')
+# @login_required
+# def notes():
+#     notes = Note.query.all()
+#     note_list = [note.to_dict() for note in notes]
+
+#     return jsonify(note_list)
+
 
 # GET /api/notes/current
 # GET all notes for the current user
@@ -40,8 +51,7 @@ def current_notes():
 
     notes = (
         Note.query
-        .join(NoteSymbol)
-        .filter(Note.userId == user_id, NoteSymbol.symbol == stock_symbol)
+        .filter(Note.userId == user_id)
         .all()
     )
 
@@ -55,9 +65,10 @@ def current_notes():
 @login_required
 def add_note():
     form = NoteForm()
+    user_id = current_user.id
 
     new_note = Note(
-        userId=1,
+        userId=user_id,
         subject=form.subject.data,
         entry=form.entry.data
     )
@@ -73,38 +84,40 @@ def add_note():
 def delete_note(id):
     note = Note.query.get(id)
     if not note:
-        return ('note not found')
+        return {'res':'note not found'}
     if current_user.id == note.userId:
         db.session.delete(note)
         db.session.commit()
-        return 'Successfully Deleted Note'
+        return {'res':'success'}
 
 # PUT /api/notes/<id>/edit
 # PUT edit a note
 @note_routes.route('/<id>/edit', methods=['PUT'])
 @login_required
 def edit_note(id):
-    note = Note.query.filter(Note.id == id)
-
+    note = Note.query.get(id)
+    print(note)
     if note:
         form = NoteForm()
-        form.subject.data=note.subject
-        form.entry.data=note.entry
+        # form.subject.data=note.subject
+        # form.entry.data=note.entry
+        note.entry=form.entry.data
+        note.subject=form.subject.data
+        # newNote = Note(
+        #     id=note.id,
+        #     userId=current_user.id,
+        #     subject=form.subject.data,
+        #     # form.data['subject']
+        #     entry=form.entry.data
+        # )
+        # db.session.add(newNote)
 
-        newNote = Note(
-            id=note.id,
-            userId=current_user.id,
-            subject=form.subject.data,
-            # form.data['subject']
-            entry=form.entry.data
-        )
-        db.session.add(newNote)
         db.session.commit()
 
-        return jsonify(newNote.to_dict())
+        return jsonify(note.to_dict())
     else:
         return 'No Note Found'
-    
+
 
 # /api/notes/<id>/notesymbol/new
 # post a new note symbol to a note
@@ -137,7 +150,7 @@ def delete_note_symbol(note_id, notesymbol_id):
         return jsonify(error = 'Symbol not found'), 404
     if note_symbol.noteId != note.id:
         return jsonify(error='Symbol does not belong to the specified note'), 400
-    
+
     db.session.delete(note_symbol)
     db.session.commit()
 
@@ -167,7 +180,7 @@ def edit_note_symbol(note_id, notesymbol_id):
     db.session.commit()
 
     return jsonify(new_symbol)
-    
+
 # GET /api/notes/<note_id>/notesymbol
 # get all the note symbol for a specific note
 @note_routes.route('/<note_id>/notesymbols')
@@ -179,9 +192,3 @@ def get_note_symbols(note_id):
     note_symbols = (NoteSymbol.query.filter(NoteSymbol.noteId == note_id))
     note_symbols_list = [note_symbol.to_dict() for note_symbol in note_symbols]
     return jsonify(note_symbols_list)
-
-    
-
-
-
-

@@ -37,7 +37,6 @@ export default function ShowDashboard() {
             </div>
             <div class="dash-news">
               <div className="dash-news">
-                This is the news
                 <div >
                   <NewsBox />
                 </div>

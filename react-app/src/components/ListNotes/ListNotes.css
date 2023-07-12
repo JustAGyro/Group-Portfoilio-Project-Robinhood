@@ -1,12 +1,32 @@
 .note-subject{
+    font-size: 20px;
     background-color: rgb(20, 20, 20);
 }
 .note-entry{
     background-color: rgb(15, 15, 15);
+    font-size: 20px;
 }
 .note-symbols{
     color: grey;
     font-size: 10px;
+}
+.delete-note{
+    color: white;
+    background-color: red;
+    font-size: 12px;
+    width: 20px;
+    text-align: center;
+}
+.edit-note{
+    color: white;
+    background-color: orange;
+    font-size: 12px;
+    width: 20px;
+    text-align: center;
+}
+.note-options{
+    display: flex;
+
 }
 .note{
     width: 180px;
