@@ -6,7 +6,6 @@ import DetailGraph from '../DetailsGraph';
 import OpenModalButton from '../OpenModalButton';
 import BuyModal from '../BuyModal';
 import SellModal from '../SellModal';
-import { useSelector } from 'react-redux';
 import AddToListModal from '../ModalsWatchlist/AddToListModal';
 
 export default function ShowStockDetail() {
