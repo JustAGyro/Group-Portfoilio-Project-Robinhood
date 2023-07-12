@@ -11,7 +11,7 @@ class PortfolioTransaction(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    transaction = db.Column(db.Enum("buy", "sell"), nullable=False)
+    transaction = db.Column(db.String, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.now().date())
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)

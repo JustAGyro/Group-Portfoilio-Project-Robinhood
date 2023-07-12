@@ -21,6 +21,9 @@ export default function AddToListModal({ closeModal, symbol }) {
             document.removeEventListener("click", handleClickOutside);
         };
     }, [closeModal]);
+    const addToList = () => {
+        
+    }
     return (
         <div id="wat-lst-modal-background">
             <div ref={modalRef} id="wat-lst-modalContainer">
@@ -29,9 +32,24 @@ export default function AddToListModal({ closeModal, symbol }) {
                     <button onClick={() => closeModal(false)}> X </button>
                 </div>
                 <div>
-                    {watchlists.map(ele => (
-                        <div> {ele.name} </div>
-                    ))}
+                    {watchlists.map(element => {
+                        return (
+                            <div>
+
+                                <div> {element.name} </div>
+                                {element['symbols'].map(ele => {
+                                    if (ele.symbol === symbol) {
+                                        return <button>Remove from list</button>
+                                    }
+
+                                })}
+                                {element['symbols'].every(ele => ele.symbol !== symbol) && (
+                                    <button>Add to list</button>
+                                )}
+                            </div>
+
+                        )
+                    })}
                 </div>
                 <div className="footer">
                     <button onClick={() => closeModal(false)}>Save Changes</button>

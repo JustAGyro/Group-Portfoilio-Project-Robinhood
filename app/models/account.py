@@ -10,7 +10,7 @@ class Account(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("users.id")), nullable=False, unique=True)
-    balance = db.Column(db.Float, nullable=False, default=1000.00)
+    balance = db.Column(db.Float, nullable=False, default=150000.00)
 
     user = relationship("User", back_populates="account")
 

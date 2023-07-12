@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import './StockDetail.css';
 import DetailGraph from '../DetailsGraph';
 import OpenModalButton from '../OpenModalButton';
 import BuyModal from '../BuyModal';
+import SellModal from '../SellModal';
+import AddToListModal from '../ModalsWatchlist/AddToListModal';
 
 export default function ShowStockDetail() {
   const { symbol } = useParams();
+  const [addModal, setAddModal] = useState(false);
   const [stockQuote, setStockQuote] = useState({});
   const [stockInfo, setStockInfo] = useState({});
   const [stockNews, setStockNews] = useState([]);
@@ -14,6 +18,31 @@ export default function ShowStockDetail() {
   const [selectedGraphButton, setSelectedGraphButton] = useState('1Y');
   const [graphData, setGraphData] = useState([]);
   const [stockPrice, setStockPrice] = useState({});
+  const [stockOwned, setStockOwned] = useState(0);
+  const ownedStocks = useSelector((state) => Object.values(state.transactions));
+  console.log('Owned Stocks: ', ownedStocks);
+
+  useEffect(() => {
+    let totalStockOwned = 0;
+
+    ownedStocks.forEach((stock) => {
+      if (stock.symbol === symbol) {
+        if (stock.transaction === 'buy') {
+          totalStockOwned += stock.quantity;
+        } else if (stock.transaction === 'sell') {
+          totalStockOwned -= stock.quantity;
+        }
+      }
+    });
+
+    setStockOwned(totalStockOwned);
+  }, [ownedStocks, symbol]);
+
+  console.log(`${symbol} Owned: ${stockOwned}`);
+  console.log(symbol, '----------------------symbol');
+  let watchlists = useSelector((state) => state?.watchlists);
+  watchlists = Object.values(watchlists);
+  console.log(watchlists);
 
   const fetchRealTimePrice = (symbol) => {
     if (symbol) {
@@ -326,11 +355,38 @@ export default function ShowStockDetail() {
                   }
                 />
               </button>
-              <button className="sd-button">Sell {symbol}</button>
+              {stockOwned > 0 && (
+                <button className="sd-button">
+                  <OpenModalButton
+                    buttonText={`Sell ${symbol}`}
+                    modalComponent={
+                      <SellModal
+                        symbol={symbol}
+                        owned={stockOwned}
+                        price={stockPrice.price}
+                      />
+                    }
+                  />
+                </button>
+              )}
             </div>
             <div className="sd-buttons-words-below">
-              Buy and Sell this stock today!
+              <p className="stockowned-amount">
+                Stocks owned of {symbol}: {stockOwned}
+              </p>
             </div>
+            {/* ***** PUT YOUR ADD TO WATCHLIST BUTTON HERE ***** */}
+          </div>
+          <div className="stc-det-add-to-list-cont">
+            <button
+              className="stc-det-add-to-list"
+              onClick={() => setAddModal(true)}
+            >
+              Add To List
+            </button>
+            {addModal && (
+              <AddToListModal closeModal={setAddModal} symbol={symbol} />
+            )}
           </div>
 
           <div class="action-deadspace"></div>
