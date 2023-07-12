@@ -10,6 +10,14 @@ export const getStock = (symbol) => async dispatch => {
         return details;
     }
 }
+export const getStockCurrent = (symbol) => async dispatch => {
+    const response = await fetch(`/api/stocks/stock_price/${symbol}`);
+    if(response.ok){
+        const details = await response.json();
+        console.log(details)
+        return details;
+    }
+}
 export const addStock = (data) => {
     return {
         type: ADD_STOCK,

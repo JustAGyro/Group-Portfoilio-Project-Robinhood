@@ -1,0 +1,8 @@
+.transaction-box{
+    width: 200px;
+    display: flex;
+    padding: 5px;
+    border: solid 1px white;
+    background-color: black;
+    border-radius: 5px;
+}

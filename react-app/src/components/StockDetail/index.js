@@ -6,9 +6,12 @@ import DetailGraph from '../DetailsGraph';
 import OpenModalButton from '../OpenModalButton';
 import BuyModal from '../BuyModal';
 import SellModal from '../SellModal';
+import { useSelector } from 'react-redux';
+import AddToListModal from '../ModalsWatchlist/AddToListModal';
 
 export default function ShowStockDetail() {
   const { symbol } = useParams();
+  const [addModal, setAddModal] = useState(false);
   const [stockQuote, setStockQuote] = useState({});
   const [stockInfo, setStockInfo] = useState({});
   const [stockNews, setStockNews] = useState([]);
@@ -37,6 +40,10 @@ export default function ShowStockDetail() {
   }, [ownedStocks, symbol]);
 
   console.log(`${symbol} Owned: ${stockOwned}`);
+  console.log(symbol, '----------------------symbol');
+  let watchlists = useSelector((state) => state?.watchlists);
+  watchlists = Object.values(watchlists);
+  console.log(watchlists);
 
   const fetchRealTimePrice = (symbol) => {
     if (symbol) {
@@ -370,6 +377,17 @@ export default function ShowStockDetail() {
               </p>
             </div>
             {/* ***** PUT YOUR ADD TO WATCHLIST BUTTON HERE ***** */}
+          </div>
+          <div className="stc-det-add-to-list-cont">
+            <button
+              className="stc-det-add-to-list"
+              onClick={() => setAddModal(true)}
+            >
+              Add To List
+            </button>
+            {addModal && (
+              <AddToListModal closeModal={setAddModal} symbol={symbol} />
+            )}
           </div>
 
           <div class="action-deadspace"></div>

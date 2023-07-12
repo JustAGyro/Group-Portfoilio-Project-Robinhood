@@ -70,7 +70,7 @@ align-items: center;
     
 }
 .fa-ellipsis {
-
+color: white;
 }
 .wat-lst-bod-head-menu {
     display: flex;
@@ -106,6 +106,7 @@ align-items: center;
     border-radius: 4px;
     /* border: 1px solid grey; */
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: black;
 }
 .wat-lst-delete-mod-btn {
     padding: auto;
@@ -115,6 +116,8 @@ align-items: center;
     background: none;
     border: none;
     text-underline-offset: 2px;
+    background-color: black;
+    color: white;
     
     
     /* word-spacing: 6px; */

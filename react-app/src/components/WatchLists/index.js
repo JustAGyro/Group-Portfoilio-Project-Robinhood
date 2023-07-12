@@ -75,6 +75,7 @@ import { useHistory, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import WatchListModal from "../ModalsWatchlist/ShowListModal";
 import DeleteWatchListModal from "../ModalsWatchlist/DeleteListModal";
+import EditListName from "../ModalsWatchlist/EditListModal";
 import { getAllWatchlistsThunk, getOneWatchlistThunk, createWatchlistThunk, deleteWatchlistThunk, createSymbollistThunk, deleteSymbollistThunk } from "../../store/watchlist";
 import WatchlistGraph from "../WatchlistGraphs";
 import './watchlist.css'
@@ -83,6 +84,7 @@ export default function WatchLists() {
     const dispatch = useDispatch()
     const [openModal, setOpenModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
+    const [editListModal, setEditListModal] = useState(false)
     const [selectedWatchlist, setSelectedWatchlist] = useState(null)
     const history = useHistory()
 
@@ -124,19 +126,19 @@ export default function WatchLists() {
                     </div>
                 </div>
                 <div>
-                    {watchlists.map(ele => {
+                    {watchlists.map(element => {
                         return (
                             <div className="wat-lst-pri-cont">
                                 <div className="wat-lst-bod-head">
-                                    <p>{ele['name'].toUpperCase()}</p>
+                                    <p>{element['name'].toUpperCase()}</p>
                                     <div className="wat-lst-bod-head-menu">
-                                        <button className="" onClick={() => handleOptionsClick(ele.id)}> 
+                                        <button className="" onClick={() => handleOptionsClick(element.id)}> 
                                             <i class="fa-solid fa-ellipsis"></i>
                                         </button>
                                         <p><i class="fa-solid fa-sort-down"></i></p>
                                     </div>
                                 </div>
-                                {ele['symbols'].map(ele => {
+                                {element['symbols'].map(ele => {
                                     return (
                                         <div className="wat-lst-bod-bod">
                                             <p>{ele.symbol}</p>
@@ -145,11 +147,15 @@ export default function WatchLists() {
                                     )
                                 })}
                                 {/* Show options for selected watchlist */}
-                                {selectedWatchlist === ele.id && (
+                                {selectedWatchlist === element.id && (
                                     <div className="wat-lst-mod-btn-cont">
                                         <div className="">
                                         <button onClick={() => { setDeleteModal(true) }} className="wat-lst-delete-mod-btn"><i class="fa-solid fa-circle-xmark"></i>Delete list </button>
-                                {deleteModal && <DeleteWatchListModal closeModal={setDeleteModal} id={ele.id} />}
+                                        <button onClick={() => {setEditListModal(true)}}>
+                                            Edit List
+                                        </button>
+                                {deleteModal && <DeleteWatchListModal closeModal={setDeleteModal} id={element.id} name={element.name} len={element['symbols'].length} />}
+                                {editListModal && <EditListName closeModal={setEditListModal} id ={element.id} name = {element.name} />}
                                         </div>
                                     </div>
                                 )}

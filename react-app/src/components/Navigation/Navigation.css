@@ -1,6 +1,7 @@
 .profile-dropdown {
   position: absolute;
   background-color: white;
+  z-index: 1;
 }
 
 .searchbar-dropdown {
@@ -10,7 +11,14 @@
 .hidden {
   display: none;
 }
+.right-bar{
+  display: flex;
+  flex-direction: row;
+  background-color: black;
 
+  align-items: center;
+  justify-content: end;
+}
 .bar {
   display: flex;
   flex-direction: row;
@@ -21,6 +29,7 @@
   left: 0;
   width: 100%;
   align-items: center;
+  justify-content: center;
   height: 40px;
 }
 .bar > div {

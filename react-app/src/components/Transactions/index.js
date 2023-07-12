@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { createTransactionThunk, getAllTransactionsThunk } from "../../store/transactions";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { getStockCurrent } from "../../store/stocks";
+import './Transaction.css'
 
 export default function Transactions() {
     const dispatch = useDispatch()
@@ -35,19 +37,33 @@ export function NewTransaction() {
     const [quantity, setQuantity] = useState(0)
     const [symbol, setSymbol] = useState("")
     const [fin ,setFin] = useState({transaction, quantity, symbol, price})
+    const [disabled, setDisabled] = useState(true)
 
     useEffect(() => {
         setFin({transaction, quantity, symbol, price})
+
     }, [transaction, quantity, symbol, price])
+    useEffect(async () => {
+        let value = await dispatch(getStockCurrent(symbol));
+        if(value){
+            setPrice(value.price)
+            setDisabled(false)
+        }
+        else {
+            setPrice("No such stock")
+            setDisabled(true)
+        }
+    }, [symbol])
     const submit = async (e) => {
         e.preventDefault();
         if(transaction && quantity && symbol && price){
             await dispatch(createTransactionThunk(fin));
+
             history.push(`/transactions`)
         }
     }
     return (
-        <div>
+        <div className="transaction-box">
             <form onSubmit={submit} method="POST" action={'/api/transactions/new'}>
                 <div>
                     <label>
@@ -78,6 +94,7 @@ export function NewTransaction() {
                     </label>
                     <div>
                         <label>
+                            Quantity
                             <input
                             placeholder="1"
                             type="number"
@@ -89,6 +106,7 @@ export function NewTransaction() {
                     </div>
                     <div>
                         <label>
+                            Symbol
                             <input
                             type="text"
                             name="symbol"
@@ -98,18 +116,10 @@ export function NewTransaction() {
                         </label>
                     </div>
                     <div>
-                        <label>
-                            <input
-                            placeholder="1"
-                            type="number"
-                            name="price"
-                            onChange={e => setPrice(e.target.value)}
-                            value={price}
-                            />
-                        </label>
+                        Price: {price}
                     </div>
                     <div>
-                        <button type='submit'> submit </button>
+                        <button type='submit' disabled={disabled}> submit </button>
                     </div>
                 </div>
             </form>
