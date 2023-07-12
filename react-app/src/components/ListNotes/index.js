@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { deleteNoteThunk, getAllNotes, getNoteByIdThunk, updateNoteThunk } from "../../store/notes"
+import { deleteNoteThunk, createNoteThunk, getAllNotes, getNoteByIdThunk, updateNoteThunk } from "../../store/notes"
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './ListNotes.css'
-import { EditNoteModal } from "../NewNotes";
+import NewNoteModal, {EditNoteModal } from "../NewNotes";
 import OpenModalButton from '../OpenModalButton';
 import { useModal } from '../../context/Modal';
 
@@ -21,7 +21,10 @@ export default function ListNotes() {
     },[])
     return (
         <div>
-            <div className="new-note">+</div>
+            <div className="new-note"><OpenModalButton
+                                    buttonText="+"
+                                    modalComponent={<NewNoteModal action={createNoteThunk}/>}
+                                /></div>
             {notes.map(ele => {
                 return (
                     <div className="note">

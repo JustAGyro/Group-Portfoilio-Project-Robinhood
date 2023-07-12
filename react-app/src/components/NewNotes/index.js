@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getNotesThunk, createNoteThunk, updateNoteThunk } from "../../store/notes"
 import { useHistory, useParams } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-export default function NewNote () {
+
+export default function NewNoteModal () {
     const dispatch = useDispatch();
     const history = useHistory()
     const [subject, setSubject] = useState("");
     const [entry, setEntry] = useState("");
     const [note, setNote] = useState({subject, entry})
+    const { closeModal } = useModal();
 
     useEffect(() => {
         setNote({subject, entry})
@@ -17,11 +19,11 @@ export default function NewNote () {
         e.preventDefault();
         if(subject && entry){
             await dispatch(createNoteThunk(note));
-            history.push('/');
+            closeModal();
         }
     }
     return (
-        <div>
+        <div className="modal-box">
             <form onSubmit={submit} method="POST" action={`/api/notes/new`}>
                 <div>
                     <div>
@@ -52,6 +54,7 @@ export default function NewNote () {
                 </div>
                 <div>
                     <button type="submit">Submit</button>
+                    <button onClick={closeModal}>cancel</button>
                 </div>
             </form>
         </div>
@@ -111,6 +114,7 @@ export function EditNoteModal (props) {
                 </div>
                 <div>
                     <button type="submit">Submit</button>
+                    <button onClick={closeModal}>cancel</button>
                 </div>
             </form>
         </div>

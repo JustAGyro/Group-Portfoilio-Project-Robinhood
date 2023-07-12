@@ -5,7 +5,7 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  top: 50px;
+  top: 100px;
   right: 10%;
   width: 15%; /* Adjust the width as per your needs */
   height: 90vh; /* Adjust the height as per your needs */
