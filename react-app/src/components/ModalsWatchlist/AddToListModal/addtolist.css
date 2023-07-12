@@ -1,0 +1,37 @@
+
+
+#modal {
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #wat-lst-modal-background {
+  
+    background-color: rgb(206, 22, 22);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #wat-lst-modalContainer {
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    background-color: green;
+    padding: 25px;
+  }

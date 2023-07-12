@@ -1,0 +1,185 @@
+.sd-container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 0.5fr 2.3fr 0.7fr 0.5fr;
+  gap: 0px 0px;
+  overflow: hidden;
+  background-color: gray;
+  margin-top: 70px;
+  color: white;
+  background-color: black;
+}
+.details {
+  overflow-y: scroll;
+  height: calc(100% - 100px);
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.details-graph {
+  z-index: 0;
+}
+
+.details::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+.details::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.sd-graph-buttons-div {
+  display: flex;
+  gap: 5px;
+}
+
+.sd-graph-button {
+  border: none;
+  background-color: black;
+  color: white;
+  font-weight: bolder;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.sd-graph-button:hover {
+  color: green;
+}
+
+.about-title {
+  border-bottom: 2px solid #1e2124;
+  border-top: 2px solid #1e2124;
+}
+
+.details-info {
+  display: flex;
+  width: 100%;
+  gap: 100px;
+}
+
+.info-item {
+  margin-top: 5px;
+  font-weight: bold;
+  width: 180px;
+}
+.info-item-bottom {
+  margin-top: 5px;
+  width: 180px;
+}
+
+.details-keystats-name {
+  border-bottom: 2px solid #1e2124;
+}
+
+.details-keystats {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  column-gap: 100px;
+  row-gap: 10px;
+  margin-top: 10px;
+}
+
+.details-news {
+  border-bottom: 2px solid #1e2124;
+}
+
+.sd-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.news-card {
+  font-size: small;
+  max-width: 99%;
+  margin-top: 5px;
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.news-card:hover {
+  background-color: #1e2124;
+}
+
+.news-card h4 {
+  margin-top: 1px;
+}
+
+.news-card h2 {
+  margin-top: -10px;
+  font-weight: bolder;
+}
+
+.article-img {
+  display: flex;
+  justify-content: center;
+}
+.article-img-thumbnail {
+  width: 250px;
+}
+
+.action-buttons {
+  display: flex;
+  height: 100px;
+  background-color: #1e2124;
+  border: 2px solid #282d30;
+  border-radius: 4px;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sd-action-buttons-container {
+  display: flex;
+}
+
+.sd-button {
+  height: 50px;
+  width: 150px;
+  margin: 5px;
+  border: 1px solid #282d30;
+  background-color: #1e2124;
+  border-radius: 4px;
+  color: white;
+  font-size: 18px;
+  font-weight: 200;
+}
+
+.sd-button:hover {
+  color: green;
+  font-weight: 200;
+  border: 1px solid darkgreen;
+  cursor: pointer;
+}
+
+.sd-buttons-words-below {
+  margin-top: 5px;
+}
+
+.sd-stock-price {
+  margin-top: -10px;
+}
+
+.stockowned-amount {
+  margin-top: -1px;
+}
+.stc-det-add-to-list-cont {
+  /* background-color: red; */
+  display: flex;
+  margin-top: 10px;
+
+}
+.stc-det-add-to-list {
+  margin: auto;
+  height: 30px;
+  width: 100px;
+  background-color: rgb(25, 163, 29);
+  border-radius: 18px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+}

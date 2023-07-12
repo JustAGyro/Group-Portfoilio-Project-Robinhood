@@ -1,7 +1,68 @@
 .profile-dropdown {
   position: absolute;
+  background-color: white;
+  z-index: 1;
+}
+
+.searchbar-dropdown {
+  position: absolute;
 }
 
 .hidden {
   display: none;
+}
+.right-bar{
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+
+  align-items: center;
+  justify-content: end;
+}
+.bar {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  color: grey;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+.bar > div {
+  margin: 5px;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-link:hover {
+  color: green;
+}
+
+#feather-icon {
+  color: green;
+  height: fit-content;
+  width: 30px;
+}
+
+.account-button {
+  border: none;
+  background-color: black;
+  color: white;
+  height: fit-content;
+}
+
+.account-button:hover {
+  color: green;
+}
+
+#account-icon {
+  width: 30px;
+  height: 30px;
 }
