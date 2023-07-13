@@ -233,7 +233,7 @@ def historical_today(symbol):
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     parsed_data = json.loads(data)[:24]
-    print (parsed_data,'------------this is prsed data')
+    # print (parsed_data,'------------this is prsed data')
     # modified_data = []
     # for items in parsed_data:
     #     date_str = items['date']
@@ -247,7 +247,7 @@ def historical_today(symbol):
     price_and_time_only = [{'time': obj['date'], 'value': obj['close']} for obj in parsed_data]
     # print(price_and_time_only, '---------------before reverse')
     price_and_time_only.reverse()
-    print (price_and_time_only, '-----------this is price and time')
+    # print (price_and_time_only, '-----------this is price and time')
     import datetime
     modified_data = []
     for items in price_and_time_only:
@@ -257,17 +257,5 @@ def historical_today(symbol):
         unix_time = int(date_obj.timestamp())
         modified_item = {"time": unix_time, "value": val}
         modified_data.append(modified_item)
-    print(modified_data)
-    # print ('')
-
-
-
-
-
-
-    # modified_data.reverse()
-    # print(price_and_time_only, '------------------after reverse')
-
-    
     return modified_data
     # return price_and_time_only

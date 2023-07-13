@@ -1,49 +1,72 @@
 
 
-#modal {
-
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  #del-wat-lst-modal-background {
-  
-    background-color: rgba(70, 69, 69, 0.4);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-  }
-  
-  #det-wat-lst-modalContainer {
-    width: 190px;
+  #wat-lst-modalContainer-edit {
+    width: 300px;
     height: 140px;
-    border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #1e2124;
+    border: 2px solid #282d30;
+    border-radius: 2px;
+    
+  }
+  .wat-lst-edit-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .wat-lst-edit-title p {
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+  }
+  .wat-lst-edit-title button {
+    margin-right: 10px;
+    color: white;
+    background:none;
+    border: none;
+  }
+  .wat-lst-edit-form-body {
     display: flex;
     flex-direction: column;
-    background-color: rgb(121, 130, 121);
-    padding: 5px, 5px;
   }
-  .wat-lst-del-mod-headr {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .wat-lst-edit-form-body input {
+    width: 200px;
+    margin: auto;
+    height: 24px;
+    border-radius: 2px;
+    border: none;
+    font-size: 10px;
+    padding-left: 5px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    outline: none;
+    background-color: #282d30;
+    color: white;
   }
-  .wat-lst-del-mod-headr p {
-    font-size: 12px;
+  .wat-lst-edit-form-body input:focus {
+    outline: 1px solid rgb(91, 213, 91);
+    background-color: #1e2124;
+    border: none;
   }
-  .wat-lst-del-mod-bod p {
-   font-size: 9px;
+  
+.wat-lst-edit-form-body input:focus:hover {
+  border: none;
+}
+  .wat-lst-edit-form-body input:hover{
+    border: 1px solid rgb(243, 242, 242);
+  }
+  .wat-lst-edit-form-body button {
+    width: 200px;
+    margin: auto;
+    height: 24px;
+    border-radius: 16px;
+    border: none;
+    background-color: rgb(96, 205, 96);
+    color: white;
+    font-size: 9px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .wat-lst-edit-form-body button:hover {
+    background-color:rgb(68, 163, 68) ;
   }

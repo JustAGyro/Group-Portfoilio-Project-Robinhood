@@ -13,3 +13,10 @@ class SymbolList(db.Model):
     symbol = db.Column(db.String(5))
 
     list = relationship("WatchList", back_populates="symbollists")
+
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'listId':self.listId,
+            'symbol':self.symbol
+        }
