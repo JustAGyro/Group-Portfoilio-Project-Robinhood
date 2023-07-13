@@ -82,3 +82,19 @@ export const DeleteNoteModal = (props) => {
         </div>
     )
 }
+export const EditNoteSymbolsModal = (props) => {
+    let note = props.note;
+    const [noteSymbols, setNoteSymbols] = useState(note.symbols)
+    
+    return (
+        <div className="symbol-box">
+            <div className="symbol-list">
+
+            </div>
+            <div className="add-symbol">
+
+            </div>
+
+        </div>
+    )
+}
