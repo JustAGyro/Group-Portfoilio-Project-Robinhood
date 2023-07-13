@@ -14,7 +14,7 @@ class Note(db.Model):
     entry = db.Column(db.String(2000), nullable=False)
 
     user = relationship("User", back_populates="notes")
-    symbols = relationship("NoteSymbol", back_populates="note")
+    symbols = relationship("NoteSymbol", back_populates="note", cascade="all, delete-orphan")
 
     def to_dict(self):
         symbols1 = [
