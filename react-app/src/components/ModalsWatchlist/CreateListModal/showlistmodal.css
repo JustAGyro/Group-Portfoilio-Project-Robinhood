@@ -1,4 +1,4 @@
-
+/* 
 
 #modal {
 
@@ -24,16 +24,17 @@
   justify-content: center;
   align-items: center;
   z-index: 999;
-}
+} */
 
 #cre-wat-lst-modalContainer {
   width: 300px;
   height: 100px;
   border-radius: 12px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
   display: flex;
   flex-direction: column;
-  background-color: rgb(18, 18, 18);
+  background-color: #1e2124;
+  border: 2px solid #282d30;
   color: white;
   padding: 25px;
 }
@@ -49,7 +50,7 @@
   display: flex;
 }
 .wat-lst-cre-mod-bod input{
-  /* transition: border .5s; */
+ 
   box-sizing: border-box;
   height: 26px;
   border-radius: 4px;
@@ -61,21 +62,20 @@
   
 }
 .wat-lst-cre-mod-bod input::placeholder {
-  /* margin-left: 5px;
-   */
+ 
   padding: 4px;
   font-size: 11px;
 }
-/* .wat-lst-cre-mod-bod input:focus:hover {
+.wat-lst-cre-mod-bod input:focus:hover {
   border: none;
   outline: 1px solid #00ff15;
   background-color: white;
-} */
+}
 
 .wat-lst-cre-mod-bod input:hover {
-  background-color: white;
+  background-color: rgb(212, 211, 211);
   border: 2px solid  #f8f9fa;
-}
+} 
 .wat-lst-cre-mod-bod input:focus {
   border: none;
   outline: 1px solid #00ff15;
@@ -83,12 +83,7 @@
 
 }
 
-
-/* .cre-wat-mod-footer {
-
-} */
 .cre-wat-lst-mod-btns {
-  /* background-color: black; */
   width: 230px;
   margin: auto;
   display: flex;

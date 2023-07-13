@@ -1,46 +1,47 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./editlistmodal.css"
+import { useModal } from "../../../context/Modal";
 import { createWatchlistThunk, editListThunk, getAllWatchlists } from "../../../store/watchlist";
 import { useDispatch, useSelector } from "react-redux";
-export default function EditListName({ closeModal, id, name }) {
+export default function EditListName({ id, name }) {
     const dispatch = useDispatch()
-    const modalRef = useRef(null);
+    const {closeModal} = useModal()
+    // const modalRef = useRef(null);
     const [listName, setListName] = useState(name)
     console.log (listName)
     console.log (id)
     let watchlists = useSelector(state => state?.watchlists)
     watchlists = Object.values(watchlists)
     // console.log(watchlists, '----------------list of watchlists')
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (modalRef.current && !modalRef.current.contains(event.target)) {
-                closeModal(false);
-            }
-        }
+    // useEffect(() => {
+    //     function handleClickOutside(event) {
+    //         if (modalRef.current && !modalRef.current.contains(event.target)) {
+    //             // closeModal();
+    //         }
+    //     }
 
-        document.addEventListener("click", handleClickOutside);
-        return () => {
-            document.removeEventListener("click", handleClickOutside);
-        };
-    }, [closeModal]);
+    //     document.addEventListener("click", handleClickOutside);
+    //     return () => {
+    //         document.removeEventListener("click", handleClickOutside);
+    //     };
+    // }, [closeModal]);
     const submit  = async (e) => {
         e.preventDefault();
         if (listName) await dispatch (editListThunk(id, {
           name: listName
         }))
         // dispatch()
-        closeModal(false)
+        closeModal()
       }
     return (
-        <div id="wat-lst-modal-background">
-            <div ref={modalRef} id="wat-lst-modalContainer">
-                <div className="title">
-                    <h1>Edit List</h1>
-                    <button onClick={() => closeModal(false)}> X </button>
+            <div id="wat-lst-modalContainer-edit">
+                <div className="wat-lst-edit-title">
+                    <p>Edit List</p>
+                    <button className="wat-lst-edit-cancel" onClick={closeModal}> X </button>
                 </div>
-                <div>
+                <div className="wat-lst-edit-form">
                     <form onSubmit={submit} method="PUT" action={`/api/watchlists/${id}/edit`}>
-                        <div>
+                        <div className="wat-lst-edit-form-body">
                     <input value={listName} onChange={(e) => setListName(e.target.value)}/>
 
                     <button type="submit">Save</button>
@@ -49,7 +50,7 @@ export default function EditListName({ closeModal, id, name }) {
                     </form>
                 </div>
             </div>
-        </div>
+        
 
 
     )

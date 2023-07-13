@@ -125,3 +125,45 @@ color: white;
 .fa-circle-xmark {
     margin-right: 8px ;
 }
+.wat-edit-modal-btn {
+    color: white;
+    background-color: black;
+    font-size: 10px;
+    word-spacing: 4px;
+    border: none;
+    /* border-bottom: 1px solid white; */
+    padding: 0;
+}
+.fa-gear {
+    font-size: 10px;
+    margin-left: 4px;
+}
+.wat-edit-modal-btn-txt {
+    font-size: 10px;
+    margin-left: 10px;
+    border-bottom: 1px solid white;
+    transition: .3s;
+}
+.wat-del-mod-btn {
+    color: white;
+    background-color: black;
+    font-size: 10px;
+    word-spacing: 4px;
+    border: none;
+    /* border-bottom: 1px solid white; */
+    padding: 0;
+}
+.fa-xmark {
+    font-size: 12px;
+    margin-left: 4px;
+}
+.wat-edit-modal-btn-txt:hover {
+    color: rgb(93, 209, 93);
+}
+.cre-wat-lst-plus-btn {
+    background-color: black;
+    border: none;
+}
+.fa-plus {
+    color: white;
+}

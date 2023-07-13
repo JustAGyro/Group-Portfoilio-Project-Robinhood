@@ -26,8 +26,9 @@ export default function GraphWatchlist (props) {
 				layout: {
 					background: { type: ColorType.Solid, color: backgroundColor },
 					textColor,
+					// crosshairMarkerVisible:false
 				},
-				width: chartContainerRef.current.clientWidth,
+				// width: chartContainerRef.current.clientWidth,
 				height: 40,
                 width: 50,
                 rightPriceScale: {
@@ -44,6 +45,16 @@ export default function GraphWatchlist (props) {
                         visible: false
                     }
                 },
+				crosshair: {
+					vertLine:{
+						visible:false
+					},
+					horzLine: {
+						visible: false
+					},
+					crosshairMarkerVisible: false
+				},
+				
                 
             
 			});
