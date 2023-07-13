@@ -13,4 +13,3 @@ class NoteSymbol(db.Model):
     symbol = db.Column(db.String(5))
 
     note = relationship("Note", back_populates="symbols")
-
