@@ -29,8 +29,8 @@ def seed():
     seed_accounts()
     seed_notessymbols()
     seed_portfoliotransactions()
-    seed_symbolists()
     seed_watchlists()
+    seed_symbolists()
     # Add other seed functions here
 
 
