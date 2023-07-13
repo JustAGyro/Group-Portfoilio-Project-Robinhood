@@ -169,7 +169,6 @@
   /* background-color: red; */
   display: flex;
   margin-top: 10px;
-
 }
 .stc-det-add-to-list {
   margin: auto;
@@ -180,6 +179,10 @@
   border: none;
   cursor: pointer;
   color: white;
+  font-size: 10px;
+  font-weight: bold;
+}
+.stc-det-add-to-list-cont button {
   font-size: 10px;
   font-weight: bold;
 }

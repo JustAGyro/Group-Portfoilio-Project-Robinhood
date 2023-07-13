@@ -1,45 +1,135 @@
-.note-subject{
-    font-size: 20px;
-    background-color: rgb(51, 51, 51);
-    padding:5px;
+.note-subject {
+  font-size: 20px;
+  background-color: rgb(51, 51, 51);
+  padding: 5px;
 }
-.note-entry{
-    background-color: rgb(19, 19, 19);
-    font-size: 20px;
-    padding:5px;
+.note-entry {
+  background-color: rgb(19, 19, 19);
+  font-size: 15px;
+  height: 100px;
+  padding: 5px;
 }
-.note-symbols{
-    color: grey;
-    font-size: 10px;
-    background-color: rgb(14, 14, 14);
-
+.note-symbols {
+  color: grey;
+  font-size: 15px;
+  background-color: rgb(14, 14, 14);
 }
-.delete-note{
-    color: white;
-    background-color: red;
-    font-size: 12px;
-    width: 25px;
-    text-align: center;
-    border-top-left-radius: 5px;
+.delete-note {
+  color: white;
+  background-color: #1e2124;
+  border: 2px solid #282d30;
+  text-align: center;
+  margin: 2px;
 }
-.edit-note{
-    color: white;
-    background-color: orange;
-    font-size: 12px;
-    width: 25px;
-    text-align: center;
-    border-top-right-radius: 5px;
-}
-.note-options{
-    display: flex;
-
-}
-.note{
-    width: 180px;
-    overflow-wrap: break-word;
+.edit-note {
+  color: white;
+  background-color: #1e2124;
+  border: 2px solid #282d30;
+  font-size: 12px;
+  text-align: center;
+  margin: 2px;
 }
 
-.modal-box{
-    padding: 5px;
-    border-radius: 5px;
+.delete-note:hover {
+  color: green;
+  font-weight: 200;
+  border: 1px solid darkgreen;
+  cursor: pointer;
+}
+
+.edit-note:hover {
+  color: green;
+  font-weight: 200;
+  border: 1px solid darkgreen;
+  cursor: pointer;
+}
+
+.note-options {
+  display: flex;
+}
+
+.note {
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 2px solid #1e2124;
+}
+
+.modal-box {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.deletemain {
+  border: 2px solid #282d30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  padding: 10px;
+  background-color: #1e2124;
+  border-radius: 4px;
+}
+
+.deletemain-buttons {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+#yesbutton {
+  height: 30px;
+  width: 100px;
+  margin: 5px;
+  border: 1px solid #282d30;
+  background-color: #1e2124;
+  border-radius: 4px;
+  color: white;
+  font-size: 18px;
+  font-weight: 200;
+}
+
+#nobutton {
+  height: 30px;
+  width: 100px;
+  margin: 5px;
+  border: 1px solid #282d30;
+  background-color: #1e2124;
+  border-radius: 4px;
+  color: white;
+  font-size: 18px;
+  font-weight: 200;
+}
+
+#yesbutton:hover {
+  color: green;
+  font-weight: 200;
+  border: 1px solid darkgreen;
+  cursor: pointer;
+}
+
+#nobutton:hover {
+  color: green;
+  font-weight: 200;
+  border: 1px solid darkgreen;
+  cursor: pointer;
+}
+
+.add-note {
+  color: white;
+  background-color: #1e2124;
+  border: 2px solid #282d30;
+  text-align: center;
+  margin: 2px;
+  width: 150px;
+}
+
+.add-note:hover {
+  color: green;
+  font-weight: 200;
+  border: 1px solid darkgreen;
+  cursor: pointer;
+}
+
+.related-stocks-h4 {
+  margin-bottom: 5px;
 }

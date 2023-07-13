@@ -1,35 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./addtolist.css"
-import { createWatchlistThunk, getAllWatchlists } from "../../../store/watchlist";
+import { createWatchlistThunk, getAllWatchlistsThunk } from "../../../store/watchlist";
+import { createSymbollistThunk, deleteSymbollistThunk } from "../../../store/watchlist";
+
+import { useModal } from "../../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
-export default function AddToListModal({ closeModal, symbol }) {
+export default function AddToListModal({ symbol }) {
     const dispatch = useDispatch()
     const modalRef = useRef(null);
+    const {closeModal} = useModal()
     let watchlists = useSelector(state => state?.watchlists)
     watchlists = Object.values(watchlists)
-    console.log(watchlists, '----------------list of watchlists')
-    useEffect(() => {
-        // below function is listner for click if click is outside the refrence it will close the modal
-        function handleClickOutside(event) {
-            if (modalRef.current && !modalRef.current.contains(event.target)) {
-                closeModal(false);
-            }
-        }
-
-        document.addEventListener("click", handleClickOutside);
-        return () => {
-            document.removeEventListener("click", handleClickOutside);
-        };
-    }, [closeModal]);
-    const addToList = () => {
-        
+    const addToList = async (listId, listSymbol) => {
+        // setSymbolToAdd(listSymbol)
+        // if (symbolToAdd)
+        await dispatch(createSymbollistThunk(listId, listSymbol))
+        await dispatch(getAllWatchlistsThunk())
+        closeModal()
+    }
+    const removeFromList = async (listId, symbolListId) => {
+        await dispatch(deleteSymbollistThunk(listId, symbolListId))
+        await dispatch(getAllWatchlistsThunk())
+        closeModal()
     }
     return (
-        <div id="wat-lst-modal-background">
+        <div>
+            
             <div ref={modalRef} id="wat-lst-modalContainer">
                 <div className="title">
                     <h1>Add {symbol} to Your Lists</h1>
-                    <button onClick={() => closeModal(false)}> X </button>
+                    <button onClick={() => closeModal()}> X </button>
                 </div>
                 <div>
                     {watchlists.map(element => {
@@ -39,12 +39,12 @@ export default function AddToListModal({ closeModal, symbol }) {
                                 <div> {element.name} </div>
                                 {element['symbols'].map(ele => {
                                     if (ele.symbol === symbol) {
-                                        return <button>Remove from list</button>
+                                        return <button onClick={() => removeFromList(element.id, ele.id)}>Remove from list</button>
                                     }
 
                                 })}
                                 {element['symbols'].every(ele => ele.symbol !== symbol) && (
-                                    <button>Add to list</button>
+                                    <button onClick={() => addToList(element.id, symbol)}>add to list</button>
                                 )}
                             </div>
 
@@ -52,7 +52,7 @@ export default function AddToListModal({ closeModal, symbol }) {
                     })}
                 </div>
                 <div className="footer">
-                    <button onClick={() => closeModal(false)}>Save Changes</button>
+                    <button onClick={() => closeModal()}>Save Changes</button>
                     {/* <button>Create List</button> */}
                 </div>
             </div>

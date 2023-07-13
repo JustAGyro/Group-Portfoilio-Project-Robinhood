@@ -1,11 +1,12 @@
 .open-modal-button-master {
-  background-color: none;
+  /* background-color: #1e2124; */
   border: none;
-  background: none;
+  /* background: #1e2124; */
   color: white;
   font-size: large;
   height: 100%;
   width: 100%;
+  background: transparent;
 }
 
 .open-modal-button-master:hover {

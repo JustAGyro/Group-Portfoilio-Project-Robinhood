@@ -1,0 +1,30 @@
+.movers-card {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  border: 2px solid #1e2124;
+  gap: 15px;
+  padding: 10px;
+}
+
+.movers-div-for-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.movers-info {
+  font-size: 30px;
+  font-weight: bolder;
+  margin-bottom: 20px;
+}
+
+.movers-info-change {
+  font-weight: bolder;
+}
+
+.movers-card:hover {
+  background-color: #1e2124;
+}

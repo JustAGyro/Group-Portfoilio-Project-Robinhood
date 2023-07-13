@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import './StockDetail.css';
 import DetailGraph from '../DetailsGraph';
@@ -7,9 +7,11 @@ import OpenModalButton from '../OpenModalButton';
 import BuyModal from '../BuyModal';
 import SellModal from '../SellModal';
 import AddToListModal from '../ModalsWatchlist/AddToListModal';
+import {getAllWatchlistsThunk } from '../../store/watchlist';
 
 export default function ShowStockDetail() {
   const { symbol } = useParams();
+  const dispatch = useDispatch()
   const [addModal, setAddModal] = useState(false);
   const [stockQuote, setStockQuote] = useState({});
   const [stockInfo, setStockInfo] = useState({});
@@ -40,9 +42,7 @@ export default function ShowStockDetail() {
 
   console.log(`${symbol} Owned: ${stockOwned}`);
   console.log(symbol, '----------------------symbol');
-  let watchlists = useSelector((state) => state?.watchlists);
-  watchlists = Object.values(watchlists);
-  console.log(watchlists);
+  
 
   const fetchRealTimePrice = (symbol) => {
     if (symbol) {
@@ -378,15 +378,15 @@ export default function ShowStockDetail() {
             {/* ***** PUT YOUR ADD TO WATCHLIST BUTTON HERE ***** */}
           </div>
           <div className="stc-det-add-to-list-cont">
-            <button
-              className="stc-det-add-to-list"
-              onClick={() => setAddModal(true)}
-            >
-              Add To List
+            <button className="stc-det-add-to-list">
+              <OpenModalButton
+                buttonText={'Add to List'}
+                modalComponent={
+                  <AddToListModal symbol={symbol}/>
+                }
+              />
             </button>
-            {addModal && (
-              <AddToListModal closeModal={setAddModal} symbol={symbol} />
-            )}
+            
           </div>
 
           <div class="action-deadspace"></div>

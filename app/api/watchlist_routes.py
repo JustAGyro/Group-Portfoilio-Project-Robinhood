@@ -115,14 +115,17 @@ def add_symbollist(id):
     if not watchlist:
         return jsonify(error='Watchlist not found'), 404
 
-    form = SymbolListForm()
+    # form = SymbolListForm()
+    data = request.get_json()
+    symbol = data.get('symbol')
     new_symbollist = SymbolList(
         listId = id,
-        symbol = form.symbol.data
+        symbol = symbol
     )
 
     db.session.add(new_symbollist)
     db.session.commit()
+    print(new_symbollist.to_dict(), '---------------------------------------')
 
     return jsonify(new_symbollist.to_dict())
 
