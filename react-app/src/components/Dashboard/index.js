@@ -6,6 +6,7 @@ import Portfolio from '../Portfolio';
 import WatchLists from '../WatchLists';
 import { NewTransaction } from '../Transactions';
 import ListNotes from '../ListNotes';
+
 export default function ShowDashboard() {
   return (
     <div class="dash-container">
