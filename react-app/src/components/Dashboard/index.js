@@ -18,7 +18,14 @@ export default function ShowDashboard() {
         <div class="dash-movers">
           <Movers />
         </div>
+        <div className="dash-notes-div">
+          <h3>My notes</h3>
+          <div class="note-list">
+            <ListNotes />
+          </div>
+        </div>
         <div class="dash-news">
+          <h3>News</h3>
           <div className="dash-news">
             <div>
               <NewsBox />
@@ -33,11 +40,7 @@ export default function ShowDashboard() {
         <div class="stock-watchlist">
           <WatchLists />
         </div>
-        <div class="note-list">
-          <ListNotes />
-        </div>
       </div>
-
       <div class="right-gutter"></div>
     </div>
   );

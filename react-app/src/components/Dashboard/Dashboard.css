@@ -22,17 +22,11 @@
 }
 .dash-movers {
   margin-top: 10px;
+  border-bottom: 2px solid #1e2124;
 }
 
 .dash-news {
-  grid-column: 2;
-  grid-row: 4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-img {
-  max-width: 500px;
+  border-top: 2px solid #1e2124;
+  margin-top: 10px;
+  padding-top: 10px;
 }
