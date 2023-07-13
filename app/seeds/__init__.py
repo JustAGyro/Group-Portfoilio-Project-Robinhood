@@ -42,6 +42,6 @@ def undo():
     undo_accounts()
     undo_notesymbols()
     undo_portfoliotransaction()
-    undo_symbollists()
     undo_watchlists()
+    undo_symbollists()
     # Add other undo functions here
