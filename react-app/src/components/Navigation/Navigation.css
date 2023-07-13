@@ -11,7 +11,7 @@
 .hidden {
   display: none;
 }
-.right-bar{
+.right-bar {
   display: flex;
   flex-direction: row;
   background-color: black;
@@ -31,6 +31,7 @@
   align-items: center;
   justify-content: center;
   height: 40px;
+  z-index: 1;
 }
 .bar > div {
   margin: 5px;
