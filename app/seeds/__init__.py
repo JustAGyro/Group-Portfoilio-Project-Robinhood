@@ -29,8 +29,8 @@ def seed():
     seed_accounts()
     seed_notessymbols()
     seed_portfoliotransactions()
-    seed_symbolists()
     seed_watchlists()
+    seed_symbolists()
     # Add other seed functions here
 
 
@@ -42,6 +42,6 @@ def undo():
     undo_accounts()
     undo_notesymbols()
     undo_portfoliotransaction()
-    undo_symbollists()
     undo_watchlists()
+    undo_symbollists()
     # Add other undo functions here

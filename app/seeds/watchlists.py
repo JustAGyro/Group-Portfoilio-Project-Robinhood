@@ -4,8 +4,8 @@ def seed_watchlists():
     watchlist_usr1 = WatchList(name = 'my_list', userId = 1)
     watchlist_usr1_list2 = WatchList(name = 'newList', userId = 1)
     watchlist_usr2 = WatchList(name = 'watch_usr_2', userId = 2)
-
     watchlist_usr3 = WatchList(name = 'watch_usr_3', userId = 3)
+
     db.session.add(watchlist_usr1)
     db.session.add(watchlist_usr1_list2)
     db.session.add(watchlist_usr2)
