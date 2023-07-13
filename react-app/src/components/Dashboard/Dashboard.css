@@ -1,88 +1,30 @@
-  .dash-container {
-  margin-top: 50px;
-}
-.fixed-bar{
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  top: 100px;
-  right: 10%;
-  width: 15%; /* Adjust the width as per your needs */
-  height: 90vh; /* Adjust the height as per your needs */
-  background-color: black;
-  padding: 20px;
-  overflow-y: scroll;
-}
-.transaction-form{
-  max-width: 10%; /* Adjust the width as per your needs */
-  height: 100vh; /* Adjust the height as per your needs */
-  background-color: black;
-}
-.stock-watchlist {
-  width: 200px; /* Adjust the width as per your needs */
-  height: 100vh; /* Adjust the height as per your needs */
-  background-color: black;
-}
-.note-list{
-  width: 10%; /* Adjust the width as per your needs */
-  height: 100vh; /* Adjust the height as per your needs */
-  background-color: black;
-  padding: 20px;
-}
-.content {
+.dash-container {
   display: grid;
-  grid-template-columns: 0.5fr 2.1fr 0.9fr 0.5fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  height: 100vh;
+  grid-template-columns: 0.5fr 2.3fr 0.7fr 0.5fr;
   gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-  'left-gutter dashboard stock-buysell right-gutter'
-  'left-gutter dash-portfolio stock-watchlist right-gutter';
-  grid-area: content;
-  min-height: 0; /* Add this to allow content overflow */
-  overflow: hidden; /* Hide overflowing content */
-}
-
-
-.right-gutter {
-  grid-area: right-gutter;
-}
-
-.left-gutter {
-  grid-area: left-gutter;
-}
-
-.dashboard {
-  display: flex;
-  flex-direction: column;
-  grid-area: dashboard;
-  align-items: center;
-  height: 100%; /* Occupy full height of the parent */
-  overflow-y: auto; /* Enable vertical scrolling */
-  max-width: 100%;
-  text-align: center;
-}
-.dash-portfolio{
-  display: block;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width:800px;
-}
-.dash-movers{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.movers-card{
-  width: 300px;
-  margin: 5px;
-  border: solid 2px white;
+  overflow: hidden;
+  background-color: gray;
+  margin-top: 70px;
+  color: white;
   background-color: black;
-  border-radius: 20px;
 }
-.dash-news{
+.dashboard {
+  overflow-y: scroll;
+  height: calc(100% - 100px);
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.dash-portfolio {
+  padding-bottom: 20px;
+  border-bottom: 2px solid #1e2124;
+}
+.dash-movers {
+  margin-top: 10px;
+}
+
+.dash-news {
   grid-column: 2;
   grid-row: 4;
   display: flex;
