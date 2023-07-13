@@ -39,7 +39,7 @@ function ProfileButton({ user }) {
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <>
+    <div>
       <button className="account-button" onClick={openMenu}>
         <MdOutlineAccountCircle id="account-icon" />
       </button>
@@ -68,7 +68,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
-    </>
+    </div>
   );
 }
 
