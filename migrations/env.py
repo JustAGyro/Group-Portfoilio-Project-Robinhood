@@ -111,9 +111,6 @@ def run_migrations_online():
                 context.execute(f"SET search_path TO {SCHEMA}")
             context.run_migrations()
 
-        with context.begin_transaction():
-            context.run_migrations()
-
 
 if context.is_offline_mode():
     run_migrations_offline()
