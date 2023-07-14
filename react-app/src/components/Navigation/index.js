@@ -16,44 +16,11 @@ function Navigation({ isLoaded }) {
           <GiFeather id="feather-icon" />
         </NavLink>
       </div>
-      <div>
-        <NavLink className="navbar-link" exact to="/notes">
-          Notes
-        </NavLink>
-      </div>
-      <div>
-        <NavLink className="navbar-link" exact to="/notes/new">
-          New Note
-        </NavLink>
-      </div>
-      <div>
-        <NavLink className="navbar-link" to="/stockapi">
-          Stock Graph
-        </NavLink>
-      </div>
-      <div>
-        <NavLink className="navbar-link" exact to="/transactions">
-          Transactions
-        </NavLink>
-      </div>
-      <div>
-        <NavLink className="navbar-link" exact to="/transactions/new">
-          New Transaction
-        </NavLink>
-      </div>
-      <div>
-        <NavLink className="navbar-link" exact to="/account">
-          Account Balance
-        </NavLink>
-      </div>
-      <div className="search-div">
-        <SearchBar />
-      </div>
-      <div>
-        <NavLink className="navbar-link" exact to="/watchlists">
-          Watchlists
-        </NavLink>
-      </div>
+      {sessionUser && (
+        <div className="search-div">
+          <SearchBar />
+        </div>
+      )}
       {isLoaded && (
         <div>
           <ProfileButton user={sessionUser} />

@@ -20,10 +20,14 @@ import SearchBar from './components/SearchBar';
 import StockDetail from './components/StockDetail';
 import WatchLists from './components/WatchLists';
 import WatchlistGraph from './components/WatchlistGraphs';
+import Homepage from './components/Homepage';
+import { useSelector } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const sessionUser = useSelector((state) => state.session.user);
+
   useEffect(() => {
     dispatch(getAccountInfo());
     dispatch(getAllNotes());
@@ -31,57 +35,56 @@ function App() {
     dispatch(getAllWatchlistsThunk());
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
-
   return (
     <div>
       <Navigation isLoaded={isLoaded} />
       <div id="full-page">
         {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <Dashboard />
-          </Route>
-          <Route exact path="/stocks/:symbol">
-            <StockDetail />
-          </Route>
-          <Route exact path="/stockapi">
-            <StockApi />
-          </Route>
-          <Route exact path="/transactions">
-            <Transactions />
-          </Route>
-          <Route path="/transactions/new">
-            <NewTransaction />
-          </Route>
-          <Route path="/account">
-            <Account />
-          </Route>
-          <Route exact path="/notes">
-            <ListNotes />
-          </Route>
-          <Route path="/notes/new">
-            <NewNotes />
-          </Route>
-          <Route path="/notes/:id/edit">
-            <EditNotes />
-          </Route>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route path="/search">
-            <SearchBar />
-          </Route>
-          <Route path = "/watchlists">
-            <WatchLists />
-          </Route>
-          <Route exact path = "/justatest">
-          <WatchlistGraph />
-          </Route>
-        </Switch>
-      )}
+          <Switch>
+            <Route exact path="/">
+              {sessionUser ? <Dashboard /> : <Homepage />}
+            </Route>
+            <Route exact path="/stocks/:symbol">
+              <StockDetail />
+            </Route>
+            <Route exact path="/stockapi">
+              <StockApi />
+            </Route>
+            <Route exact path="/transactions">
+              <Transactions />
+            </Route>
+            <Route path="/transactions/new">
+              <NewTransaction />
+            </Route>
+            <Route path="/account">
+              <Account />
+            </Route>
+            <Route exact path="/notes">
+              <ListNotes />
+            </Route>
+            <Route path="/notes/new">
+              <NewNotes />
+            </Route>
+            <Route path="/notes/:id/edit">
+              <EditNotes />
+            </Route>
+            <Route path="/login">
+              <LoginFormPage />
+            </Route>
+            <Route path="/signup">
+              <SignupFormPage />
+            </Route>
+            <Route path="/search">
+              <SearchBar />
+            </Route>
+            <Route path="/watchlists">
+              <WatchLists />
+            </Route>
+            <Route exact path="/justatest">
+              <WatchlistGraph />
+            </Route>
+          </Switch>
+        )}
       </div>
     </div>
   );

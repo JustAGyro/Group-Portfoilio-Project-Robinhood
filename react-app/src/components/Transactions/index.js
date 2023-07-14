@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { createTransactionThunk, getAllTransactionsThunk } from "../../store/transactions";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+
+import { updateAccountInfo, getAccountInfo } from '../../store/account';
 import { getStockCurrent } from "../../store/stocks";
+import OpenModalButton from '../OpenModalButton';
+import { useModal } from '../../context/Modal';
 import './Transaction.css'
 
 export default function Transactions() {
@@ -38,11 +41,43 @@ export function NewTransaction() {
     const [symbol, setSymbol] = useState("")
     const [fin ,setFin] = useState({transaction, quantity, symbol, price})
     const [disabled, setDisabled] = useState(true)
+    const [priceErr, setPriceErr] = useState(false)
+    const [errMsg, setErrMsg] = useState("")
+
+    const acctBalance = useSelector((state) => state.account.info.balance);
+    const userId = useSelector((state) => state.session.user.id);
+
+    const [stockOwned, setStockOwned] = useState(0);
+    let balance = useSelector(state => state?.account?.info?.balance)
+    const ownedStocks = useSelector((state) => Object.values(state.transactions));
+    console.log('Owned Stocks: ', ownedStocks);
+
+    useEffect(() => {
+        let totalStockOwned = 0;
+
+        ownedStocks.forEach((stock) => {
+        if (stock.symbol === symbol) {
+            if (stock.transaction === 'buy') {
+            totalStockOwned += stock.quantity;
+            } else if (stock.transaction === 'sell') {
+            totalStockOwned -= stock.quantity;
+            }
+        }
+        });
+
+        setStockOwned(totalStockOwned);
+    }, [ownedStocks, symbol]);
 
     useEffect(() => {
         setFin({transaction, quantity, symbol, price})
-
+        if(transaction == 'buy'){
+            setPriceErr(quantity * price >= balance)
+            setErrMsg("the cost of this transaction exceeds your balance")}
+        else if(transaction == 'sell'){
+            setPriceErr(quantity >= stockOwned)
+            setErrMsg("You do not own that many stocks of this type")}
     }, [transaction, quantity, symbol, price])
+
     useEffect(async () => {
         let value = await dispatch(getStockCurrent(symbol));
         if(value){
@@ -56,10 +91,36 @@ export function NewTransaction() {
     }, [symbol])
     const submit = async (e) => {
         e.preventDefault();
-        if(transaction && quantity && symbol && price){
-            await dispatch(createTransactionThunk(fin));
 
-            history.push(`/transactions`)
+        if(transaction && quantity >= 1 && symbol && price){
+            const transactionAmount = quantity * price;
+            const newBalance = acctBalance - transactionAmount;
+            const balancePayload = {
+            balance: newBalance,
+            };
+            if(transaction == 'buy'){
+                if(quantity * price <= balance){
+                    await dispatch(createTransactionThunk(fin));
+                    const newBalance = acctBalance - transactionAmount;
+                    const balancePayload = {
+                    balance: newBalance,
+                    };
+                    dispatch(updateAccountInfo(userId, balancePayload));
+                }
+
+            }
+            else if(transaction == 'sell'){
+                if(stockOwned >= quantity){
+                    await dispatch(createTransactionThunk(fin));
+                    const newBalance = acctBalance + transactionAmount;
+                    const balancePayload = {
+                    balance: newBalance,
+                    };
+                    dispatch(updateAccountInfo(userId, balancePayload));
+                }
+            }
+
+
         }
     }
     return (
@@ -119,7 +180,8 @@ export function NewTransaction() {
                         Price: {price}
                     </div>
                     <div>
-                        <button type='submit' disabled={disabled}> submit </button>
+                    {priceErr ? <OpenModalButton buttonText="Submit" modalComponent={<PriceErrorModal err={errMsg}/>}/> :
+                    <button type='submit' disabled={disabled} className="open-modal-button-master">submit</button>}
                     </div>
                 </div>
             </form>
@@ -128,3 +190,19 @@ export function NewTransaction() {
         </div>
     )
 }
+export const PriceErrorModal = (props) => {
+    const { closeModal } = useModal();
+    const {err} = props
+    const history = useHistory();
+    return (
+      <div className="deletemain">
+        <h3>{err}</h3>
+        <div className="deletemain-buttons">
+
+          <button id="nobutton" onClick={() => closeModal()}>
+            OK
+          </button>
+        </div>
+      </div>
+    );
+  };
