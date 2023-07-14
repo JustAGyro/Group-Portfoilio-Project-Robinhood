@@ -8,6 +8,7 @@ import { NewTransaction } from '../Transactions';
 import ListNotes from '../ListNotes';
 
 export default function ShowDashboard() {
+
   return (
     <div class="dash-container">
       <div class="left-gutter"></div>
