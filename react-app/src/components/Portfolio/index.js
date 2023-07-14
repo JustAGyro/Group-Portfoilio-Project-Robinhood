@@ -198,7 +198,7 @@ export default function Portfolio() {
   );
 }
 // groupby function to group an array(arr) of objects by category(groups is an array of keys)
-function groupBy(arr, groups) {
+export function groupBy(arr, groups) {
   let grouped = {};
   // a is the object getting grouped from the array (arr)
   arr.forEach((a) => {
