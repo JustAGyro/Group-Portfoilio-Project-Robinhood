@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { createTransactionThunk, getAllTransactionsThunk } from "../../store/transactions";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+
+import { updateAccountInfo, getAccountInfo } from '../../store/account';
 import { getStockCurrent } from "../../store/stocks";
 import OpenModalButton from '../OpenModalButton';
 import { useModal } from '../../context/Modal';
-import { groupBy } from "../Portfolio";
 import './Transaction.css'
 
 export default function Transactions() {
@@ -43,6 +43,9 @@ export function NewTransaction() {
     const [disabled, setDisabled] = useState(true)
     const [priceErr, setPriceErr] = useState(false)
     const [errMsg, setErrMsg] = useState("")
+
+    const acctBalance = useSelector((state) => state.account.info.balance);
+    const userId = useSelector((state) => state.session.user.id);
 
     const [stockOwned, setStockOwned] = useState(0);
     let balance = useSelector(state => state?.account?.info?.balance)
@@ -88,12 +91,33 @@ export function NewTransaction() {
     }, [symbol])
     const submit = async (e) => {
         e.preventDefault();
-        if(transaction && quantity && symbol && price){
+
+        if(transaction && quantity >= 1 && symbol && price){
+            const transactionAmount = quantity * price;
+            const newBalance = acctBalance - transactionAmount;
+            const balancePayload = {
+            balance: newBalance,
+            };
             if(transaction == 'buy'){
-                if(quantity * price <= balance){await dispatch(createTransactionThunk(fin));}
+                if(quantity * price <= balance){
+                    await dispatch(createTransactionThunk(fin));
+                    const newBalance = acctBalance - transactionAmount;
+                    const balancePayload = {
+                    balance: newBalance,
+                    };
+                    dispatch(updateAccountInfo(userId, balancePayload));
+                }
+
             }
             else if(transaction == 'sell'){
-                if(stockOwned >= quantity){await dispatch(createTransactionThunk(fin));}
+                if(stockOwned >= quantity){
+                    await dispatch(createTransactionThunk(fin));
+                    const newBalance = acctBalance + transactionAmount;
+                    const balancePayload = {
+                    balance: newBalance,
+                    };
+                    dispatch(updateAccountInfo(userId, balancePayload));
+                }
             }
 
 
