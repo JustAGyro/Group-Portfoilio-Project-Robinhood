@@ -7,6 +7,15 @@ export default function SearchBar() {
   const [input, setInput] = useState('');
   const [results, setResults] = useState([]);
   const dropdownRef = useRef(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (input.length > 2 && results.length < 1) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  }, [input]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -14,6 +23,12 @@ export default function SearchBar() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      window.alert('Please select an item from the dropdown');
+    }
+  };
 
   const fetchData = (value) => {
     if (value) {
@@ -48,12 +63,16 @@ export default function SearchBar() {
           className="searchbar-input"
           placeholder="Search"
           value={input}
+          onKeyPress={handleKeyPress}
           onChange={(e) => handleChange(e.target.value)}
         />
       </div>
       {results.length > 0 && (
         <div className="results-dropdown-menu" ref={dropdownRef}>
           <ul className="results-list">
+            {error && (
+              <li>We were unable to find any results for your search.</li>
+            )}
             {results.map((result) => (
               <li key={result.symbol}>
                 <Link

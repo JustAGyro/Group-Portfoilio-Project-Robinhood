@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { groupBy } from '../Portfolio'
+import { groupBy } from '../Portfolio';
 import {
   createTransactionThunk,
   getAllTransactionsThunk,
@@ -16,10 +16,10 @@ import './Transaction.css';
 export default function Transactions() {
   const dispatch = useDispatch();
   let transactions = useSelector((state) => state?.transactions);
-  let account = useSelector(state => state.account.info.balance)
-  let trans = Object.values(transactions)
-  let transInv = groupBy(trans, ['symbol', 'transaction'])
-  let transKeys = Object.keys(transInv)
+  let account = useSelector((state) => state.account.info.balance);
+  let trans = Object.values(transactions);
+  let transInv = groupBy(trans, ['symbol', 'transaction']);
+  let transKeys = Object.keys(transInv);
   useEffect(() => {
     dispatch(getAllTransactionsThunk());
   }, []);
@@ -30,21 +30,15 @@ export default function Transactions() {
       <div>
         Owned Stocks
         <ul>
-          {transKeys.map(ele => {
-            let total = 0
-            transInv[ele].buy?.forEach(e => total += e.quantity)
-            transInv[ele].sell?.forEach(e => total -= e.quantity)
-            return(
-              <li key={ele}>
-                {`${ele} : ${total}`}
-              </li>
-            )
+          {transKeys.map((ele) => {
+            let total = 0;
+            transInv[ele].buy?.forEach((e) => (total += e.quantity));
+            transInv[ele].sell?.forEach((e) => (total -= e.quantity));
+            return <li key={ele}>{`${ele} : ${total}`}</li>;
           })}
         </ul>
       </div>
-
     </div>
-
   );
 }
 export function NewTransaction() {
