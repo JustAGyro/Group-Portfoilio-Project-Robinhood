@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
-    <nav class="bar">
+    <nav className="bar">
       <div>
         <NavLink className="navbar-link" exact to="/">
           <GiFeather id="feather-icon" />

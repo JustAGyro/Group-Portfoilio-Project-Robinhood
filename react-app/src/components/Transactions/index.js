@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { groupBy } from '../Portfolio'
 import {
   createTransactionThunk,
   getAllTransactionsThunk,
@@ -15,20 +16,29 @@ import './Transaction.css';
 export default function Transactions() {
   const dispatch = useDispatch();
   let transactions = useSelector((state) => state?.transactions);
-  transactions = Object.values(transactions).map((obj) => {
-    return Object.values(obj);
-  });
-
+  let trans = Object.values(transactions)
+  let transInv = groupBy(trans, ['symbol', 'transaction'])
+  let transKeys = Object.keys(transInv)
   useEffect(() => {
     dispatch(getAllTransactionsThunk());
   }, []);
 
   return (
-    <div>
-      {transactions.map((arr) => {
-        return <div>{`${arr}`}</div>;
-      })}
+    <div className="stock-inventory">
+      <ul>
+        {transKeys.map(ele => {
+          let total = 0
+          transInv[ele].buy?.forEach(e => total += e.quantity)
+          transInv[ele].sell?.forEach(e => total -= e.quantity)
+          return(
+            <li key={ele}>
+              {`${ele} : ${total}`}
+            </li>
+          )
+        })}
+      </ul>
     </div>
+
   );
 }
 export function NewTransaction() {
