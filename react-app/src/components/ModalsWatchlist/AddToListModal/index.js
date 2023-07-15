@@ -27,34 +27,33 @@ export default function AddToListModal({ symbol }) {
         <div>
             
             <div ref={modalRef} id="wat-lst-modalContainer">
-                <div className="title">
-                    <h1>Add {symbol} to Your Lists</h1>
+                <div className="add-list-header">
+                    <p>Add {symbol} to Your Lists</p>
                     <button onClick={() => closeModal()}> X </button>
                 </div>
-                <div>
+                <div className="add-list-mod-bod">
                     {watchlists.map(element => {
                         return (
-                            <div>
+                            <div className="add-list-mod-bod-content">
 
-                                <div> {element.name} </div>
+                                <p><i class="fa-solid fa-bolt"></i>  {element.name} </p>
                                 {element['symbols'].map(ele => {
                                     if (ele.symbol === symbol) {
-                                        return <button onClick={() => removeFromList(element.id, ele.id)}>Remove from list</button>
+                                        return <button className="add-list-mod-rem" onClick={() => removeFromList(element.id, ele.id)}>Remove from list</button>
                                     }
 
                                 })}
                                 {element['symbols'].every(ele => ele.symbol !== symbol) && (
-                                    <button onClick={() => addToList(element.id, symbol)}>add to list</button>
+                                    <button className="add-list-mod-add" onClick={() => addToList(element.id, symbol)}>Add to list</button>
                                 )}
                             </div>
 
                         )
                     })}
                 </div>
-                <div className="footer">
+                {/* <div className="footer">
                     <button onClick={() => closeModal()}>Save Changes</button>
-                    {/* <button>Create List</button> */}
-                </div>
+                </div> */}
             </div>
         </div>
 
