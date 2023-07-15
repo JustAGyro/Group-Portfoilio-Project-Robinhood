@@ -6,8 +6,21 @@ import Portfolio from '../Portfolio';
 import WatchLists from '../WatchLists';
 import { NewTransaction } from '../Transactions';
 import ListNotes from '../ListNotes';
+import { getAccountInfo } from '../../store/account';
+import { getAllNotes } from '../../store/notes';
+import { getAllTransactionsThunk } from '../../store/transactions';
+import { getAllWatchlistsThunk } from '../../store/watchlist';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 export default function ShowDashboard() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAccountInfo());
+    dispatch(getAllNotes());
+    dispatch(getAllTransactionsThunk());
+    dispatch(getAllWatchlistsThunk());
+  }, [dispatch]);
 
   return (
     <div class="dash-container">
