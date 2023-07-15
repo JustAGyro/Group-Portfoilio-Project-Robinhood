@@ -19,7 +19,7 @@
   /* background-color: red; */
 }
 .wat-lst-header p {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: bold;
   margin-left: 12px;
 
@@ -45,11 +45,22 @@
   margin-top: 50px;
   border-radius: 4px;
 }
+.fa-ellipsis {
+  color: white;
+  opacity: 0;
+  cursor: pointer;
+}
 .wat-lst-bod-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* background-color: teal; */
 }
+.wat-lst-bod-head:hover .fa-ellipsis {
+  /* background-color: green; */
+  opacity: 1;
+}
+
 .wat-lst-bod-head p {
   font-size: 10px;
   margin-left: 12px;
@@ -69,9 +80,6 @@
   font-size: 11px;
   font-weight: bold;
   margin-left: 11px;
-}
-.fa-ellipsis {
-  color: white;
 }
 .wat-lst-bod-head-menu {
   display: flex;
@@ -174,4 +182,7 @@
 }
 .fa-plus {
     color: white;
+}
+.fa-bolt {
+  color: gold;
 }

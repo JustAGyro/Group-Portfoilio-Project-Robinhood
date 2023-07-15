@@ -166,11 +166,11 @@ export default function watchlistsReducer(state = {}, action) {
       delete newState[action.payload];
       return newState;
     case ADD_SYMBOLLIST:
-      console.log ('inside add--------------------------symbollist')
+      // console.log ('inside add--------------------------symbollist')
       newState = { ...state };
       const { watchlistId, symbollist } = action.payload;
-      console.log (action.payload, '-----------------------')
-      console.log (symbollist, '----------------symbollist-----------')
+      // console.log (action.payload, '-----------------------')
+      // console.log (symbollist, '----------------symbollist-----------')
       newState[watchlistId] = {
         ...newState[watchlistId],
         symbollist: [...newState[watchlistId].symbols, symbollist],

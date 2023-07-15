@@ -26,7 +26,7 @@ export default function WatchLists() {
   const user = useSelector((state) => state.session.user);
   watchlists = Object.values(watchlists);
 
-  console.log(watchlists, '-----------watchlists state flag---------------');
+//   console.log(watchlists, '-----------watchlists state flag---------------');
 
     useEffect(() => {
         dispatch(getAllWatchlistsThunk())
@@ -69,7 +69,7 @@ export default function WatchLists() {
             <div className="wat-lst-mn-ctn" ref={ref}>
                 <div className="wat-lst-header">
                     <p>
-                      <i class="fa-solid fa-sort-down"></i>
+                      Lists
                     </p>
                     <div>
                         <button className="cre-wat-lst-plus-btn">
@@ -87,12 +87,12 @@ export default function WatchLists() {
                         return (
                             <div className="wat-lst-pri-cont">
                                 <div className="wat-lst-bod-head">
-                                    <p>{element['name'].toUpperCase()}</p>
+                                    <p><i class="fa-solid fa-bolt"></i>{element['name'].toUpperCase()}</p>
                                     <div className="wat-lst-bod-head-menu">
                                         <button className="" onClick={() => handleOptionsClick(element.id)}>
                                             <i class="fa-solid fa-ellipsis"></i>
                                         </button>
-                                        <p><i class="fa-solid fa-sort-down"></i></p>
+                                        {/* <p><i class="fa-solid fa-sort-down"></i></p> */}
                                     </div>
                                 </div>
                                 {element['symbols'].map(ele => {
