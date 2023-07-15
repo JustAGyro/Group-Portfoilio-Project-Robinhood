@@ -11,7 +11,7 @@ export default function Homepage() {
         <h1>Welcome to Robinhood</h1>
       </div>
       <div className="hp-buttons">
-        <button>
+        <button className="sd-button">
           {' '}
           <OpenModalButton
             className="hp-btn"
@@ -19,7 +19,7 @@ export default function Homepage() {
             modalComponent={<LoginFormModal />}
           />
         </button>
-        <button>
+        <button className="sd-button">
           {' '}
           <OpenModalButton
             className="hp-btn"
