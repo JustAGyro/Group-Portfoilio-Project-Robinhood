@@ -22,7 +22,7 @@ export default function Movers() {
       <h3>Daily Movers</h3>
       <div className="movers-div-for-cards">
         {movers.slice(0, 5).map((ele) => (
-          <div class="movers-card" onClick={() => history.push(`/stocks/${ele.symbol}`)}>
+          <div class="movers-card">
             <div class="movers-info">{ele.symbol}</div>
             <div class="movers-info-change">$ {ele.change}</div>
             <div class="movers-info-change">
