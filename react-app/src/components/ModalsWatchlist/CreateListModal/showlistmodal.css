@@ -1,4 +1,4 @@
-/* 
+/*
 
 #modal {
 
@@ -28,7 +28,7 @@
 
 #cre-wat-lst-modalContainer {
   width: 300px;
-  height: 100px;
+  min-height: 200px;
   border-radius: 12px;
   /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
   display: flex;
@@ -41,7 +41,6 @@
 .cre-wat-mod-hed {
   display: flex;
   justify-content: space-between;
-
 }
 .cre-wat-mod-hed p {
   font-size: 12px;
@@ -49,22 +48,19 @@
 .wat-lst-cre-mod-bod {
   display: flex;
 }
-.wat-lst-cre-mod-bod input{
- 
+.wat-lst-cre-mod-bod input {
   box-sizing: border-box;
   height: 26px;
   border-radius: 4px;
-  width:230px ;
+  width: 230px;
   border: none;
   border: 2px solid white;
   background-color: #f8f9fa;
   /* outline: 1px solid white; */
   margin: auto;
-  transition: .2s;
-  
+  transition: 0.2s;
 }
 .wat-lst-cre-mod-bod input::placeholder {
- 
   padding: 4px;
   font-size: 11px;
 }
@@ -76,15 +72,14 @@
 }
 
 .wat-lst-cre-mod-bod input:hover {
-  background-color:rgb(212, 211, 211) ;
- border-color:rgb(212, 211, 211) ;
+  background-color: rgb(212, 211, 211);
+  border-color: rgb(212, 211, 211);
   /* border: 2px solid  #f8f9fa; */
-} 
+}
 .wat-lst-cre-mod-bod input:focus {
   /* border: none; */
-  outline: 1px solid #16DB65;
+  outline: 1px solid #16db65;
   background-color: white;
-
 }
 
 .cre-wat-lst-mod-btns {
@@ -94,16 +89,15 @@
   flex-direction: row;
   justify-content: end;
   height: 30px;
-  margin-top:10px ;
-
+  margin-top: 10px;
 }
 .cre-lst-mod-cancel-btn {
   background-color: white;
   margin-right: 10px;
   border-radius: 15px;
   width: 80px;
-  color: #16DB65;
-  border: 1px solid #16DB65;
+  color: #16db65;
+  border: 1px solid #16db65;
   font-weight: bold;
   font-size: 12px;
 }
@@ -113,11 +107,15 @@
   color: white;
 }
 .cre-lst-mod-btn {
-  background-color:#16DB65;
+  background-color: #16db65;
   color: white;
   font-weight: bold;
   font-size: 12px;
   border: none;
   width: 90px;
   border-radius: 15px;
+}
+
+.name-error {
+  color: darkred;
 }
