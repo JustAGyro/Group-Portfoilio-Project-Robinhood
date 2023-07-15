@@ -231,7 +231,6 @@ async function calculatePortfolioValueByDay() {
 
 calculatePortfolioValueByDay()
   .then((portfolioData) => {
-    console.log(portfolioData);
   })
   .catch((error) => {
     console.error('Error calculating portfolio value:', error);

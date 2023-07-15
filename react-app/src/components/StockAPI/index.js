@@ -39,13 +39,12 @@ export default function StockApi() {
   const onSubmit = async (e) => {
     e.preventDefault();
     let them = await getIt();
-    console.log('them', them);
+
     setUpdate(symbol);
     setAddToList(true);
     // dispatch(addStock(them))
     // setInitialData(fav)
     // setInitialData(them.historical)
-    // console.log(initialData)
   };
 
   return (

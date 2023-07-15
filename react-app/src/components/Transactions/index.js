@@ -18,7 +18,7 @@ export default function Transactions() {
   transactions = Object.values(transactions).map((obj) => {
     return Object.values(obj);
   });
-  console.log(Object.values(Object.values(transactions)));
+
   useEffect(() => {
     dispatch(getAllTransactionsThunk());
   }, []);

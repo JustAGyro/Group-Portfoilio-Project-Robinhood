@@ -23,7 +23,6 @@ export default function ListNotes() {
 
   useEffect(() => {
     dispatch(getAllNotes());
-    console.log(notes);
   }, []);
   return (
     <div>
@@ -71,7 +70,6 @@ export const DeleteNoteModal = (props) => {
   const history = useHistory();
 
   const handleSubmit = async () => {
-    console.log(target);
     dispatch(action(target));
     closeModal();
   };

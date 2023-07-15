@@ -3,13 +3,13 @@ const ADD_WATCHLIST = 'watchlist/ADD_WATCHLIST';
 const DELETE_WATCHLIST = 'watchlist/DELETE_WATCHLIST';
 const ADD_SYMBOLLIST = 'watchlist/ADD_SYMBOLLIST';
 const DELETE_SYMBOLLIST = 'watchlist/DELETE_SYMBOLLIST';
-const CLEAR_WATCHLIST = 'watchlist/CLEAR_SYMBOLLIST'
+const CLEAR_WATCHLIST = 'watchlist/CLEAR_SYMBOLLIST';
 
 export const clearWatchlists = () => {
   return {
-    type:CLEAR_WATCHLIST
-  }
-}
+    type: CLEAR_WATCHLIST,
+  };
+};
 
 export const getAllWatchlists = (watchlists) => {
   return {
@@ -103,7 +103,8 @@ export const deleteWatchlistThunk = (watchlist) => async (dispatch) => {
   }
 };
 
-export const createSymbollistThunk = (watchlistId, symbollist) => async (dispatch) => {
+export const createSymbollistThunk =
+  (watchlistId, symbollist) => async (dispatch) => {
     const response = await fetch(
       `/api/watchlists/${watchlistId}/symbollist/new`,
       {
@@ -124,18 +125,18 @@ export const createSymbollistThunk = (watchlistId, symbollist) => async (dispatc
 
 export const editListThunk = (id, updatedList) => async (dispatch) => {
   const response = await fetch(`/api/watchlists/${id}/edit`, {
-    method:'PUT',
+    method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(updatedList)
+    body: JSON.stringify(updatedList),
   });
   if (response.ok) {
-    const data = await response.json()
-    dispatch(addWatchlists(data))
-    return data
+    const data = await response.json();
+    dispatch(addWatchlists(data));
+    return data;
   }
-}
+};
 export const deleteSymbollistThunk =
   (watchlistId, symbollistId) => async (dispatch) => {
     const response = await fetch(
@@ -173,11 +174,9 @@ export default function watchlistsReducer(state = {}, action) {
       delete newState[action.payload];
       return newState;
     case ADD_SYMBOLLIST:
-      // console.log ('inside add--------------------------symbollist')
       newState = { ...state };
       const { watchlistId, symbollist } = action.payload;
-      // console.log (action.payload, '-----------------------')
-      // console.log (symbollist, '----------------symbollist-----------')
+
       newState[watchlistId] = {
         ...newState[watchlistId],
         symbollist: [...newState[watchlistId].symbols, symbollist],
@@ -191,9 +190,9 @@ export default function watchlistsReducer(state = {}, action) {
           (symbollist) => symbollist.id !== symbollistId
         );
       }
-      return newState
-    case CLEAR_WATCHLIST: 
-      newState = {}
+      return newState;
+    case CLEAR_WATCHLIST:
+      newState = {};
       return newState;
     default:
       return state;

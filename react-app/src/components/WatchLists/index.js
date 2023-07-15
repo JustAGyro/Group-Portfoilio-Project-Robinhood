@@ -26,7 +26,7 @@ export default function WatchLists() {
   const user = useSelector((state) => state.session.user);
   watchlists = Object.values(watchlists);
 
-//   console.log(watchlists, '-----------watchlists state flag---------------');
+
 
     useEffect(() => {
         dispatch(getAllWatchlistsThunk())
@@ -148,7 +148,7 @@ export default function WatchLists() {
 
                                             </button>
 
-                                        
+
 
                                         </div>
                                     </div>

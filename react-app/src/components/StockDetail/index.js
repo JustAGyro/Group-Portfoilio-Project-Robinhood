@@ -22,7 +22,7 @@ export default function ShowStockDetail() {
   const [stockPrice, setStockPrice] = useState({});
   const [stockOwned, setStockOwned] = useState(0);
   const ownedStocks = useSelector((state) => Object.values(state.transactions));
-  console.log('Owned Stocks: ', ownedStocks);
+
 
   useEffect(() => {
     let totalStockOwned = 0;
@@ -40,9 +40,7 @@ export default function ShowStockDetail() {
     setStockOwned(totalStockOwned);
   }, [ownedStocks, symbol]);
 
-  console.log(`${symbol} Owned: ${stockOwned}`);
-  console.log(symbol, '----------------------symbol');
-  
+
 
   const fetchRealTimePrice = (symbol) => {
     if (symbol) {
@@ -188,7 +186,7 @@ export default function ShowStockDetail() {
     setGraphData(newData);
   }, [newData, selectedGraphButton]);
 
-  console.log(stockPrice);
+
 
   return (
     <>
@@ -386,7 +384,7 @@ export default function ShowStockDetail() {
                 }
               />
             </button>
-            
+
           </div>
 
           <div class="action-deadspace"></div>
