@@ -14,14 +14,19 @@ export default function BuyModal({ symbol, price }) {
   const [quantityError, setQuantityError] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const dispatch = useDispatch();
-  const acctBalance = useSelector((state) => state.account.info.balance);
+  const acctBalance = useSelector((state) =>
+    state.account.info.balance.toFixed(2)
+  );
   const userId = useSelector((state) => state.session.user.id);
   const [pendingTransaction, setPendingTransaction] = useState(0);
   const [transClass, setTransClass] = useState('modal-p-tag-trans-good');
   let formattedBalance;
 
   if (acctBalance) {
-    formattedBalance = acctBalance.toLocaleString();
+    formattedBalance = acctBalance.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
   }
 
   const handleQuantityChange = (event) => {
