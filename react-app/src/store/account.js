@@ -15,9 +15,22 @@ export const addAccount = (account) => {
     }
 }
 
+export const createAccount = (userId) => async dispatch => {
+    const response = await fetch(`/api/accounts/${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    if (response.ok) {
+        const details = await response.json()
+        await dispatch(addAccount(details))
+        return details
+    }
+}
 export const getAccountInfo = () => async dispatch => {
     const response = await fetch('/api/accounts/info');
-    
+
     if (response.ok) {
         const details = await response.json();
         await dispatch(getAccount(details))

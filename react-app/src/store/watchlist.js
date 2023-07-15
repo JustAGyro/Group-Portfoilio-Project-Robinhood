@@ -3,6 +3,13 @@ const ADD_WATCHLIST = 'watchlist/ADD_WATCHLIST';
 const DELETE_WATCHLIST = 'watchlist/DELETE_WATCHLIST';
 const ADD_SYMBOLLIST = 'watchlist/ADD_SYMBOLLIST';
 const DELETE_SYMBOLLIST = 'watchlist/DELETE_SYMBOLLIST';
+const CLEAR_WATCHLIST = 'watchlist/CLEAR_SYMBOLLIST'
+
+export const clearWatchlists = () => {
+  return {
+    type:CLEAR_WATCHLIST
+  }
+}
 
 export const getAllWatchlists = (watchlists) => {
   return {
@@ -184,6 +191,9 @@ export default function watchlistsReducer(state = {}, action) {
           (symbollist) => symbollist.id !== symbollistId
         );
       }
+      return newState
+    case CLEAR_WATCHLIST: 
+      newState = {}
       return newState;
     default:
       return state;

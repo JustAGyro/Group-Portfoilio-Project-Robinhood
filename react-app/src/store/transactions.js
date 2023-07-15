@@ -1,5 +1,6 @@
 const GET_TRANSACTION = 'transactions/GET_TRANSACTION';
 const ADD_TRANSACTION = 'transactions/ADD_TRANSACTION';
+const CLEAR_TRANSACTION = 'transactions/CLEAR_TRANSACTION';
 
 export const getTransactions = (transactions) => {
   return {
@@ -15,12 +16,18 @@ export const addTransactions = (transaction) => {
   };
 };
 
+export const clearTransactions = () => {
+  return {
+    type: CLEAR_TRANSACTION,
+  };
+};
+
 export const getAllTransactionsThunk = () => async (dispatch) => {
   const response = await fetch('/api/transactions/current');
 
   if (response.ok) {
     const transactions = await response.json();
-    console.log(response)
+    console.log(response);
     await dispatch(getTransactions(transactions));
     return transactions;
   }
@@ -74,6 +81,9 @@ export default function transactionsReducer(state = {}, action) {
     case ADD_TRANSACTION:
       newState = { ...state };
       newState[action.payload.id] = action.payload;
+      return newState;
+    case CLEAR_TRANSACTION:
+      newState = {};
       return newState;
     default:
       return state;

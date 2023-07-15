@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { signUp } from '../../store/session';
 import './SignupForm.css';
+import { createAccount } from '../../store/account';
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -17,9 +18,10 @@ function SignupFormModal() {
     e.preventDefault();
     if (password === confirmPassword) {
       const data = await dispatch(signUp(username, email, password));
-      if (data) {
+      if (!data?.id) {
         setErrors(data);
       } else {
+        dispatch(createAccount(data.id));
         closeModal();
       }
     } else {

@@ -5,7 +5,12 @@ const GET_NOTESYMBOLS = 'note/GET_NOTESYMBOLS'
 const ADD_NOTESYMBOL = 'notes/ADD_NOTESYMBOL';
 const EDIT_NOTESYMBOL = 'notes/EDIT_NOTESYMBOL'
 const DELETE_NOTESYMBOL = 'notes/DELETE_';
-
+const CLEAR_NOTES = 'notes/CLEAR'
+export const clearNotes = () =>{
+  return {
+    type: CLEAR_NOTES
+  }
+}
 export const addNote = (note) => {
   return {
     type: ADD_NOTE,
@@ -222,6 +227,8 @@ export default function notesReducer(state = {}, action) {
         )
       }
       return newState
+    case CLEAR_NOTES:
+      return {}
     default:
       return state;
   }

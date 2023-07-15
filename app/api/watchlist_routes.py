@@ -68,8 +68,8 @@ def delete_watchlist(id):
     if not watchlist:
         return ('Watchlist not found')
     if current_user.id == watchlist.userId:
-        for symbol in symbollist:
-            db.session.delete(symbol)
+        # for symbol in symbollist:
+        #     db.session.delete(symbol)
         db.session.delete(watchlist)
         db.session.commit()
         return {

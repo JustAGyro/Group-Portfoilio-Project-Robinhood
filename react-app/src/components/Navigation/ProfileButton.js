@@ -6,6 +6,9 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { MdOutlineAccountCircle } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
+import { clearTransactions } from '../../store/transactions';
+import { clearNotes } from '../../store/notes';
+import { clearWatchlists } from '../../store/watchlist';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -34,7 +37,11 @@ function ProfileButton({ user }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
+    dispatch(clearNotes());
+    dispatch(clearTransactions());
+    dispatch(clearWatchlists());
     dispatch(logout());
+
     history.push('/');
   };
 
