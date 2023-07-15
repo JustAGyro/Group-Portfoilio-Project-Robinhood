@@ -163,7 +163,7 @@ export function NewTransaction() {
                 placeholder="1"
                 type="number"
                 name="quantity"
-                onChange={(e) => setQuantity(e.target.value)}
+                onChange={(e) => e.target.value < 0 ? setQuantity(0) : setQuantity(e.target.value)}
                 value={quantity}
               />
             </label>
