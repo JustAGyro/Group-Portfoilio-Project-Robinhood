@@ -62,7 +62,7 @@ export const getAllNotes = () => async (dispatch) => {
   const response = await fetch(`/api/notes/current`);
   if (response.ok) {
     const details = await response.json();
-    console.log("NOTEFLAG",details);
+
     await dispatch(getNotes(details));
     return details;
   }
@@ -96,7 +96,7 @@ export const deleteNoteThunk = (note) => async (dispatch) => {
   }
 };
 export const createNoteThunk = (note) => async (dispatch) => {
-  console.log("NOTEFLAG",note)
+
   const response = await fetch(`/api/notes/new`, {
     method: 'POST',
     headers: {

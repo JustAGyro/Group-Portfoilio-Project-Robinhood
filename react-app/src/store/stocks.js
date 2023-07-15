@@ -5,7 +5,7 @@ export const getStock = (symbol) => async dispatch => {
     const response = await fetch(`/api/stocks/one_year/${symbol}`);
     if(response.ok){
         const details = await response.json();
-        console.log(details)
+
         await dispatch(addStock({symbol,historical:details}));
         return details;
     }
@@ -14,7 +14,7 @@ export const getStockCurrent = (symbol) => async dispatch => {
     const response = await fetch(`/api/stocks/stock_price/${symbol}`);
     if(response.ok){
         const details = await response.json();
-        console.log(details)
+
         return details;
     }
 }
@@ -28,7 +28,7 @@ export const getGainers = () => async dispatch => {
     const response = await fetch(`/api/stocks/top_gainers`);
     if(response.ok){
         const details = await response.json();
-        // console.log('deets',details)
+
         return details;
     }
 }
@@ -38,7 +38,7 @@ export const GetHistoricalHour = (symbol) => async dispatch => {
     fetch(`/api/stocks/todays/${symbol}`);
     if (response.ok) {
         const details = await response.json()
-        // console.log (details, '----------flag for hourly historical')
+
         return details
     }
 }

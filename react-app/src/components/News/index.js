@@ -7,7 +7,7 @@ import './News.css';
 export default function NewsStory(props) {
   const history = useHistory();
   const { story } = props;
-  // console.log("story", story)
+
   return (
     <div
       className="news-story"
@@ -27,15 +27,13 @@ export const NewsBox = () => {
   useEffect(() => {
     dispatch(getGeneralNews());
   }, []);
-  useEffect(() => {
-    // console.log(news)
-  }, [news]);
+  useEffect(() => {}, [news]);
   let generalNews = news.general;
   let newsList = Object.values(generalNews);
   let display = newsList.map((ele) => {
     return <NewsStory story={ele} />;
   });
-  // console.log("display", display)
+
   return (
     <div className="news-box">
       {newsList.map((article, index) => (

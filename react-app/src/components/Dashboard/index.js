@@ -4,7 +4,7 @@ import Movers from '../Movers';
 import { NewsBox } from '../News';
 import Portfolio from '../Portfolio';
 import WatchLists from '../WatchLists';
-import { NewTransaction } from '../Transactions';
+import Transactions, { NewTransaction } from '../Transactions';
 import ListNotes from '../ListNotes';
 import { getAccountInfo } from '../../store/account';
 import { getAllNotes } from '../../store/notes';
@@ -51,6 +51,9 @@ export default function ShowDashboard() {
       <div class="fixed-bar">
         <div class="transaction-Form">
           <NewTransaction />
+        </div>
+        <div id="inventory">
+          <Transactions />
         </div>
         <div class="stock-watchlist">
           <WatchLists />

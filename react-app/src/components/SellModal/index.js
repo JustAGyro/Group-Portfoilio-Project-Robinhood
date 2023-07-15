@@ -24,8 +24,6 @@ export default function SellModal({ symbol, owned, price }) {
     formattedBalance = acctBalance.toLocaleString();
   }
 
-  console.log('User id: ', userId);
-  console.log('Quantity: ', quantity);
 
   const handleQuantityChange = (event) => {
     const input = event.target.value;
@@ -81,7 +79,7 @@ export default function SellModal({ symbol, owned, price }) {
     const balancePayload = {
       balance: newBalance,
     };
-    console.log('New Balance: ', newBalance);
+
     dispatch(createTransactionThunk(payload));
     dispatch(updateAccountInfo(userId, balancePayload));
 

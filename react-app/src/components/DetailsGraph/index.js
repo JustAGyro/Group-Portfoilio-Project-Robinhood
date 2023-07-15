@@ -110,7 +110,6 @@ export default function DetailGraph(props) {
     }
   }, [data]);
 
-  console.log(currentPrice);
 
   return (
     <div className="chart-container-div">

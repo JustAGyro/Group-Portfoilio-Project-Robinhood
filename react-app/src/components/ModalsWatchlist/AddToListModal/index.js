@@ -9,16 +9,25 @@ export default function AddToListModal({ symbol }) {
     const dispatch = useDispatch()
     const modalRef = useRef(null);
     const {closeModal} = useModal()
+    const [error, setError] = useState(false)
     let watchlists = useSelector(state => state?.watchlists)
     watchlists = Object.values(watchlists)
+    // useEffect(() => {
+    //     if watchlists.symbol
+    // })
     const addToList = async (listId, listSymbol) => {
+        if (error) {
+            return
+        } 
         // setSymbolToAdd(listSymbol)
         // if (symbolToAdd)
+        setError(true)
         await dispatch(createSymbollistThunk(listId, listSymbol))
         await dispatch(getAllWatchlistsThunk())
         closeModal()
     }
     const removeFromList = async (listId, symbolListId) => {
+        setError(false)
         await dispatch(deleteSymbollistThunk(listId, symbolListId))
         await dispatch(getAllWatchlistsThunk())
         closeModal()
