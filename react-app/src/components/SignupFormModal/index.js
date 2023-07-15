@@ -21,7 +21,7 @@ function SignupFormModal() {
       if (!data?.id) {
         setErrors(data);
       } else {
-        dispatch(createAccount(data.id))
+        dispatch(createAccount(data.id));
         closeModal();
       }
     } else {
