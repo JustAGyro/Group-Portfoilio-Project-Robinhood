@@ -12,23 +12,28 @@ export default function EditListName({ id, name }) {
   const { closeModal } = useModal();
   // const modalRef = useRef(null);
   const [listName, setListName] = useState(name);
+  const [nameError, setNameError] = useState(false);
+  // const [disabled, setDisabled] = useState(false);
 
   let watchlists = useSelector((state) => state?.watchlists);
   watchlists = Object.values(watchlists);
-  // useEffect(() => {
-  //     function handleClickOutside(event) {
-  //         if (modalRef.current && !modalRef.current.contains(event.target)) {
-  //             // closeModal();
-  //         }
-  //     }
+  
 
-  //     document.addEventListener("click", handleClickOutside);
-  //     return () => {
-  //         document.removeEventListener("click", handleClickOutside);
-  //     };
-  // }, [closeModal]);
+  // useEffect(() => {
+  //   if (listName.length > 15 || listName.length < 1) {
+  //     setNameError(true);
+  //     setDisabled(true);
+  //   } else {
+  //     setNameError(false);
+  //     setDisabled(false);
+  //   }
+  // }, [listName]);
   const submit = async (e) => {
     e.preventDefault();
+    if (listName.length > 15 || listName.length < 1) {
+      setNameError(true)
+      return 
+    }
     if (listName)
       await dispatch(
         editListThunk(id, {
@@ -53,6 +58,11 @@ export default function EditListName({ id, name }) {
           method="PUT"
           action={`/api/watchlists/${id}/edit`}
         >
+          {nameError && (
+            <p className="name-error">
+              Name must be between 1 and 15 characters
+            </p>
+          )}
           <div className="wat-lst-edit-form-body">
             <input
               value={listName}

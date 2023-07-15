@@ -13,18 +13,23 @@ export default function WatchListModal() {
   const [nameError, setNameError] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
-  useEffect(() => {
-    if (name.length > 15 || name.length < 1) {
-      setNameError(true);
-      setDisabled(true);
-    } else {
-      setNameError(false);
-      setDisabled(false);
-    }
-  }, [name]);
+  // useEffect(() => {
+  //   if (name.length > 15 || name.length < 1) {
+  //     setNameError(true);
+  //     setDisabled(true);
+  //   } else {
+  //     setNameError(false);
+  //     setDisabled(false);
+  //   }
+  // }, [name]);
 
   const submit = async (e) => {
     e.preventDefault();
+    if (name.length > 15 || name.length < 1) {
+      setNameError(true)
+
+      return 
+    }
     if (name)
       await dispatch(
         createWatchlistThunk({
@@ -32,6 +37,7 @@ export default function WatchListModal() {
         })
       );
     // dispatch()
+    setDisabled(true)
     closeModal();
   };
   return (
