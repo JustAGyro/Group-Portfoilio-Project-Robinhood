@@ -6,6 +6,8 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { MdOutlineAccountCircle } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
+import { clearTransactions } from '../../store/transactions';
+import { clearNotes } from '../../store/notes';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -35,6 +37,9 @@ function ProfileButton({ user }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    dispatch(clearNotes());
+    dispatch(clearTransactions());
+
     history.push('/');
   };
 
