@@ -15,6 +15,9 @@ def get_account():
     print (account)
     return account.to_dict()
 
+@account_routes.route('/<id>', methods=['POST'])
+@login_required
+def create_account():
 
 # Route for updating user balance
 @account_routes.route('/<id>/update', methods=['PUT'])
@@ -26,5 +29,3 @@ def update_balance(id):
     user_account.balance = balance
     db.session.commit()
     return user_account.to_dict()
-
-

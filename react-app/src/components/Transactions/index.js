@@ -49,7 +49,6 @@ export function NewTransaction() {
     const [stockOwned, setStockOwned] = useState(0);
     let balance = useSelector(state => state?.account?.info?.balance)
     const ownedStocks = useSelector((state) => Object.values(state.transactions));
-    console.log('Owned Stocks: ', ownedStocks);
 
     useEffect(() => {
         let totalStockOwned = 0;
@@ -79,7 +78,7 @@ export function NewTransaction() {
 
     useEffect(async () => {
         let value = await dispatch(getStockCurrent(symbol));
-        if(value){
+        if(symbol && value){
             setPrice(value.price)
             setDisabled(false)
         }
