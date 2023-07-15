@@ -15,9 +15,15 @@ export default function NewNoteModal() {
   const [entry, setEntry] = useState('');
   const [note, setNote] = useState({ subject, entry });
   const { closeModal } = useModal();
+  const [noLength, setNoLength] = useState(false);
 
   useEffect(() => {
     setNote({ subject, entry });
+    if (subject.length < 1 || entry.length < 1) {
+      setNoLength(true);
+    } else {
+      setNoLength(false);
+    }
   }, [subject, entry]);
   const submit = async (e) => {
     e.preventDefault();
@@ -50,6 +56,9 @@ export default function NewNoteModal() {
               value={entry}
             />
           </label>
+          {noLength && (
+            <p className="error-p-tag">Neither field can be empty.</p>
+          )}
         </div>
         <div>
           <button className="sd-button-li-su" type="submit">
@@ -71,13 +80,22 @@ export function EditNoteModal(props) {
   const [entry, setEntry] = useState('');
   const [note, setNote] = useState({ subject, entry });
   const { closeModal } = useModal();
+  const [noLength, setNoLength] = useState(false);
+
   useEffect(() => {
     setSubject(noteX.subject);
     setEntry(noteX.entry);
   }, [noteX]);
+
   useEffect(() => {
     setNote({ subject, entry });
+    if (subject.length < 1 || entry.length < 1) {
+      setNoLength(true);
+    } else {
+      setNoLength(false);
+    }
   }, [subject, entry]);
+
   const submit = async (e) => {
     e.preventDefault();
     if (subject && entry) {
@@ -109,6 +127,9 @@ export function EditNoteModal(props) {
               value={entry}
             />
           </label>
+          {noLength && (
+            <p className="error-p-tag">Neither field can be empty.</p>
+          )}
         </div>
         <div>
           <button className="sd-button-li-su" type="submit">
