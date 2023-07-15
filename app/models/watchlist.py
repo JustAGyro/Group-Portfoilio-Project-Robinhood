@@ -13,7 +13,7 @@ class WatchList(db.Model):
     userId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
     user = relationship("User", back_populates="watchlists")
-    symbollists = relationship("SymbolList", back_populates="list")
+    symbollists = relationship("SymbolList", back_populates="list", cascade="all, delete-orphan")
 
     def to_dict(self):
         symbollists1 = [
