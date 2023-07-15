@@ -1,0 +1,53 @@
+.sd-button-drop-down {
+  height: 30px;
+  width: 80px;
+  margin: 5px;
+  border: 1px solid #282d30;
+  background-color: #1e2124;
+  border-radius: 4px;
+  color: white;
+  font-size: 18px;
+  font-weight: 200;
+}
+
+.login-signup-container {
+  background-color: #1e2124;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 3px solid #282d30;
+  border-radius: 4px;
+}
+
+.login-signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-signup-input {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.li-su-h1 {
+  margin-bottom: -10px;
+}
+
+.sd-button-li-su {
+  margin: 5px;
+  border: 1px solid #282d30;
+  background-color: #1e2124;
+  border-radius: 4px;
+  color: white;
+  font-size: 18px;
+  font-weight: 200;
+}
+
+.sd-button-li-su:hover {
+  color: green;
+  font-weight: 200;
+  border: 1px solid darkgreen;
+  cursor: pointer;
+}
