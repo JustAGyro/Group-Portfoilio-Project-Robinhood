@@ -16,7 +16,7 @@ import './Transaction.css';
 export default function Transactions() {
   const dispatch = useDispatch();
   let transactions = useSelector((state) => state?.transactions);
-  let account = useSelector((state) => state.account.info.balance);
+  let account = useSelector((state) => state.account.info?.balance);
   let trans = Object.values(transactions);
   let transInv = groupBy(trans, ['symbol', 'transaction']);
   let transKeys = Object.keys(transInv);
