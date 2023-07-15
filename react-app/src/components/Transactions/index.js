@@ -16,10 +16,12 @@ import './Transaction.css';
 export default function Transactions() {
   const dispatch = useDispatch();
   let transactions = useSelector((state) => state?.transactions);
-  let account = useSelector((state) => Number(state.account.info?.balance).toLocaleString(undefined, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }));
+  let account = useSelector((state) =>
+    Number(state.account.info?.balance).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
+  );
   let trans = Object.values(transactions);
   let transInv = groupBy(trans, ['symbol', 'transaction']);
   let transKeys = Object.keys(transInv);
@@ -47,7 +49,7 @@ export default function Transactions() {
 export function NewTransaction() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [transaction, setTransaction] = useState('');
+  const [transaction, setTransaction] = useState('wrong');
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [symbol, setSymbol] = useState('');
@@ -104,6 +106,8 @@ export function NewTransaction() {
       setDisabled(true);
     }
   }, [symbol]);
+
+  console.log('trans ' + transaction);
   const submit = async (e) => {
     e.preventDefault();
 
@@ -135,6 +139,8 @@ export function NewTransaction() {
         }
         window.alert('Wow you sold a stock');
         history.push('/');
+      } else if (transaction == 'wrong') {
+        window.alert('Pick a transaction type');
       }
     }
   };
@@ -148,7 +154,7 @@ export function NewTransaction() {
               onChange={(e) => setTransaction(e.target.value)}
               value={transaction}
             >
-              <option key={'NA'} value={''}>
+              <option key={'NA'} value={'wrong'}>
                 Pick an Option
               </option>
               <option key={'Buy'} value={'buy'}>

@@ -104,7 +104,12 @@ export default function BuyModal({ symbol, price }) {
         )}
         <form className="form-modal" onSubmit={handleSubmit}>
           <label>Quantity: </label>
-          <input className="buy-sell-input" type="number" min="0"></input>
+          <input
+            className="buy-sell-input"
+            type="number"
+            min="0"
+            onChange={handleQuantityChange}
+          ></input>
           {validationError && (
             <p className="validation-error">
               Transaction exceeds purchasing power, choose a smaller quantity.
