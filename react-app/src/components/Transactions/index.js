@@ -16,6 +16,7 @@ import './Transaction.css';
 export default function Transactions() {
   const dispatch = useDispatch();
   let transactions = useSelector((state) => state?.transactions);
+  let account = useSelector(state => state.account.info.balance)
   let trans = Object.values(transactions)
   let transInv = groupBy(trans, ['symbol', 'transaction'])
   let transKeys = Object.keys(transInv)
@@ -25,18 +26,23 @@ export default function Transactions() {
 
   return (
     <div className="stock-inventory">
-      <ul>
-        {transKeys.map(ele => {
-          let total = 0
-          transInv[ele].buy?.forEach(e => total += e.quantity)
-          transInv[ele].sell?.forEach(e => total -= e.quantity)
-          return(
-            <li key={ele}>
-              {`${ele} : ${total}`}
-            </li>
-          )
-        })}
-      </ul>
+      Balance: ${account}
+      <div>
+        Owned Stocks
+        <ul>
+          {transKeys.map(ele => {
+            let total = 0
+            transInv[ele].buy?.forEach(e => total += e.quantity)
+            transInv[ele].sell?.forEach(e => total -= e.quantity)
+            return(
+              <li key={ele}>
+                {`${ele} : ${total}`}
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+
     </div>
 
   );

@@ -53,7 +53,6 @@ export default function ShowDashboard() {
           <NewTransaction />
         </div>
         <div id="inventory">
-          Owned Stocks:
           <Transactions />
         </div>
         <div class="stock-watchlist">
