@@ -163,7 +163,7 @@ export function NewTransaction() {
                 placeholder="1"
                 type="number"
                 name="quantity"
-                min={0}
+                min="0"
                 onChange={(e) => setQuantity(e.target.value)}
                 value={quantity}
               />
