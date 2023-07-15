@@ -16,7 +16,10 @@ import './Transaction.css';
 export default function Transactions() {
   const dispatch = useDispatch();
   let transactions = useSelector((state) => state?.transactions);
-  let account = useSelector((state) => state.account.info?.balance);
+  let account = useSelector((state) => Number(state.account.info?.balance).toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }));
   let trans = Object.values(transactions);
   let transInv = groupBy(trans, ['symbol', 'transaction']);
   let transKeys = Object.keys(transInv);
@@ -175,7 +178,7 @@ export function NewTransaction() {
               <input
                 type="text"
                 name="symbol"
-                onChange={(e) => setSymbol(e.target.value)}
+                onChange={(e) => setSymbol(e.target.value.toUpperCase())}
                 value={symbol}
               />
             </label>
