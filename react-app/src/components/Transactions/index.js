@@ -44,7 +44,6 @@ export function NewTransaction() {
     const [priceErr, setPriceErr] = useState(false)
     const [errMsg, setErrMsg] = useState("")
 
-    const acctBalance = useSelector((state) => state.account.info.balance);
     const userId = useSelector((state) => state.session.user.id);
 
     const [stockOwned, setStockOwned] = useState(0);
@@ -94,14 +93,14 @@ export function NewTransaction() {
 
         if(transaction && quantity >= 1 && symbol && price){
             const transactionAmount = quantity * price;
-            const newBalance = acctBalance - transactionAmount;
+            const newBalance = balance - transactionAmount;
             const balancePayload = {
             balance: newBalance,
             };
             if(transaction == 'buy'){
                 if(quantity * price <= balance){
                     await dispatch(createTransactionThunk(fin));
-                    const newBalance = acctBalance - transactionAmount;
+                    const newBalance = balance - transactionAmount;
                     const balancePayload = {
                     balance: newBalance,
                     };
@@ -112,7 +111,7 @@ export function NewTransaction() {
             else if(transaction == 'sell'){
                 if(stockOwned >= quantity){
                     await dispatch(createTransactionThunk(fin));
-                    const newBalance = acctBalance + transactionAmount;
+                    const newBalance = balance + transactionAmount;
                     const balancePayload = {
                     balance: newBalance,
                     };
