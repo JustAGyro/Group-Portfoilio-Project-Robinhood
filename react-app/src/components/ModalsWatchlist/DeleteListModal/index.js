@@ -12,9 +12,9 @@ export default function DeleteWatchListModal({  id, name, len }) {
         dispatch(deleteWatchlistThunk({
             id: id
         }))
-        dispatch(deleteSymbollistThunk({
+        // dispatch(deleteSymbollistThunk({
             
-        }))
+        // }))
         closeModal()
         // dispatch(getAllWatchlistsThunk())
     }
