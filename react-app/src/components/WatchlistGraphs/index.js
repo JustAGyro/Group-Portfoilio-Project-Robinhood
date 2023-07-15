@@ -41,28 +41,24 @@ export default function WatchlistGraph(props) {
   let color = 'green';
   if (percentDifference < 0) {
     color = 'red';
-
-    return (
-      <>
-        <div id="watc-lst-gra-container" style={{ display: 'flex' }}>
-          <div>
-            <GraphWatchlist {...props} data={stockHour} lineColor={color} />
-          </div>
-          <div className="watc-lst-gra-container-footer">
-            <p id="watc-lst-gra-container-footer-top">
-              ${Number(lastPrice).toFixed(2)}
-            </p>
-            {isNaN(percentDifference) ? null : (
-              <p
-                id="watc-lst-gra-container-footer-down"
-                style={{ color: color }}
-              >
-                {percentDifference.toFixed(3)}%
-              </p>
-            )}
-          </div>
-        </div>
-      </>
-    );
   }
+  return (
+    <>
+      <div id="watc-lst-gra-container" style={{ display: 'flex' }}>
+        <div>
+          <GraphWatchlist {...props} data={stockHour} lineColor={color} />
+        </div>
+        <div className="watc-lst-gra-container-footer">
+          <p id="watc-lst-gra-container-footer-top">
+            ${Number(lastPrice).toFixed(2)}
+          </p>
+          {isNaN(percentDifference) ? null : (
+            <p id="watc-lst-gra-container-footer-down" style={{ color: color }}>
+              {percentDifference.toFixed(3)}%
+            </p>
+          )}
+        </div>
+      </div>
+    </>
+  );
 }
