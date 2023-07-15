@@ -74,10 +74,10 @@ export function NewTransaction() {
     setFin({ transaction, quantity, symbol, price });
     if (transaction == 'buy') {
       setPriceErr(quantity * price >= balance);
-      setErrMsg('the cost of this transaction exceeds your balance');
+      setErrMsg('Cost exceeds balance');
     } else if (transaction == 'sell') {
       setPriceErr(quantity > stockOwned);
-      setErrMsg('You do not own that many stocks of this type');
+      setErrMsg("You don't own enough stock");
     }
   }, [transaction, quantity, symbol, price]);
 
@@ -109,6 +109,8 @@ export function NewTransaction() {
           };
           dispatch(updateAccountInfo(userId, balancePayload));
         }
+        window.alert('Wow you bought a stock');
+        history.push('/');
       } else if (transaction == 'sell') {
         if (stockOwned >= quantity) {
           await dispatch(createTransactionThunk(fin));
@@ -118,6 +120,8 @@ export function NewTransaction() {
           };
           dispatch(updateAccountInfo(userId, balancePayload));
         }
+        window.alert('Wow you sold a stock');
+        history.push('/');
       }
     }
   };
