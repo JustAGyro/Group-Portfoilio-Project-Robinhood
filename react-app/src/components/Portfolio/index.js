@@ -130,7 +130,7 @@ export default function Portfolio() {
     let input = Object.keys(history); //all the dates
     console.log('dates', input);
     let tank = Object.entries(stocks);
-    // console.log(tank)
+    console.log("tank", tank)
     let tankData = {};
     tank.forEach((ele) => {
       let actual = {};
@@ -138,7 +138,9 @@ export default function Portfolio() {
       let fillerKeys = Object.keys(filler);
       fillerKeys.forEach((e) => {
         let date = new Date(e);
+        date.setDate(date.getDate() + 1)
         // console.log('key', e)
+        // console.log('date', date)
         // console.log('obj',filler[e])
         actual[date.toDateString()] = filler[e];
       });
@@ -159,11 +161,14 @@ export default function Portfolio() {
       let symbols = Object.keys(data);
       // value = tankData[]
       symbols.forEach((val) => {
+
         if (tankData[val][ele]) {
           // console.log("tankdata",val,ele,tankData[val][ele])
           value += tankData[val][ele][0].value * data[val];
           savedDate = ele;
-        } else value += tankData[val][savedDate][0].value * data[val];
+        } else{
+          console.log("CHCHCHCHCHHC",tankData[val][savedDate])
+           value += tankData[val][savedDate][0].value * data[val];}
       });
       graphData.push({ time: ele, value });
     });

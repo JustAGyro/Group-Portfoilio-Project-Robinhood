@@ -17,7 +17,12 @@ def get_account():
 
 @account_routes.route('/<id>', methods=['POST'])
 @login_required
-def create_account():
+def create_account(id):
+    user_id = id
+    new_acc =  Account(userId=user_id)
+    db.session.add(new_acc)
+    db.session.commit()
+    return new_acc.to_dict()
 
 # Route for updating user balance
 @account_routes.route('/<id>/update', methods=['PUT'])

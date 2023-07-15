@@ -51,6 +51,11 @@ export function NewTransaction() {
     const ownedStocks = useSelector((state) => Object.values(state.transactions));
 
     useEffect(() => {
+        dispatch(getAllTransactionsThunk())
+        dispatch(getAccountInfo())
+    },[])
+
+    useEffect(() => {
         let totalStockOwned = 0;
 
         ownedStocks.forEach((stock) => {
