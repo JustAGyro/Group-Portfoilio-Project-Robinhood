@@ -31,13 +31,13 @@ export default function WatchListModal() {
       return 
     }
     if (name)
+    setDisabled(true)
       await dispatch(
         createWatchlistThunk({
           name: name,
         })
       );
     // dispatch()
-    setDisabled(true)
     closeModal();
   };
   return (
