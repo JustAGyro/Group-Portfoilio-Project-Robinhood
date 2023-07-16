@@ -30,11 +30,11 @@ export default function Transactions() {
   }, []);
 
   return (
-    <div className="stock-inventory">
-      Balance: ${account}
+    <div className="owned-stocks">
+      <p className="owned-stocks-p">Balance: ${account}</p>
+      <p className="owned-stocks-p">Owned Stocks</p>
       <div>
-        Owned Stocks
-        <ul>
+        <ul className="owned-stocks-ul">
           {transKeys.map((ele) => {
             let total = 0;
             transInv[ele].buy?.forEach((e) => (total += e.quantity));
@@ -161,12 +161,7 @@ export function NewTransaction() {
   };
   return (
     <div className="transaction-box">
-      <form
-        className="trans-form"
-        onSubmit={submit}
-        method="POST"
-        action={'/api/transactions/new'}
-      >
+      <form onSubmit={submit} method="POST" action={'/api/transactions/new'}>
         <div className="trans-form">
           <label>
             <select
@@ -204,7 +199,13 @@ export function NewTransaction() {
             onChange={(e) => setSymbol(e.target.value.toUpperCase())}
             value={symbol}
           />
-          <div>Price: {price}</div>
+          <>
+            {disabled === true ? (
+              <div className="trans-error">{price}</div>
+            ) : (
+              <div>Price: {price}</div>
+            )}
+          </>
           <div>
             {priceErr ? (
               <OpenModalButton
