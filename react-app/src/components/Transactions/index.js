@@ -16,7 +16,12 @@ import './Transaction.css';
 export default function Transactions() {
   const dispatch = useDispatch();
   let transactions = useSelector((state) => state?.transactions);
-  let account = useSelector((state) => state.account.info?.balance);
+  let account = useSelector((state) =>
+    Number(state.account.info?.balance).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
+  );
   let trans = Object.values(transactions);
   let transInv = groupBy(trans, ['symbol', 'transaction']);
   let transKeys = Object.keys(transInv);
@@ -34,7 +39,11 @@ export default function Transactions() {
             let total = 0;
             transInv[ele].buy?.forEach((e) => (total += e.quantity));
             transInv[ele].sell?.forEach((e) => (total -= e.quantity));
-            return <li key={ele}>{`${ele} : ${total}`}</li>;
+            if (total === 0) {
+              return;
+            } else {
+              return <li key={ele}>{`${ele} : ${total}`}</li>;
+            }
           })}
         </ul>
       </div>
@@ -44,7 +53,7 @@ export default function Transactions() {
 export function NewTransaction() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [transaction, setTransaction] = useState('');
+  const [transaction, setTransaction] = useState('wrong');
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [symbol, setSymbol] = useState('');
@@ -101,6 +110,8 @@ export function NewTransaction() {
       setDisabled(true);
     }
   }, [symbol]);
+
+  console.log('trans ' + transaction);
   const submit = async (e) => {
     e.preventDefault();
 
@@ -132,6 +143,8 @@ export function NewTransaction() {
         }
         window.alert('Wow you sold a stock');
         history.push('/');
+      } else if (transaction == 'wrong') {
+        window.alert('Pick a transaction type');
       }
     }
   };
@@ -145,7 +158,7 @@ export function NewTransaction() {
               onChange={(e) => setTransaction(e.target.value)}
               value={transaction}
             >
-              <option key={'NA'} value={''}>
+              <option key={'NA'} value={'wrong'}>
                 Pick an Option
               </option>
               <option key={'Buy'} value={'buy'}>
@@ -163,6 +176,7 @@ export function NewTransaction() {
                 placeholder="1"
                 type="number"
                 name="quantity"
+                min="0"
                 onChange={(e) => setQuantity(e.target.value)}
                 value={quantity}
               />
@@ -174,7 +188,7 @@ export function NewTransaction() {
               <input
                 type="text"
                 name="symbol"
-                onChange={(e) => setSymbol(e.target.value)}
+                onChange={(e) => setSymbol(e.target.value.toUpperCase())}
                 value={symbol}
               />
             </label>
