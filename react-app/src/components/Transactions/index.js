@@ -122,7 +122,6 @@ export function NewTransaction() {
     }
   }, [symbol]);
 
-  console.log('trans ' + transaction);
   const submit = async (e) => {
     e.preventDefault();
 
