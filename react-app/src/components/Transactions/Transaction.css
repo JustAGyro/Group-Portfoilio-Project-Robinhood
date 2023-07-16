@@ -1,12 +1,70 @@
 .transaction-box {
-  width: 200px;
   display: flex;
-  padding: 5px;
-  border: solid 1px white;
-  background-color: black;
-  border-radius: 5px;
+  align-items: center;
+  background-color: #1e2124;
+  border: 2px solid #282d30;
+  border-radius: 4px;
+  flex-direction: column;
+  width: 80%;
 }
 
 .error-p-tag {
   color: darkred;
+}
+
+.trans-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: 100%;
+  width: 90%;
+  padding: 10px;
+  align-items: center;
+}
+
+.trans-select {
+  background-color: #282d30;
+  border: none;
+  color: white;
+  height: 25px;
+  margin-top: 10px;
+}
+
+.trans-input {
+  background-color: #282d30;
+  border: none;
+  color: white;
+  text-align: right;
+  height: 25px;
+}
+
+.trans-button-submit {
+  height: 50px;
+  width: 150px;
+  margin: 5px;
+  border: 1px solid #282d30;
+  background-color: #1e2124;
+  border-radius: 4px;
+  color: white;
+  font-size: 18px;
+  font-weight: 200;
+}
+
+.trans-button-submit:hover {
+  color: green;
+  font-weight: 200;
+  border: 1px solid darkgreen;
+  cursor: pointer;
+}
+
+.trans-button-submit-disabled {
+  height: 50px;
+  width: 150px;
+  margin: 5px;
+  border: 1px solid #282d30;
+  background-color: #1e2124;
+  border-radius: 4px;
+  color: #282d30;
+  font-size: 18px;
+  font-weight: 200;
 }
