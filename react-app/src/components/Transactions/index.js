@@ -54,7 +54,7 @@ export function NewTransaction() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [transaction, setTransaction] = useState('wrong');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState(0);
   const [symbol, setSymbol] = useState('');
   const [fin, setFin] = useState({ transaction, quantity, symbol, price });
