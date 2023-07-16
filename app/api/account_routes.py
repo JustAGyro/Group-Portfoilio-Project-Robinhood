@@ -30,7 +30,7 @@ def create_account(id):
 def update_balance(id):
     data = request.get_json()
     balance = data.get('balance')
-    user_account = Account.query.get(id)
+    user_account = Account.query.filter(Account.userId==id).first()
     user_account.balance = balance
     db.session.commit()
     return user_account.to_dict()
