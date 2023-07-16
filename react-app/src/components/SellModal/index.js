@@ -24,7 +24,6 @@ export default function SellModal({ symbol, owned, price }) {
     formattedBalance = acctBalance.toLocaleString();
   }
 
-
   const handleQuantityChange = (event) => {
     const input = event.target.value;
     const newQuantity = input === '' ? 0 : parseInt(input);
@@ -105,6 +104,8 @@ export default function SellModal({ symbol, owned, price }) {
           <label>Quantity: </label>
           <input
             className="buy-sell-input"
+            min="0"
+            type="number"
             onChange={handleQuantityChange}
           ></input>
           {quantityError && (

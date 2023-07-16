@@ -39,7 +39,11 @@ export default function Transactions() {
             let total = 0;
             transInv[ele].buy?.forEach((e) => (total += e.quantity));
             transInv[ele].sell?.forEach((e) => (total -= e.quantity));
-            return <li key={ele}>{`${ele} : ${total}`}</li>;
+            if (total === 0) {
+              return;
+            } else {
+              return <li key={ele}>{`${ele} : ${total}`}</li>;
+            }
           })}
         </ul>
       </div>
