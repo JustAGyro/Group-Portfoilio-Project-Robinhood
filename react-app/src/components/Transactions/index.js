@@ -61,6 +61,9 @@ export function NewTransaction() {
   const [disabled, setDisabled] = useState(true);
   const [priceErr, setPriceErr] = useState(false);
   const [errMsg, setErrMsg] = useState('');
+  const [disabledClass, setDisabledClass] = useState(
+    'trans-button-submit-disabled'
+  );
 
   const userId = useSelector((state) => state.session.user.id);
 
@@ -72,6 +75,14 @@ export function NewTransaction() {
     dispatch(getAllTransactionsThunk());
     dispatch(getAccountInfo());
   }, []);
+
+  useEffect(() => {
+    if (disabled) {
+      setDisabledClass('trans-button-submit-disabled');
+    } else {
+      setDisabledClass('trans-button-submit');
+    }
+  }, [disabled]);
 
   useEffect(() => {
     let totalStockOwned = 0;
@@ -150,10 +161,16 @@ export function NewTransaction() {
   };
   return (
     <div className="transaction-box">
-      <form onSubmit={submit} method="POST" action={'/api/transactions/new'}>
-        <div>
+      <form
+        className="trans-form"
+        onSubmit={submit}
+        method="POST"
+        action={'/api/transactions/new'}
+      >
+        <div className="trans-form">
           <label>
             <select
+              className="trans-select"
               name="transaction"
               onChange={(e) => setTransaction(e.target.value)}
               value={transaction}
@@ -169,30 +186,24 @@ export function NewTransaction() {
               </option>
             </select>
           </label>
-          <div>
-            <label>
-              Quantity
-              <input
-                placeholder="1"
-                type="number"
-                name="quantity"
-                min="0"
-                onChange={(e) => setQuantity(e.target.value)}
-                value={quantity}
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              Symbol
-              <input
-                type="text"
-                name="symbol"
-                onChange={(e) => setSymbol(e.target.value.toUpperCase())}
-                value={symbol}
-              />
-            </label>
-          </div>
+          <label>Quantity</label>
+          <input
+            className="trans-input"
+            placeholder="1"
+            type="number"
+            name="quantity"
+            min="1"
+            onChange={(e) => setQuantity(e.target.value)}
+            value={quantity}
+          />
+          <label>Symbol</label>
+          <input
+            className="trans-input"
+            type="text"
+            name="symbol"
+            onChange={(e) => setSymbol(e.target.value.toUpperCase())}
+            value={symbol}
+          />
           <div>Price: {price}</div>
           <div>
             {priceErr ? (
@@ -204,9 +215,9 @@ export function NewTransaction() {
               <button
                 type="submit"
                 disabled={disabled}
-                className="open-modal-button-master"
+                className={disabledClass}
               >
-                submit
+                Submit
               </button>
             )}
           </div>
