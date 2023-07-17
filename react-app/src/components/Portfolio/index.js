@@ -7,6 +7,7 @@ import reactRouterDom from 'react-router-dom';
 import DetailGraph from '../DetailsGraph';
 
 export default function Portfolio() {
+  const [portfolioValues, setPortfoliValues] = useState([])
   const dispatch = useDispatch();
   const transactions = useSelector(state => state.transactions);
   const stocks = useSelector((state) => state.stocks);
@@ -113,16 +114,17 @@ export default function Portfolio() {
       symbols.forEach(sym => {
 
         let total = 0;
-        if(stockData[sym]){
-          if(stockData[sym][key]){
-            total = value[sym] * stockData[sym][key][0].value;
-            prevTotal = total;
-          }
-          else{
-            total = prevTotal
-          }
+        total = value[sym] * stockData[sym][key][0].value;
+        // if(stockData[sym]){
+        //   if(stockData[sym][key]){
+        //     total = value[sym] * stockData[sym][key][0].value;
+        //     prevTotal = total;
+        //   }
+        //   else{
+        //     total = prevTotal
+        //   }
 
-        }
+        // }
         dailyTotal += total
         return total
       })
@@ -131,13 +133,26 @@ export default function Portfolio() {
     console.log(returnObject)
     return returnObject
   }
-  let graphData = Object.entries(parseValues(parseDates(filteredTrans),stocks)).map(ele => {
-    const obj = {time:ele[0], value: ele[1]}
-    return obj
-  })
+  const checkStore = (data) => {
+    return Object.keys(data).reduce((acc, curr) => {
+      Object.keys(stocks).includes(curr) && acc ? (acc = true) : (acc = false);
+      return acc;
+    }, true);
+  };
+  let graphData = () => {
+    return Object.entries(parseValues(parseDates(filteredTrans),stocks)).map(ele => {
+      const obj = {time:ele[0], value: ele[1]}
+      return obj
+    })
+  }
+  useEffect(() => {
+    if(checkStore(groupBy(Object.values(transactions), ['symbol']))){
+      setPortfoliValues(graphData())
+    }
+  }, [stocks])
   return (
     <div>
-      <DetailGraph data={graphData} />
+      <DetailGraph data={portfolioValues} />
     </div>
   );
 }
