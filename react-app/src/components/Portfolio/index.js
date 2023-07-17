@@ -109,11 +109,17 @@ export default function Portfolio() {
       let key = e[0];
       let value = e[1];
       let symbols = Object.keys(value)
+      let prevTotal = 0
       symbols.forEach(sym => {
+
         let total = 0;
         if(stockData[sym]){
           if(stockData[sym][key]){
             total = value[sym] * stockData[sym][key][0].value;
+            prevTotal = total;
+          }
+          else{
+            total = prevTotal
           }
 
         }
