@@ -35,6 +35,7 @@ export default function Portfolio() {
   let fillDates = (data) => {
     let newData = {}
     let currentDate = new Date()
+    let nextDate = new Date(currentDate.valueOf() + 86400000)
     Object.keys(data).forEach(e => {
       newData[e] = {}
       let dataByDate = groupBy(data[e],['time'])
@@ -45,7 +46,7 @@ export default function Portfolio() {
       let successVal = sortedData[0].value;
       for(
         let date = new Date(sortedData[0].time);
-        date.valueOf() < currentDate.valueOf();
+        date.valueOf() < nextDate.valueOf();
         date.setDate(date.getDate() + 1)
       ){
         let target = date.toJSON().slice(0, date.toJSON().indexOf('T'))
@@ -62,7 +63,6 @@ export default function Portfolio() {
     const startDate = trans[0]?.date;
     const currentDate = new Date();
     const returnData = {};
-    // console.log(returnData)
 
     for(
       let date = new Date(startDate);
@@ -80,7 +80,10 @@ export default function Portfolio() {
       }
       if(!dailySymbols){
         returnData[target] = {...returnData[prevTarget]}
-        // returnData[nextTarget] = {...returnData[target]}
+
+        if(new Date(nextTarget) < currentDate){
+           returnData[nextTarget] = {...returnData[target]}
+        }
       }
       else{
         dailySymbols.forEach(e => {
@@ -91,26 +94,25 @@ export default function Portfolio() {
              returnData[target][e] = returnData[target][e] - ele.quantity
           })
         })
+        returnData[nextTarget] = {...returnData[target]}
       }
     }
-    // console.log(returnData);
     return returnData
   }
   const parseValues = (dates, stocks) => {
     const stockData = fillDates(stocks);
     let returnObject = {};
-    let data = {...dates};
+    let data = dates;
     let dataEntries = Object.entries(data)
     dataEntries.forEach(e => {
       let dailyTotal = 0;
       let key = e[0];
       let value = e[1];
       let symbols = Object.keys(value)
-      let total = symbols.map(sym => {
+      symbols.forEach(sym => {
         let total = 0;
-        console.log(stockData[sym] , sym , key)
         if(stockData[sym]){
-          total = value[sym] * stockData[sym][key];
+          total = value[sym] * stockData[sym][key][0].value;
         }
         dailyTotal += total
         return total
@@ -118,11 +120,15 @@ export default function Portfolio() {
       returnObject[key] = dailyTotal;
     })
     console.log(returnObject)
+    return returnObject
   }
-  parseValues(parseDates(filteredTrans),stocks)
+  let graphData = Object.entries(parseValues(parseDates(filteredTrans),stocks)).map(ele => {
+    const obj = {time:ele[0], value: ele[1]}
+    return obj
+  })
   return (
     <div>
-      {/* <DetailGraph data={dataGraph} /> */}
+      <DetailGraph data={graphData} />
     </div>
   );
 }
@@ -183,7 +189,6 @@ export function OldPortfolio() {
 
 
   const createHistory = (transactionHistory) => {
-    console.log(transactionHistory)
     let orderedHistory = groupBy(transactionHistory, [
       'date',
       'symbol',
@@ -206,7 +211,6 @@ export function OldPortfolio() {
       let newDate = new Date(ele.date);
       data[newDate.toJSON().slice(0, newDate.toJSON().indexOf('T'))] = orderedHistory[ele.date];
     });
-    console.log(data)
 
     for (
       let date = new Date(firstTransactionDate);
