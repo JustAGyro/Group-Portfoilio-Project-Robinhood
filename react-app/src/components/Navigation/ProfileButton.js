@@ -9,6 +9,8 @@ import { useHistory } from 'react-router-dom';
 import { clearTransactions } from '../../store/transactions';
 import { clearNotes } from '../../store/notes';
 import { clearWatchlists } from '../../store/watchlist';
+import { clearAccount } from '../../store/account';
+import { clearStock } from '../../store/stocks';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -40,6 +42,9 @@ function ProfileButton({ user }) {
     dispatch(clearNotes());
     dispatch(clearTransactions());
     dispatch(clearWatchlists());
+    dispatch(clearAccount());
+    dispatch(clearStock());
+
     dispatch(logout());
 
     history.push('/');
