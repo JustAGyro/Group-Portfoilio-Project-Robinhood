@@ -8,6 +8,159 @@ import DetailGraph from '../DetailsGraph';
 
 export default function Portfolio() {
   const dispatch = useDispatch();
+  const transactions = useSelector(state => state.transactions);
+  const stocks = useSelector((state) => state.stocks);
+  const filteredTrans = Object.values(transactions).map(transaction => {
+    let newDate = new Date(transaction.date)
+
+    return {
+      type:transaction.transaction,
+      date: newDate.toJSON().slice(0, newDate.toJSON().indexOf('T')),
+      symbol:transaction.symbol,
+      quantity:transaction.quantity
+    }
+  })
+  useEffect(() => {
+    dispatch(getAllTransactionsThunk());
+
+  }, [])
+  useEffect(() => {
+    let trans = Object.values(transactions);
+    let dailyData = groupBy(trans, ['symbol']);
+    Object.keys(dailyData).forEach((ele) => {
+      dispatch(getStock(ele));
+    });
+  }, [transactions])
+
+  let fillDates = (data) => {
+    let newData = {}
+    let currentDate = new Date()
+    let nextDate = new Date(currentDate.valueOf() + 86400000)
+    Object.keys(data).forEach(e => {
+      newData[e] = {}
+      let dataByDate = groupBy(data[e],['time'])
+      let sortedData = data[e].sort(function (a, b) {
+        return new Date(b.time) - new Date(a.time);
+      })
+      .reverse();
+      let successVal = sortedData[0].value;
+      for(
+        let date = new Date(sortedData[0].time);
+        date.valueOf() < nextDate.valueOf();
+        date.setDate(date.getDate() + 1)
+      ){
+        let target = date.toJSON().slice(0, date.toJSON().indexOf('T'))
+        newData[e][target] = dataByDate[target] || [{time:target, value:successVal}]
+        successVal = newData[e][target][0].value;
+      }
+    })
+    return newData
+  }
+
+
+  const parseDates = (trans) => {
+    const orgTrans = groupBy(trans, ['date','symbol'])
+    const startDate = trans[0]?.date;
+    const currentDate = new Date();
+    const returnData = {};
+
+    for(
+      let date = new Date(startDate);
+      date <= currentDate;
+      date.setDate(date.getDate() + 1)
+    ){
+      let target = date.toJSON().slice(0, date.toJSON().indexOf('T'));
+      let prevTarget = new Date(date.valueOf() - 86400000).toJSON().slice(0, date.toJSON().indexOf('T'))
+      let nextTarget = new Date(date.valueOf() + 86400000).toJSON().slice(0, date.toJSON().indexOf('T'))
+
+      let dailySymbols = orgTrans[target] ? Object.keys(orgTrans[target]) : null
+
+      if(!returnData[target]){
+        returnData[target] = {}
+      }
+      if(!dailySymbols){
+        returnData[target] = {...returnData[prevTarget]}
+
+        if(new Date(nextTarget) < currentDate){
+           returnData[nextTarget] = {...returnData[target]}
+        }
+      }
+      else{
+        dailySymbols.forEach(e => {
+          orgTrans[target][e].forEach(ele => {
+            if(!returnData[target][e])returnData[target][e] = 0;
+            ele.type == 'buy' ?
+             returnData[target][e] = returnData[target][e] + ele.quantity :
+             returnData[target][e] = returnData[target][e] - ele.quantity
+          })
+        })
+        returnData[nextTarget] = {...returnData[target]}
+      }
+    }
+    return returnData
+  }
+  const parseValues = (dates, stocks) => {
+    const stockData = fillDates(stocks);
+    let returnObject = {};
+    let data = dates;
+    let dataEntries = Object.entries(data)
+    dataEntries.forEach(e => {
+      let dailyTotal = 0;
+      let key = e[0];
+      let value = e[1];
+      let symbols = Object.keys(value)
+      symbols.forEach(sym => {
+        let total = 0;
+        if(stockData[sym]){
+          total = value[sym] * stockData[sym][key][0].value;
+        }
+        dailyTotal += total
+        return total
+      })
+      returnObject[key] = dailyTotal;
+    })
+    console.log(returnObject)
+    return returnObject
+  }
+  let graphData = Object.entries(parseValues(parseDates(filteredTrans),stocks)).map(ele => {
+    const obj = {time:ele[0], value: ele[1]}
+    return obj
+  })
+  return (
+    <div>
+      <DetailGraph data={graphData} />
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function OldPortfolio() {
+  const dispatch = useDispatch();
   let transactions = useSelector((state) => state?.transactions);
   let stocks = useSelector((state) => state.stocks);
   const [dataGraph, setDataGraph] = useState([]);
@@ -33,49 +186,55 @@ export default function Portfolio() {
       return acc;
     }, true);
   };
+
+
   const createHistory = (transactionHistory) => {
     let orderedHistory = groupBy(transactionHistory, [
       'date',
       'symbol',
       'transaction',
     ]);
-    let sortedTransactionHistory = transactionHistory
-      .sort(function (a, b) {
+
+    let sortedTransactionHistory = transactionHistory.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       })
       .reverse();
+
     const firstTransactionDate = new Date(sortedTransactionHistory[0].date);
     const currentDate = new Date(); // Current date
-    // let it = {}
+
     let data = {};
     let returnData = {};
+    let finalReturnData = {};
 
-    transactionHistory.forEach((ele) => {
+    sortedTransactionHistory.forEach((ele) => {
       let newDate = new Date(ele.date);
-      data[newDate.toDateString()] = orderedHistory[ele.date];
+      data[newDate.toJSON().slice(0, newDate.toJSON().indexOf('T'))] = orderedHistory[ele.date];
     });
 
     for (
       let date = new Date(firstTransactionDate);
-      date < currentDate;
+      date <= currentDate;
       date.setDate(date.getDate() + 1)
     ) {
-      if (date.toDateString() == firstTransactionDate.toDateString()) {
-        returnData[date.toDateString()] = {};
+      let target = date.toJSON().slice(0, date.toJSON().indexOf('T'))
+      if (target == firstTransactionDate.toJSON().slice(0, date.toJSON().indexOf('T'))) {
+        returnData[target] = {};
       }
-      if (data[date.toDateString()]) {
+      if (data[target]) {
         // data[date.toDateString()] = {}
-        let keys = Object.keys(data[date.toDateString()]);
+        let keys = Object.keys(data[date.toJSON().slice(0, date.toJSON().indexOf('T'))]);
         keys.forEach((d) => {
-          data[date.toDateString()][d].buy?.forEach((q) => {
-            returnData[date.toDateString()][d]
-              ? (returnData[date.toDateString()][d] += q.quantity)
-              : (returnData[date.toDateString()][d] = q.quantity);
+          data[date.toJSON().slice(0, date.toJSON().indexOf('T'))][d].buy?.forEach((q) => {
+            console.log(returnData, date.toJSON().slice(0, date.toJSON().indexOf('T')), d)
+            returnData[date.toJSON().slice(0, date.toJSON().indexOf('T'))][d]
+              ? (returnData[date.toJSON().slice(0, date.toJSON().indexOf('T'))][d] += q.quantity)
+              : (returnData[date.toJSON().slice(0, date.toJSON().indexOf('T'))][d] = q.quantity);
           });
-          data[date.toDateString()][d].sell?.forEach((q) => {
-            returnData[date.toDateString()][d]
-              ? (returnData[date.toDateString()][d] -= q.quantity)
-              : (returnData[date.toDateString()][d] = q.quantity);
+          data[date.toJSON().slice(0, date.toJSON().indexOf('T'))][d].sell?.forEach((q) => {
+            returnData[date.toJSON().slice(0, date.toJSON().indexOf('T'))][d]
+              ? (returnData[date.toJSON().slice(0, date.toJSON().indexOf('T'))][d] -= q.quantity)
+              : (returnData[date.toJSON().slice(0, date.toJSON().indexOf('T'))][d] = q.quantity);
           });
         });
       }
@@ -83,96 +242,83 @@ export default function Portfolio() {
       // it[date.toDateString()] = {...returnData[date.toDateString()]}
       let newDate = new Date(date);
       newDate.setDate(date.getDate() + 1);
-      returnData[newDate.toDateString()] = {
-        ...returnData[date.toDateString()],
+      finalReturnData[newDate.toJSON().slice(0, date.toJSON().indexOf('T'))] = {
+        ...returnData[date.toJSON().slice(0, date.toJSON().indexOf('T'))],
       };
     }
+    return finalReturnData;
+  };
 
-    let dataEntries = Object.entries(returnData);
-    let sortedDataEntries = dataEntries
-      .sort(function (a, b) {
-        // Turn your strings into dates, and then subtract them
-        // to get a value that is either negative, positive, or zero.
-        return new Date(b[0]) - new Date(a[0]);
+  let fillDates = (data) => {
+    let newData = {}
+    let currentDate = new Date()
+    Object.keys(data).forEach(e => {
+      newData[e] = {}
+      let dataByDate = groupBy(data[e],['time'])
+      let sortedData = data[e].sort(function (a, b) {
+        return new Date(b.time) - new Date(a.time);
       })
       .reverse();
-
-    // dataEntries.forEach(ele => {
-
-    //     Object.keys(ele[1]).forEach(symbol => {
-
-    //       let stockObj = groupBy(stocks[symbol], ['time'])
-    //       Object.entries(stockObj).forEach(val => {
-    //         let one = new Date(val[0])
-    //         let two = new Date(ele[0])
-
-    //       })
-
-    //     })
-    // })
-
-    return returnData;
-  };
+      let successVal = sortedData[0].value;
+      for(
+        let date = new Date(sortedData[0].time);
+        date.valueOf() < currentDate.valueOf();
+        date.setDate(date.getDate() + 1)
+      ){
+        let target = date.toJSON().slice(0, date.toJSON().indexOf('T'))
+        newData[e][target] = dataByDate[target] || [{time:target, value:successVal}]
+        successVal = newData[e][target][0].value;
+      }
+    })
+    return newData
+  }
 
   let manageInfo = (history) => {
     let graphData = [];
 
     let input = Object.keys(history); //all the dates
-
     let tank = Object.entries(stocks);
+    let tankData = fillDates(stocks);
 
-    let tankData = {};
-    tank.forEach((ele) => {
-      let actual = {};
-      let filler = groupBy(ele[1], ['time']);
-      let fillerKeys = Object.keys(filler);
-      fillerKeys.forEach((e) => {
-        let date = new Date(e);
-        date.setDate(date.getDate() + 1);
-
-        actual[date.toDateString()] = filler[e];
-      });
-      tankData[ele[0]] = actual;
-    });
-
-    let sortedData = input
-      .sort(function (a, b) {
-        // Turn your strings into dates, and then subtract them
-        // to get a value that is either negative, positive, or zero.
+    let sortedData = input.sort(function (a, b) {
         return new Date(b) - new Date(a);
       })
       .reverse();
-    let savedDate;
+    let savedValue = sortedData[0]
     sortedData.forEach((ele) => {
       let value = 0;
       let data = history[ele];
       let symbols = Object.keys(data);
       // value = tankData[]
       symbols.forEach((val) => {
-        if (tankData[val][ele]) {
+        if(tankData[val][ele]){
           value += tankData[val][ele][0].value * data[val];
-          savedDate = ele;
-        } else {
-          value += tankData[val][savedDate][0].value * data[val];
+          savedValue = tankData[val][ele][0].value;
+        }
+        else{
+          console.log(tankData, ele, val, savedValue)
+          value += savedValue * data[val] ;
         }
       });
       graphData.push({ time: ele, value });
     });
     return graphData;
   };
+
   useEffect(() => {
     let trans = Object.values(transactions);
     let dailyData = groupBy(trans, ['symbol', 'date', 'transaction']);
 
     if (checkStore(dailyData)) {
       let info = groupBy(trans, ['symbol']);
-      let symbols = Object.keys(info);
+      let symbols = Object.keys(info);//CANCHANGE: info can be dailyData
       symbols.forEach((symbol) => {
         let data = groupBy(stocks[symbol], ['time']);
 
         let hist = createHistory(trans);
-
+        console.log(hist)
         let theStuff = manageInfo(hist);
+        console.log(theStuff)
         setDataGraph(theStuff);
 
       });
@@ -279,46 +425,3 @@ function calculatePortfolioValueByDay(transactionList, stocks) {
 
   return portfolioValues;
 }
-
-// export default function Portfolio() {
-//     const dispatch = useDispatch()
-//     let transactions = useSelector(state => state?.transactions)
-//     let stocks = useSelector(state => state.stocks)
-//     const [byDate, setByDate] = useState({})
-//     const [dailyValue, setDailyValue] = useState([])
-//     const [place, setPlace] = useState({})
-//     useEffect(async () => {
-//         dispatch(getAllTransactionsThunk())
-//     },[])
-//     useEffect(async () => {
-//         let trans = Object.values(transactions)
-//         let dailyData = {...groupBy(trans, ['date','transaction'])}
-//         let sortedDailyData = Object.keys(dailyData).sort(function(a,b){
-//             // Turn your strings into dates, and then subtract them
-//             // to get a value that is either negative, positive, or zero.
-//             return new Date(b.date) - new Date(a.date);
-//         })
-
-//         let groupedDates = groupBy(trans, ['date', 'symbol','transaction'])
-
-
-
-//         Object.keys(symbolList).forEach(async symbol => {
-//             dispatch(getStock(symbol))
-//         });
-
-
-//         if(stocks && trans){
-//         let it = await calculatePortfolioValueByDay(trans, stocks )
-//         .then((portfolioData) => {
-//         })
-//         .catch((error) => {
-//             console.error('Error calculating portfolio value:', error);
-//         });}
-//     }, [transactions])
-//     return (
-//         <div>
-//             cahrt go here
-//         </div>
-//     )
-// }
