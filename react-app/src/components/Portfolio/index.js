@@ -112,7 +112,10 @@ export default function Portfolio() {
       symbols.forEach(sym => {
         let total = 0;
         if(stockData[sym]){
-          total = value[sym] * stockData[sym][key][0].value;
+          if(stockData[sym][key]){
+            total = value[sym] * stockData[sym][key][0].value;
+          }
+
         }
         dailyTotal += total
         return total
