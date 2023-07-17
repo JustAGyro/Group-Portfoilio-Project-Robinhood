@@ -1,8 +1,8 @@
 """create tables
 
-Revision ID: fcbc5253dc1e
+Revision ID: b8da7487bb63
 Revises: 
-Create Date: 2023-07-15 14:25:01.830322
+Create Date: 2023-07-17 00:23:31.378543
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'fcbc5253dc1e'
+revision = 'b8da7487bb63'
 down_revision = None
 branch_labels = None
 depends_on = None
