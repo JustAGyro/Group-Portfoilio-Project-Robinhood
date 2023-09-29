@@ -228,7 +228,7 @@ def top_gainers():
 @stock_routes.route('/todays/<symbol>')
 # @login_required
 def historical_today(symbol):
-    
+
     url =f"https://financialmodelingprep.com/api/v3/historical-chart/1hour/{symbol}?serietype=line&apikey=c4af6834a77de852f5ef970e0b5dd457"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
@@ -237,13 +237,13 @@ def historical_today(symbol):
     # modified_data = []
     # for items in parsed_data:
     #     date_str = items['date']
-    #     # price = 
+    #     # price =
     #     date_obj = datetime.datetime.strptime(date_str,"%Y-%m-%d %H:%M:%S")
     #     unix_time = int(date_obj.timestamp())
     #     modified_item = {"date": unix_time}
     #     modified_data.append(modified_item)
-    #     print(modified_data, '------------this is modified data')
-    
+
+
     price_and_time_only = [{'time': obj['date'], 'value': obj['close']} for obj in parsed_data]
     # print(price_and_time_only, '---------------before reverse')
     price_and_time_only.reverse()
