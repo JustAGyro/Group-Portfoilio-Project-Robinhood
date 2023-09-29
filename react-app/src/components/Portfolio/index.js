@@ -104,7 +104,6 @@ export default function Portfolio() {
           : [];
         returnData[nextTarget] = { ...returnData[target] };
         nextDailySymbols.forEach((e) => {
-          // console.log(orgTrans[nextTarget][e], nextTarget,e)
           let it = orgTrans[target];
           orgTrans[nextTarget][e].forEach((ele) => {
             if (!returnData[nextTarget][e]) returnData[nextTarget][e] = 0;
@@ -117,7 +116,6 @@ export default function Portfolio() {
         });
       }
     }
-    // console.log(returnData)
     return returnData;
   };
   const parseValues = (dates, stocks) => {
@@ -138,7 +136,6 @@ export default function Portfolio() {
       });
       returnObject[key] = dailyTotal;
     });
-    // console.log(returnObject)
     return returnObject;
   };
   const checkStore = (data) => {

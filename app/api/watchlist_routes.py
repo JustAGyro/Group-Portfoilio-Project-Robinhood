@@ -19,11 +19,11 @@ def watchlist_test():
 def watchlist_current():
 
     user_id = current_user.id
-    print(user_id)
-    
+
+
     # watchlists = WatchList.query.join(SymbolList).filter(WatchList.userId == user_id).all()
     watchlists = WatchList.query.filter(WatchList.userId == user_id)
-    print(watchlists)
+
     list = [watchlist.to_dict() for watchlist in watchlists]
 
     return jsonify(list)
@@ -125,7 +125,6 @@ def add_symbollist(id):
 
     db.session.add(new_symbollist)
     db.session.commit()
-    print(new_symbollist.to_dict(), '---------------------------------------')
 
     return jsonify(new_symbollist.to_dict())
 
