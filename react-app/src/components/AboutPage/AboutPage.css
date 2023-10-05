@@ -1,0 +1,37 @@
+.rh-img {
+  height: 500px;
+  margin: 20px;
+}
+
+.hp-img-container {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* gap: 10px; */
+}
+
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* gap: 10px; */
+}
+
+.header-hp {
+  color: green;
+  font-size: 30px;
+}
+
+.hp-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.bar-home-about {
+  display: flex;
+  flex-direction: column;
+}

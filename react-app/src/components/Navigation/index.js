@@ -11,10 +11,13 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav className="bar">
-      <div>
-        <NavLink className="navbar-link" exact to="/">
-          <GiFeather id="feather-icon" />
-        </NavLink>
+      <div className="bar-home-about">
+        <div>
+          <NavLink className="navbar-link" exact to="/">
+            <GiFeather id="feather-icon" />
+          </NavLink>
+        </div>
+        <div>About</div>
       </div>
       {sessionUser && (
         <div className="search-div">
