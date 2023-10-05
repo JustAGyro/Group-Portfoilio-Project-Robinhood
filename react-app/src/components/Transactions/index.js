@@ -113,7 +113,7 @@ export function NewTransaction() {
 
   useEffect(async () => {
 
-    console.log (symbol, '----------------------this is symbol')
+    setSymbol('AAPL')
     let value = await dispatch(getStockCurrent(symbol));
     if (symbol && value) {
       setPrice(value.price);
