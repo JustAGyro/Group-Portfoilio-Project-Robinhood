@@ -1,36 +1,50 @@
-.rh-img {
-  height: 500px;
-  margin: 20px;
-}
+.about-me-main-cont {
+  /* background-color: red; */
+  width: 40%;
+  /* height: 40%; */
+  margin: auto;
+  margin-top: 100px;
 
-.hp-img-container {
-  display: flex;
-  /* flex-direction: column; */
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  /* gap: 10px; */
 }
-
-.homepage-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  /* gap: 10px; */
-}
-
-.header-hp {
-  color: green;
-  font-size: 30px;
-}
-
-.hp-buttons {
+.about-me-upper {
   display: flex;
   gap: 10px;
+  margin-bottom: 10px;
+  
 }
+.about-me-text {
+  letter-spacing: 1px;
+  /* background-color: red; */
+  text-align: center;
+}
+.about-me-left{
+  /* width: 50%; */
+  /* background-color: blue; */
+  display: flex;
+  justify-content: center;
 
+}
+.profile-pic {
+ 
+  border-radius: 50%; 
+  width: 240px;
+  height: 320px;
+}
+.about-me-right {
+  /* background-color: green; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+.about-me-name {
+  font-weight: 600;
+  font-size: 30px;
+}
+.about-me-subheading {
+  font-weight: 600;
+}
 .about-me-bottom {
   /* background-color: red; */
   height: 100px;
@@ -38,13 +52,12 @@
   justify-content: flex-end;
   gap: 15px;
 }
-
-.about-me-links {
+.about-me-links  {
   width: 70px;
   height: 70px;
   border-radius: 50%;
   /* background-color: #dda15e; */
-  border: 1px solid #4362ee1c;
+  border: 1px solid  #4362ee1c;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -52,7 +65,7 @@
   text-decoration: none;
   font-size: 15px;
   color: white;
-  transition: 0.3s;
+  transition: .3s;
 }
 .about-me-links:hover {
   /* background-color: #4362ee1c; */
@@ -60,9 +73,10 @@
   /* border-color: #dda15e; */
   /* color: #dda15e; */
   transform: scale(1.2);
-}
+
+}   
 .about-me-portfolio {
-  background-color: #dda15e;
+   background-color: #dda15e;
 }
 .about-me-portfolio:hover {
   color: #dda15e;
@@ -75,6 +89,7 @@
   /* background-color: ; */
   color: #a8dadc;
   border-color: #a8dadc;
+
 }
 .about-me-resume {
   background-color: #9b5de5;
@@ -83,18 +98,10 @@
   color: #9b5de5;
   border-color: #9b5de5;
 }
-
-.about-text {
-  font-size: 12pt;
-  white-space: initial;
+.about-me-linkedin {
+  background-color: #4361ee;
 }
-
-.about-header {
-  display: flex;
-  flex-direction: column;
-  max-width: 800px;
-}
-
-h6 {
-  margin: 0;
+.about-me-linkedin:hover {
+  color: #4361ee;
+  border-color: #4361ee;
 }
