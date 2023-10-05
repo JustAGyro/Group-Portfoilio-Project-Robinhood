@@ -5,6 +5,9 @@ import certifi
 import json
 from urllib.request import urlopen
 from datetime import datetime
+import os
+
+api_key = os.environ.get('api_key')
 
 stock_routes = Blueprint('stocks', __name__)
 
@@ -17,7 +20,7 @@ stock_routes = Blueprint('stocks', __name__)
 @stock_routes.route('/stock_price/<symbol>')
 @login_required
 def stock_price(symbol):
-    url =  f"https://financialmodelingprep.com/api/v3/quote/{symbol}?apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url =  f"https://financialmodelingprep.com/api/v3/quote/{symbol}?apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode('utf-8')
     parsed_data = json.loads(data)[0]
@@ -30,7 +33,7 @@ def stock_price(symbol):
 @stock_routes.route('/one_month/<symbol>')
 @login_required
 def one_month(symbol):
-    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=30&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=30&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     parsed_data = json.loads(data)
@@ -40,7 +43,7 @@ def one_month(symbol):
 @stock_routes.route('/three_month/<symbol>')
 @login_required
 def three_month(symbol):
-    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=90&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=90&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     parsed_data = json.loads(data)
@@ -50,7 +53,7 @@ def three_month(symbol):
 @stock_routes.route('/one_year/<symbol>')
 @login_required
 def one_year(symbol):
-    url = f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=365&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url = f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=365&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     parsed_data = json.loads(data)
@@ -60,7 +63,7 @@ def one_year(symbol):
 @stock_routes.route('/three_year/<symbol>')
 @login_required
 def three_year(symbol):
-    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=1095&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=1095&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     parsed_data = json.loads(data)
@@ -70,7 +73,7 @@ def three_year(symbol):
 @stock_routes.route('/five_year/<symbol>')
 @login_required
 def five_year(symbol):
-    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=1825&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url =f"https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?serietype=line&timeseries=1825&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     parsed_data = json.loads(data)
@@ -81,7 +84,7 @@ def five_year(symbol):
 @stock_routes.route('/company_quote/<symbol>')
 @login_required
 def company_quote(symbol):
-    url =  f"https://financialmodelingprep.com/api/v3/quote/{symbol}?apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url =  f"https://financialmodelingprep.com/api/v3/quote/{symbol}?apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode('utf-8')
     parsed_data = json.loads(data)[0]
@@ -108,7 +111,7 @@ def company_quote(symbol):
 @stock_routes.route('/company_info/<symbol>')
 @login_required
 def company_info(symbol):
-    url = f"https://financialmodelingprep.com/api/v3/profile/{symbol}?apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url = f"https://financialmodelingprep.com/api/v3/profile/{symbol}?apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     parsed_data = json.loads(data)[0]
@@ -131,7 +134,7 @@ def company_info(symbol):
 @stock_routes.route('/stock_news/<symbol>')
 @login_required
 def single_stock_news(symbol):
-    url = f"https://financialmodelingprep.com/api/v3/stock_news?tickers={symbol}&limit=5&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url = f"https://financialmodelingprep.com/api/v3/stock_news?tickers={symbol}&limit=5&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     return json.loads(data)
@@ -145,7 +148,7 @@ def single_stock_news(symbol):
 # @login_required
 def stock_search_symbol(symbol):
     symbol = symbol.upper()
-    url=f"https://financialmodelingprep.com/api/v3/search?query={symbol}&limit=10&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url=f"https://financialmodelingprep.com/api/v3/search?query={symbol}&limit=10&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     parsed_data = json.loads(data)
@@ -159,7 +162,7 @@ def stock_search_symbol(symbol):
 @stock_routes.route('/faang_news')
 @login_required
 def fanng_articles():
-    url = f"https://financialmodelingprep.com/api/v3/stock_news?tickers=AAPL,FB,GOOG,AMZN,NFLX&limit=10&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url = f"https://financialmodelingprep.com/api/v3/stock_news?tickers=AAPL,FB,GOOG,AMZN,NFLX&limit=10&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     return json.loads(data)
@@ -170,7 +173,7 @@ def fanng_articles():
 @stock_routes.route('/general_news')
 # @login_required
 def gerneral_news():
-    url = f"https://financialmodelingprep.com/api/v4/general_news?limit=10&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url = f"https://financialmodelingprep.com/api/v4/general_news?limit=10&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     return json.loads(data)
@@ -179,7 +182,7 @@ def gerneral_news():
 @stock_routes.route('/crypto_news')
 @login_required
 def crypto_news():
-    url = f"https://financialmodelingprep.com/api/v4/crypto_news?limit=10&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url = f"https://financialmodelingprep.com/api/v4/crypto_news?limit=10&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     return json.loads(data)
@@ -187,7 +190,7 @@ def crypto_news():
 @stock_routes.route('/forex_news')
 @login_required
 def forex_news():
-    url = f"https://financialmodelingprep.com/api/v4/forex_news?limit=10&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url = f"https://financialmodelingprep.com/api/v4/forex_news?limit=10&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     return json.loads(data)
@@ -196,7 +199,7 @@ def forex_news():
 @stock_routes.route('/search/<value>')
 @login_required
 def stock_search(value):
-    url = f"https://financialmodelingprep.com/api/v3/search?query={value}&limit=10&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url = f"https://financialmodelingprep.com/api/v3/search?query={value}&limit=10&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     parsed_data = json.loads(data)
@@ -219,7 +222,7 @@ def stock_search(value):
 @stock_routes.route('/top_gainers')
 # @login_required
 def top_gainers():
-    url="https://financialmodelingprep.com/api/v3/stock_market/gainers?apikey=c4af6834a77de852f5ef970e0b5dd457"
+    url=f"https://financialmodelingprep.com/api/v3/stock_market/gainers?apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     return json.loads(data)
@@ -228,8 +231,8 @@ def top_gainers():
 @stock_routes.route('/todays/<symbol>')
 # @login_required
 def historical_today(symbol):
-
-    url =f"https://financialmodelingprep.com/api/v3/historical-chart/1hour/{symbol}?serietype=line&apikey=c4af6834a77de852f5ef970e0b5dd457"
+    
+    url =f"https://financialmodelingprep.com/api/v3/historical-chart/1hour/{symbol}?serietype=line&apikey={api_key}"
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     parsed_data = json.loads(data)[:24]
