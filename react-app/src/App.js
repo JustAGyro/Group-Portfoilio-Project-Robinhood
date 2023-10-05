@@ -21,6 +21,7 @@ import StockDetail from './components/StockDetail';
 import WatchLists from './components/WatchLists';
 import WatchlistGraph from './components/WatchlistGraphs';
 import Homepage from './components/Homepage';
+import Aboutpage from './components/AboutPage';
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -82,6 +83,9 @@ function App() {
             </Route>
             <Route exact path="/justatest">
               <WatchlistGraph />
+            </Route>
+            <Route exact path="/about">
+              <Aboutpage />
             </Route>
           </Switch>
         )}

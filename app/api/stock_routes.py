@@ -240,13 +240,13 @@ def historical_today(symbol):
     # modified_data = []
     # for items in parsed_data:
     #     date_str = items['date']
-    #     # price = 
+    #     # price =
     #     date_obj = datetime.datetime.strptime(date_str,"%Y-%m-%d %H:%M:%S")
     #     unix_time = int(date_obj.timestamp())
     #     modified_item = {"date": unix_time}
     #     modified_data.append(modified_item)
-    #     print(modified_data, '------------this is modified data')
-    
+
+
     price_and_time_only = [{'time': obj['date'], 'value': obj['close']} for obj in parsed_data]
     # print(price_and_time_only, '---------------before reverse')
     price_and_time_only.reverse()
