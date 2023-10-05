@@ -27,7 +27,7 @@ def stock_price(symbol):
     stock_price = {
         'price': parsed_data['price']
     }
-    return stock_price
+    return jsonify(stock_price)
 
 # Historical Daily Price for a specific stock - 1 Month
 @stock_routes.route('/one_month/<symbol>')

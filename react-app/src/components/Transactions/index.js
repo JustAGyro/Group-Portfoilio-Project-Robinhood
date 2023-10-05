@@ -112,6 +112,8 @@ export function NewTransaction() {
   }, [transaction, quantity, symbol, price]);
 
   useEffect(async () => {
+
+    console.log (symbol, '----------------------this is symbol')
     let value = await dispatch(getStockCurrent(symbol));
     if (symbol && value) {
       setPrice(value.price);
