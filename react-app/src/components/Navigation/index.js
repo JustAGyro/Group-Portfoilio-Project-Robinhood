@@ -11,24 +11,29 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav className="bar">
-      <div className="bar-home-about">
-        <div>
-          <NavLink className="navbar-link" exact to="/">
-            <GiFeather id="feather-icon" />
-          </NavLink>
-        </div>
-        <div>About</div>
+      <div>
+        <NavLink className="navbar-link" exact to="/">
+          <GiFeather id="feather-icon" />
+        </NavLink>
       </div>
+
       {sessionUser && (
         <div className="search-div">
           <SearchBar />
         </div>
       )}
-      {isLoaded && (
+      <div className="bar-home-about">
+        {isLoaded && (
+          <div>
+            <ProfileButton user={sessionUser} />
+          </div>
+        )}
         <div>
-          <ProfileButton user={sessionUser} />
+          <NavLink className="navbar-link" exact to="/about">
+            About
+          </NavLink>
         </div>
-      )}
+      </div>
     </nav>
   );
 }
