@@ -112,13 +112,15 @@ export function NewTransaction() {
   }, [transaction, quantity, symbol, price]);
 
   useEffect(async () => {
-    let value = await dispatch(getStockCurrent(symbol));
-    if (symbol && value) {
-      setPrice(value.price);
-      setDisabled(false);
-    } else {
-      setPrice('No such stock');
-      setDisabled(true);
+    if (symbol.length > 1) {
+      let value = await dispatch(getStockCurrent(symbol));
+      if (symbol && value) {
+        setPrice(value.price);
+        setDisabled(false);
+      } else {
+        setPrice('No such stock');
+        setDisabled(true);
+      }
     }
   }, [symbol]);
 
