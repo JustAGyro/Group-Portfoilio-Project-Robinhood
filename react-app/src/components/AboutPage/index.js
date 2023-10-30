@@ -5,6 +5,7 @@ export default function Aboutpage() {
   return (
     <div className="homepage-container">
       <div className="about-header">
+        <h3>Kamran Qureshi - Software Engineer</h3>
         <h4>About Me!</h4>
         <h6>How I started</h6>
         <p className="about-text">
