@@ -1,19 +1,37 @@
 .sd-container {
-  display: grid;
-  height: 100vh;
-  grid-template-columns: 0.5fr 2.3fr 0.7fr 0.5fr;
-  gap: 0px 0px;
+  width:auto;
+  padding: 0px 10px;
+  margin: 0px 20px;
+  /* overflow-y: scroll;  */
+
+  flex-direction: column-reverse;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* grid-template-rows: 10vh auto;
+  grid-template-columns: 0.5fr 2.3fr 0.5fr;
+  gap: 0px 0px; */
+
   overflow: hidden;
   background-color: gray;
-  margin-top: 70px;
+  /* margin-top: 70px; */
   color: white;
   background-color: black;
+
+}
+.details-about{
+  display: flex;
+  flex-direction: column;
 }
 .details {
-  overflow-y: scroll;
+  /* grid-row: 2;
+  grid-column: 2; */
+  /* overflow-y: scroll; */
   height: calc(100% - 100px);
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
+  width: auto;
 }
 
 .details-graph {
@@ -55,7 +73,7 @@
 .details-info {
   display: flex;
   width: 100%;
-  gap: 100px;
+  /* gap: 100px; */
 }
 
 .info-item {
@@ -128,7 +146,10 @@
   border: 2px solid #282d30;
   border-radius: 4px;
   align-items: center;
-  flex-direction: column;
+  /* justify-content: center; */
+  flex-direction: row;
+  width: 100%;
+  padding: 5px;
 }
 
 .sd-action-buttons-container {
@@ -155,7 +176,8 @@
 }
 
 .sd-buttons-words-below {
-  margin-top: 5px;
+  margin-top: 15px;
+  padding: 5px;
 }
 
 .sd-stock-price {
@@ -181,6 +203,8 @@
   color: white;
   font-size: 10px;
   font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 .stc-det-add-to-list-cont button {
   font-size: 10px;

@@ -252,6 +252,52 @@ export default function ShowStockDetail() {
               5Y
             </button>
           </div>
+          {/* new actions location */}
+          <div class="actions">
+            <div class="action-buttons">
+              <div class="sd-action-buttons-container">
+                <button className="sd-button">
+                  <OpenModalButton
+                    buttonText={`Buy ${symbol}`}
+                    modalComponent={
+                      <BuyModal symbol={symbol} price={stockPrice.price} />
+                    }
+                  />
+                </button>
+                {stockOwned > 0 && (
+                  <button className="sd-button">
+                    <OpenModalButton
+                      buttonText={`Sell ${symbol}`}
+                      modalComponent={
+                        <SellModal
+                          symbol={symbol}
+                          owned={stockOwned}
+                          price={stockPrice.price}
+                        />
+                      }
+                    />
+                  </button>
+                )}
+              </div>
+              <div className="sd-buttons-words-below">
+                <p className="stockowned-amount">
+                  Stocks owned of {symbol}: {stockOwned}
+                </p>
+              </div>
+              {/* ***** PUT YOUR ADD TO WATCHLIST BUTTON HERE ***** */}
+                <div className="stc-det-add-to-list-cont">
+                  <button className="stc-det-add-to-list">
+                    <OpenModalButton
+                      buttonText={'Add to List'}
+                      modalComponent={
+                        <AddToListModal symbol={symbol}/>
+                      }
+                    />
+                  </button>
+                </div>
+            </div>
+          </div>
+          
           <div class="details-about">
             <div class="about-title">
               <h2>About</h2>
@@ -342,53 +388,7 @@ export default function ShowStockDetail() {
             </a>
           ))}
         </div>
-        <div class="actions">
-          <div class="action-buttons">
-            <div class="sd-action-buttons-container">
-              <button className="sd-button">
-                <OpenModalButton
-                  buttonText={`Buy ${symbol}`}
-                  modalComponent={
-                    <BuyModal symbol={symbol} price={stockPrice.price} />
-                  }
-                />
-              </button>
-              {stockOwned > 0 && (
-                <button className="sd-button">
-                  <OpenModalButton
-                    buttonText={`Sell ${symbol}`}
-                    modalComponent={
-                      <SellModal
-                        symbol={symbol}
-                        owned={stockOwned}
-                        price={stockPrice.price}
-                      />
-                    }
-                  />
-                </button>
-              )}
-            </div>
-            <div className="sd-buttons-words-below">
-              <p className="stockowned-amount">
-                Stocks owned of {symbol}: {stockOwned}
-              </p>
-            </div>
-            {/* ***** PUT YOUR ADD TO WATCHLIST BUTTON HERE ***** */}
-          </div>
-          <div className="stc-det-add-to-list-cont">
-            <button className="stc-det-add-to-list">
-              <OpenModalButton
-                buttonText={'Add to List'}
-                modalComponent={
-                  <AddToListModal symbol={symbol}/>
-                }
-              />
-            </button>
-
-          </div>
-
-          <div class="action-deadspace"></div>
-        </div>
+        {/* prev actions location */}
         <div class="r-gutter"></div>
       </div>
     </>
