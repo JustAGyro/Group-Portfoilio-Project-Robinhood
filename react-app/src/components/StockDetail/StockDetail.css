@@ -1,7 +1,7 @@
 .sd-container {
   width:auto;
   padding: 0px 10px;
-  margin: 0px 20px;
+  /* margin: 0px 20px; */
   /* overflow-y: scroll;  */
 
   flex-direction: column-reverse;
@@ -25,17 +25,22 @@
   flex-direction: column;
 }
 .details {
-  /* grid-row: 2;
-  grid-column: 2; */
-  /* overflow-y: scroll; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: calc(100% - 100px);
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
-  width: auto;
+  width: 100vw;
 }
 
+.details-name-price{
+  width: 98%;
+  margin: 30px;
+}
 .details-graph {
   z-index: 0;
+  width: 99vw;
 }
 
 .details::-webkit-scrollbar {
@@ -139,6 +144,14 @@
   width: 250px;
 }
 
+.actions{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90vw;
+}
+
+
 .action-buttons {
   display: flex;
   height: 100px;
@@ -146,16 +159,19 @@
   border: 2px solid #282d30;
   border-radius: 4px;
   align-items: center;
-  /* justify-content: center; */
+  justify-content: center;
   flex-direction: row;
-  width: 100%;
+  width: 95%;
   padding: 5px;
+  margin: 10px;
 }
 
 .sd-action-buttons-container {
   display: flex;
 }
-
+.sd-action-buttons-container > div{
+  margin: 20px;
+}
 .sd-button {
   height: 50px;
   width: 150px;

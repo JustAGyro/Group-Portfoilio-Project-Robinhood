@@ -191,7 +191,7 @@ export default function ShowStockDetail() {
   return (
     <>
       <div class="sd-container">
-        <div class="l-gutter"></div>
+        {/* <div class="l-gutter"></div> */}
         <div class="details">
           <div class="details-name-price">
             <h1>{stockQuote.name}</h1>
@@ -389,7 +389,7 @@ export default function ShowStockDetail() {
           ))}
         </div>
         {/* prev actions location */}
-        <div class="r-gutter"></div>
+        {/* <div class="r-gutter"></div> */}
       </div>
     </>
   );
