@@ -20,6 +20,9 @@
   background-color: black;
 
 }
+.sd-container > div{
+  max-width: 100%;
+}
 .details-about{
   display: flex;
   flex-direction: column;
@@ -143,6 +146,15 @@
 .article-img-thumbnail {
   width: 250px;
 }
+@media screen and (max-width: 650px) {
+  .news-card{
+    flex-direction: column;
+  }
+  .article-img-thumbnail {
+    width: 100%;
+  }
+}
+
 
 .actions{
   display: flex;
