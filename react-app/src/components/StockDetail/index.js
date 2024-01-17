@@ -297,7 +297,7 @@ export default function ShowStockDetail() {
                 </div>
             </div>
           </div>
-          
+    
           <div class="details-about">
             <div class="about-title">
               <h2>About</h2>
