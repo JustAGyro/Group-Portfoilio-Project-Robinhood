@@ -2,6 +2,9 @@
   position: absolute;
   z-index: 1;
 }
+.search-div{
+  max-width: 40%;
+}
 
 .searchbar-dropdown {
   position: absolute;
