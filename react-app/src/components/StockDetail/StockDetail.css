@@ -1,6 +1,6 @@
 .sd-container {
   width:auto;
-  padding: 0px 10px;
+  padding: 10px 100px;
   /* margin: 0px 20px; */
   /* overflow-y: scroll;  */
 
@@ -44,6 +44,9 @@
 .details-graph {
   z-index: 0;
   width: 99vw;
+  max-width: 100%;
+  overflow: hidden;
+  justify-content: end;
 }
 
 .details::-webkit-scrollbar {
@@ -115,14 +118,20 @@
   text-decoration: none;
   color: inherit;
 }
-
+.stock_news{
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  justify-content: start;
+  align-content: start;
+}
 .news-card {
   font-size: small;
   max-width: 99%;
   margin-top: 5px;
   display: flex;
-  gap: 5px;
-  justify-content: space-between;
+  justify-content: start;
+  align-items: start;
   padding: 5px;
 }
 
@@ -145,6 +154,9 @@
 }
 .article-img-thumbnail {
   width: 250px;
+}
+.article-text{
+  word-wrap: normal;
 }
 @media screen and (max-width: 650px) {
   .news-card{

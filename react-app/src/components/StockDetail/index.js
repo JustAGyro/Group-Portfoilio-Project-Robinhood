@@ -368,6 +368,7 @@ export default function ShowStockDetail() {
           <div class="details-news">
             <h2>News</h2>
           </div>
+          <div className='stock_news'>
           {stockNews.map((article, index) => (
             <a className="sd-link" href={article.url}>
               <div className="news-card" key={index}>
@@ -375,18 +376,19 @@ export default function ShowStockDetail() {
                   <img
                     className="article-img-thumbnail"
                     src={article.image}
-                  ></img>
+                    ></img>
                 </div>
                 <div className="article-text">
                   <h4>
                     {article.site} - {article.publishedDate}
                   </h4>
                   <h2>{article.title}</h2>
-                  <p>{article.text}</p>
+                  <p className='article_text'>{article.text}</p>
                 </div>
               </div>
             </a>
           ))}
+          </div>
         </div>
         {/* prev actions location */}
         {/* <div class="r-gutter"></div> */}
