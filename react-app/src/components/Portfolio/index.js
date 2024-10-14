@@ -124,13 +124,19 @@ export default function Portfolio() {
     let data = dates;
     let dataEntries = Object.entries(data);
     dataEntries.forEach((e) => {
+      console.log('WHAT THE FUCK IS E: ', e);
       let dailyTotal = 0;
       let key = e[0];
+      console.log('WHAT THE FUCK IS KEY: ', key);
       let value = e[1];
+      console.log('WHAT THE FUCK IS VALUE: ', value);
       let symbols = Object.keys(value);
+      console.log('WHAT THE FUCK IS SYMBOLS: ', symbols);
       symbols.forEach((sym) => {
         let total = 0;
-        total = value[sym] * stockData[sym][key][0].value;
+        if (stockData[sym][key]) {
+          total = value[sym] * stockData[sym][key][0].value;
+        }
         dailyTotal += total;
         return total;
       });
